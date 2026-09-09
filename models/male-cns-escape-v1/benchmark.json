@@ -1,0 +1,23 @@
+{
+  "model": "male-cns-escape-v1",
+  "model_sha256": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+  "neurons": 313,
+  "edges": 20607,
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "os": "Darwin",
+  "architecture": "arm64",
+  "processor": "arm",
+  "dt_ms": 1.0,
+  "simulated_ms": 1000.0,
+  "wall_seconds": [
+    0.103565291,
+    0.10431620799999997,
+    0.10376204200000005,
+    0.10451999999999995,
+    0.11539987500000004
+  ],
+  "median_wall_seconds": 0.10431620799999997,
+  "real_time_factor": 9.586238027363882,
+  "scope": "End-to-end step() and action(), loading excluded. Applies only to this subgraph."
+}
