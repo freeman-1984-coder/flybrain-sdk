@@ -1,0 +1,18 @@
+name: Bug report
+description: Report a reproducible problem without needing a GPU.
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include code, expected behavior and actual output. Remove secrets.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: SDK version, Python/NumPy versions, OS, backend and model.
+    validations:
+      required: true

@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flybrain-sdk"
+version = "0.1.0a1"
+description = "CPU-first connectome simulation for games and experiments. No CUDA required."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "flybrain-sdk contributors"}]
+keywords = ["connectome", "simulation", "lif", "games", "neuroscience"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = ["numpy>=1.24"]
+
+[project.urls]
+Homepage = "https://freeman-1984-coder.github.io/flybrain-sdk/"
+Repository = "https://github.com/freeman-1984-coder/flybrain-sdk"
+Documentation = "https://freeman-1984-coder.github.io/flybrain-sdk/api.html"
+Issues = "https://github.com/freeman-1984-coder/flybrain-sdk/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "build>=1.2", "twine>=6", "ruff>=0.9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flybrain = ["data/*.json", "py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

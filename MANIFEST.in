@@ -1,0 +1,10 @@
+include README.md LICENSE CONTRIBUTING.md
+recursive-include examples *.py
+recursive-include tests *.py
+recursive-include docs *.md
+recursive-include site *.html *.css *.txt *.xml .nojekyll
+recursive-include .github *.yml *.md
+include packages/js/package.json packages/js/package-lock.json packages/js/tsconfig.json
+include packages/js/README.md
+recursive-include packages/js/src *.ts
+global-exclude *.py[cod] .DS_Store

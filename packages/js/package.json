@@ -1,0 +1,10 @@
+{
+  "name": "@flybrain-sdk/core",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "description": "Draft TypeScript contract for flybrain-sdk; no WASM runtime yet",
+  "type": "module",
+  "types": "./src/index.ts",
+  "scripts": {"typecheck": "tsc --noEmit"},
+  "devDependencies": {"typescript": "^5.7.0"}
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "id": "toy",
+    "title": "Synthetic offline LIF circuit",
+    "version": "toy-v1",
+    "status": "builtin",
+    "license": "MIT",
+    "source_url": "https://github.com/freeman-1984-coder/flybrain-sdk",
+    "description": "12 hand-authored neurons; runnable immediately, no biological claims.",
+    "assets": {}
+  },
+  {
+    "id": "male-cns-v1.0",
+    "title": "MaleCNS v1.0 raw connectome",
+    "version": "1.0-minconf-0.5",
+    "status": "raw-data",
+    "license": "CC-BY-4.0",
+    "source_url": "https://male-cns.janelia.org/download/",
+    "description": "Official connectivity, annotations and transmitter predictions. Importer/calibration pending.",
+    "assets": {
+      "connections": {
+        "filename": "connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+        "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+        "size_bytes": 1051241946
+      },
+      "annotations": {
+        "filename": "body-annotations-male-cns-v1.0-minconf-0.5.feather",
+        "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+        "size_bytes": 14483314
+      },
+      "neurotransmitters": {
+        "filename": "body-neurotransmitters-male-cns-v1.0.feather",
+        "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+        "size_bytes": 43282834
+      }
+    }
+  },
+  {
+    "id": "flywire-v783",
+    "title": "FlyWire FAFB v783 raw connectome",
+    "version": "783-zenodo-10676866",
+    "status": "raw-data",
+    "license": "CC-BY-4.0",
+    "source_url": "https://zenodo.org/records/10676866",
+    "description": "Pinned publication archive: proofread connections and root IDs. Importer/calibration pending.",
+    "assets": {
+      "connections": {
+        "filename": "proofread_connections_783.feather",
+        "url": "https://zenodo.org/api/records/10676866/files/proofread_connections_783.feather/content",
+        "size_bytes": 852022274,
+        "checksum": "md5:f48f972d262323a102aed49af1396b8a"
+      },
+      "neuron_ids": {
+        "filename": "proofread_root_ids_783.npy",
+        "url": "https://zenodo.org/api/records/10676866/files/proofread_root_ids_783.npy/content",
+        "size_bytes": 1114168,
+        "checksum": "md5:e0e6c19732fd8c7a4e39a2d170105421"
+      }
+    }
+  }
+]

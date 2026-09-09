@@ -1,0 +1,18 @@
+# flybrain-sdk
+
+> Open-source Python connectome simulation SDK. No CUDA required.
+
+Working: NumPy CPU backend, synthetic 12-neuron toy, sensory/motor APIs,
+JSON checkpoints, on-demand raw MaleCNS/FlyWire downloads.
+Not yet implemented: calibrated biological models, full-brain real-time guarantees,
+WASM/CUDA runtimes, NPM runtime, learning or plasticity. No PyPI publication yet.
+
+- [Quickstart](https://freeman-1984-coder.github.io/flybrain-sdk/api.html)
+- [Model catalog](https://freeman-1984-coder.github.io/flybrain-sdk/models.html)
+- [Contributing](https://freeman-1984-coder.github.io/flybrain-sdk/contribute.html)
+- [Source](https://github.com/freeman-1984-coder/flybrain-sdk)
+- [Python API](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/api.md)
+- [Real-data plan](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/real-data.md)
+
+Package name: flybrain-sdk. Python import: from flybrain import FlyBrain.
+Do not describe raw source datasets as already runnable biological brains.

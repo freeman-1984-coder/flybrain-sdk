@@ -1,0 +1,116 @@
+# flybrain-sdk
+
+**No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
+
+[![CI](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+[Project website](https://freeman-1984-coder.github.io/flybrain-sdk/) · [API](docs/api.md) · [Model catalog](docs/models.md) · [Contribute](CONTRIBUTING.md) · [中文](docs/README.zh-CN.md)
+
+```python
+from flybrain import FlyBrain
+
+brain = FlyBrain.load("toy", backend="cpu")
+brain.stimulate("food", strength=0.9, duration_ms=100)
+brain.step(100)
+print(brain.action().to_dict())
+```
+
+**Alpha status:** the bundled demo is a hand-authored circuit with 12 LIF neurons, not a biological fruit-fly brain. MaleCNS/FlyWire source URLs and downloads are included; converting those data into calibrated runnable models is the next milestone. CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+
+## Install and run
+
+Python 3.9+ on a NumPy-supported platform. Development installation:
+
+```sh
+git clone https://github.com/freeman-1984-coder/flybrain-sdk.git
+cd flybrain-sdk
+python -m venv .venv
+# macOS/Linux:
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -e .
+python examples/quickstart.py
+python -m pip install -e ".[dev]"
+pytest
+```
+
+The package is **not yet published to PyPI**. Install directly from GitHub without cloning:
+
+```sh
+python -m pip install "flybrain-sdk @ git+https://github.com/freeman-1984-coder/flybrain-sdk.git"
+```
+
+Normal installation needs only NumPy at runtime. Offline operation means the demo makes no network requests; initial dependency installation needs an existing wheel cache or internet access.
+
+## One API, explicit backend support
+
+| API | Behavior |
+| --- | --- |
+| `FlyBrain.load("toy", backend="cpu")` | Load bundled data; a local model JSON path or `Connectome` also works |
+| `brain.stimulate("looming_left", strength=1, duration_ms=100)` | Start a finite current pulse on the next tick |
+| `brain.step(20)` | Advance 20 fixed simulation ticks, return final immutable state |
+| `brain.action()` | Read independent motor intensities without advancing time |
+| `brain.save("brain.checkpoint.json")` | Atomically save model, config, dynamics, and pending stimuli |
+| `FlyBrain.restore("brain.checkpoint.json")` | Create a brain that continues the saved trajectory |
+
+The toy sensory channels are `food`, `looming_left`, `looming_right`, `touch`.
+Motor channels are `walk`, `turn_left`, `turn_right`, `jump`, each between 0 and 1.
+They are heuristic control values, not probabilities or measured physical velocities.
+Game movement and rendering stay in your application; see [game_loop.py](examples/game_loop.py).
+
+| Backend | Current status |
+| --- | --- |
+| `cpu` | Working reference implementation, NumPy edge lists, float64 |
+| `wasm` | Reserved name; raises `BackendUnavailableError` |
+| `cuda` | Reserved name; raises `BackendUnavailableError`; no CUDA dependencies |
+
+See [dynamics and backend contract](docs/architecture.md) for equations, spike timing and limitations.
+
+## Models are downloaded only when requested
+
+```python
+from flybrain import list_models, model_info, fetch_model
+
+print([(m["id"], m["status"]) for m in list_models()])  # offline catalog
+print(model_info("male-cns-v1.0"))  # includes URLs, sizes, license
+
+# Explicit network request: download only this ~1.1 MB asset, then reuse local cache.
+paths = fetch_model("flywire-v783", assets=["neuron_ids"])
+print(paths["neuron_ids"])
+```
+
+```sh
+python -m flybrain models list
+python -m flybrain models info male-cns-v1.0
+python -m flybrain models download male-cns-v1.0 --asset annotations
+```
+
+`fetch_model()` returns file paths. Raw Feather/NPY data cannot yet be passed straight to `FlyBrain.load()`.
+Nothing large is shipped in the wheel or fetched at import/load time. See the [catalog and cache contract](docs/models.md) and [real-data integration plan](docs/real-data.md).
+
+## Scope and scientific honesty
+
+The SDK offers plumbing for experiments, not a validated emulation of a fly. Wiring alone does not specify physiological parameters, receptor effects, sensory encoding, motor decoding, a body, or learning. The demo has no plasticity, morphology, realistic vision, or inferred biological behavior. Full-brain CPU real-time performance has not been established.
+
+Code and original toy data are MIT. Third-party datasets retain their own licenses and required citations; they are not relicensed by this repository. This is an independent project, unaffiliated with Janelia, FlyWire, Google, or the dataset authors.
+
+## Help build it
+
+Issues and pull requests are welcome. Good starting areas:
+
+- Add a versioned model source with license, attribution, sizes and integrity metadata.
+- Implement a small reproducible MaleCNS/FlyWire subgraph importer with explicit sensory/motor mappings.
+- Add a Godot/Unity adapter or a headless game example.
+- Port the reference dynamics to WASM and match Python reference traces.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md), [roadmap](docs/roadmap.md), and the [TypeScript contract](packages/js/README.md). New contributors can use the model request, bug report, or feature request templates. Pull requests run CI before review.
+
+## Build a distribution
+
+```sh
+python -m build
+python -m twine check dist/*
+```
+
+The wheel includes the toy connectome and model catalog. See [release instructions](docs/releasing.md) before publishing.

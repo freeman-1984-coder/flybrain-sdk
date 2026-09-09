@@ -1,0 +1,23 @@
+name: Add a model source
+description: Propose a connectome source or a calibrated runnable model.
+labels: [models, enhancement]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Official source URL and pinned version
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: License, attribution, file sizes and checksums
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Raw data or runnable model?
+      description: For runnable models include parameters, sensory/motor mappings and evidence.
+    validations:
+      required: true
