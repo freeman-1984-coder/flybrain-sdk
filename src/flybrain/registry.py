@@ -16,6 +16,39 @@ from urllib.request import Request, urlopen
 from .config import positive_int
 
 
+def cache_root(cache_dir: Optional[Union[str, Path]] = None) -> Path:
+    return Path(cache_dir) if cache_dir is not None else Path.home() / ".cache" / "flybrain-sdk"
+
+
+def resolve_model(
+    model_id: str, *, download: bool = False, cache_dir: Optional[Union[str, Path]] = None
+) -> Path:
+    """Resolve a runnable catalog bundle, requiring explicit opt-in for network I/O."""
+    entry = model_info(model_id)
+    if entry["status"] != "ready":
+        raise ValueError(
+            f"{model_id!r} is raw connectome data, not a runnable model. "
+            "Use fetch_model() for source files or choose a ready model."
+        )
+    asset = entry["assets"]["model"]
+    path = cache_root(cache_dir) / model_id / asset["filename"]
+    expected = asset.get("checksum", "")
+    if not expected.startswith("sha256:"):
+        raise ValueError("runnable models require a pinned SHA256 checksum")
+    if download:
+        return fetch_model(model_id, assets=["model"], cache_dir=cache_dir)["model"]
+    if (
+        path.is_file()
+        and path.stat().st_size == asset["size_bytes"]
+        and _digest(path) == expected.split(":", 1)[1]
+    ):
+        return path
+    raise FileNotFoundError(
+        f"Model {model_id!r} is not cached or failed verification. "
+        "Pass download=True once to fetch the pinned bundle."
+    )
+
+
 def list_models() -> list:
     """Return detached catalog entries; inspect status and asset sizes before downloading."""
     return json.loads(files("flybrain.data").joinpath("registry.json").read_text(encoding="utf-8"))
@@ -62,11 +95,11 @@ def _fetch_asset(asset: dict, folder: Path, max_bytes: int) -> Path:
                 and (expected is None or _digest(target, algorithm) == expected)
             ):
                 return target
-        except (ValueError, KeyError):
+        except (ValueError, KeyError, TypeError):
             pass
     temporary = None
     try:
-        request = Request(asset["url"], headers={"User-Agent": "flybrain-sdk/0.1.0a1"})
+        request = Request(asset["url"], headers={"User-Agent": "flybrain-sdk/0.2.0a1"})
         with urlopen(request, timeout=60) as response:
             if not response.geturl().startswith("https://"):
                 raise ValueError("download redirected to an insecure URL")
@@ -120,7 +153,7 @@ def fetch_model(
     """
     positive_int(max_bytes, "max_bytes")
     entry = model_info(model_id)
-    root = Path(cache_dir) if cache_dir is not None else Path.home() / ".cache" / "flybrain-sdk"
+    root = cache_root(cache_dir)
     if entry["status"] == "builtin":
         if assets is not None and tuple(assets) != ("model",):
             raise ValueError("toy has only the 'model' asset")

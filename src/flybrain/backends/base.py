@@ -37,6 +37,19 @@ class Backend(ABC):
     def observe(self) -> SimulationState:
         """Return a detached observation without advancing time."""
 
+    @property
+    @abstractmethod
+    def tick(self) -> int:
+        """Clock position without transferring neural arrays."""
+
+    @abstractmethod
+    def observe_selected(self, indices: tuple, fields: tuple) -> dict:
+        """Return only requested cells and fields as detached tuples."""
+
+    @abstractmethod
+    def set_silenced(self, indices: tuple, enabled: bool) -> None:
+        """Hold cells at reset and suppress new spikes beginning next tick."""
+
     @abstractmethod
     def snapshot(self) -> dict:
         """Export every value necessary for deterministic continuation."""

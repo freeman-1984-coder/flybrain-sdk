@@ -1,10 +1,11 @@
 import hashlib
+import importlib
 import io
 import json
 
 import pytest
 
-from flybrain import FlyBrain, fetch_model, list_models, model_info, registry
+from flybrain import Connectome, FlyBrain, fetch_model, list_models, model_info, registry
 
 
 class Response(io.BytesIO):
@@ -33,7 +34,12 @@ def test_listing_never_downloads(monkeypatch):
         raise AssertionError("unexpected network request")
 
     monkeypatch.setattr(registry, "urlopen", blocked)
-    assert {m["id"] for m in list_models()} == {"toy", "male-cns-v1.0", "flywire-v783"}
+    assert {m["id"] for m in list_models()} == {
+        "toy",
+        "male-cns-escape-v1",
+        "male-cns-v1.0",
+        "flywire-v783",
+    }
     assert model_info("flywire-v783")["status"] == "raw-data"
     assert model_info("male-cns-v1.0")["assets"]["connections"]["size_bytes"] > 1_000_000_000
 
@@ -101,3 +107,43 @@ def test_model_catalog_is_detached():
     entries = list_models()
     entries[0]["id"] = "changed"
     assert list_models()[0]["id"] == "toy"
+
+
+def test_ready_model_opt_in_load_cache_and_integrity(tmp_path, monkeypatch):
+    payload = json.dumps(Connectome.load().to_dict()).encode()
+    asset = {
+        "filename": "model.json",
+        "url": "https://example.org/model.json",
+        "size_bytes": len(payload),
+        "checksum": "sha256:" + hashlib.sha256(payload).hexdigest(),
+    }
+    entry = {"id": "test-ready", "status": "ready", "assets": {"model": asset}}
+    monkeypatch.setattr(registry, "list_models", lambda: [entry])
+    monkeypatch.setattr(importlib.import_module("flybrain.brain"), "list_models", lambda: [entry])
+    calls = []
+
+    def opener(*args, **kwargs):
+        calls.append(1)
+        return Response(payload)
+
+    monkeypatch.setattr(registry, "urlopen", opener)
+    with pytest.raises(FileNotFoundError):
+        FlyBrain.load("test-ready", cache_dir=tmp_path)
+    assert calls == []
+    brain = FlyBrain.load("test-ready", cache_dir=tmp_path, download=True)
+    assert brain.model.name == "toy-v1"
+    assert len(calls) == 1
+    assert FlyBrain.load("test-ready", cache_dir=tmp_path).state == brain.state
+    assert len(calls) == 1
+    path = tmp_path / "test-ready" / "model.json"
+    path.write_bytes(b"x" * len(payload))
+    with pytest.raises(FileNotFoundError):
+        FlyBrain.load("test-ready", cache_dir=tmp_path)
+    assert len(calls) == 1
+    FlyBrain.load("test-ready", cache_dir=tmp_path, download=True)
+    assert len(calls) == 2
+    assert path.read_bytes() == payload
+    del asset["checksum"]
+    with pytest.raises(ValueError, match="SHA256"):
+        FlyBrain.load("test-ready", cache_dir=tmp_path, download=True)
+    assert len(calls) == 2

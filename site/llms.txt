@@ -3,12 +3,17 @@
 > Open-source Python connectome simulation SDK. No CUDA required.
 
 Working: NumPy CPU backend, synthetic 12-neuron toy, sensory/motor APIs,
-JSON checkpoints, on-demand raw MaleCNS/FlyWire downloads.
+schema-2 JSON checkpoints, direct current injection, annotation selection,
+custom output channels, selected observations, reversible silencing, and a
+3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.2.0a1.
+Raw MaleCNS/FlyWire downloads also remain available.
 Not yet implemented: calibrated biological models, full-brain real-time guarantees,
 WASM/CUDA runtimes, NPM runtime, learning or plasticity. No PyPI publication yet.
 
 - [Quickstart](https://freeman-1984-coder.github.io/flybrain-sdk/api.html)
 - [Model catalog](https://freeman-1984-coder.github.io/flybrain-sdk/models.html)
+- [Runnable real model](https://freeman-1984-coder.github.io/flybrain-sdk/male-cns-escape.html)
+- [Model catalog JSON](https://freeman-1984-coder.github.io/flybrain-sdk/model-catalog.json)
 - [Contributing](https://freeman-1984-coder.github.io/flybrain-sdk/contribute.html)
 - [Source](https://github.com/freeman-1984-coder/flybrain-sdk)
 - [Python API](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/api.md)

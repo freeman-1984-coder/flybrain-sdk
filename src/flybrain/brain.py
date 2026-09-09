@@ -4,13 +4,16 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import Optional, Union
+from typing import Mapping, Optional, Sequence, Union
 
 from .backends import SimulationState, create_backend
 from .config import LIFConfig, positive_int
+from .drive import CurrentDrive, Interventions, duration_ticks
 from .errors import CheckpointError
 from .model import Connectome
-from .motor import MotorAction, MotorDecoder
+from .motor import ChannelAction, MotorAction, MotorDecoder
+from .neurons import NeuronIndex, Observation, Progress
+from .registry import list_models, resolve_model
 from .sensory import SensoryEncoder, Stimulus
 
 PathLike = Union[str, Path]
@@ -25,6 +28,9 @@ class FlyBrain:
         self._backend = create_backend(backend, model, self.config)
         self._sensory = SensoryEncoder(model, self.config)
         self._motor = MotorDecoder(model, self.config)
+        self.neurons = NeuronIndex(model)
+        self.drive = CurrentDrive(self.neurons, self.config)
+        self.intervene = Interventions(self.neurons, self._backend)
 
     @property
     def model(self) -> Connectome:
@@ -53,14 +59,27 @@ class FlyBrain:
         *,
         backend: str = "cpu",
         config: Optional[LIFConfig] = None,
+        download: bool = False,
+        cache_dir: Optional[PathLike] = None,
     ) -> "FlyBrain":
-        """Load the bundled toy or a local versioned JSON model, without network I/O."""
-        if isinstance(model, str) and model in ("male-cns-v1.0", "flywire-v783"):
-            raise ValueError(
-                f"{model!r} is raw connectome data, not a runnable model yet. "
-                "Use fetch_model() to download; see docs/real-data.md for conversion."
-            )
-        connectome = model if isinstance(model, Connectome) else Connectome.load(model)
+        """Load toy, a local model/bundle, or a catalog model with opt-in downloads."""
+        if isinstance(model, Connectome):
+            return cls(model, backend=backend, config=config)
+        if model == "toy":
+            return cls(Connectome.load(), backend=backend, config=config)
+        if isinstance(model, str) and model in {e["id"] for e in list_models()}:
+            model = resolve_model(model, download=download, cache_dir=cache_dir)
+        data = json.loads(Path(model).read_text(encoding="utf-8"))
+        if data.get("format") == "flybrain-model-bundle":
+            if type(data.get("schema_version")) is not int or data["schema_version"] != 1:
+                raise ValueError("unsupported model bundle schema")
+            connectome = Connectome.from_dict(data["model"])
+            if connectome.fingerprint != data["model_sha256"]:
+                raise ValueError("model bundle fingerprint mismatch")
+            if config is None:
+                config = LIFConfig(**data["config"])
+        else:
+            connectome = Connectome.from_dict(data)
         return cls(connectome, backend=backend, config=config)
 
     def stimulate(
@@ -83,19 +102,71 @@ class FlyBrain:
     def step(self, steps: int = 1) -> SimulationState:
         """Advance a positive integer number of fixed ticks and return the final state."""
         positive_int(steps, "steps")
-        for _ in range(steps):
-            self._backend.step(self._sensory.current())
+        self._advance_ticks(steps)
         return self.state
 
-    def action(self) -> MotorAction:
+    def _advance_ticks(self, steps: int) -> None:
+        for _ in range(steps):
+            self._backend.step(self._sensory.peek() + self.drive.peek())
+            self._sensory.consume()
+            self.drive.consume()
+
+    def advance(self, *, duration_ms: float) -> Progress:
+        """Advance an exact multiple of dt without exporting all neural arrays."""
+        self._advance_ticks(duration_ticks(duration_ms, self.config.dt_ms))
+        return Progress(self._backend.tick, self._backend.tick * self.config.dt_ms)
+
+    def observe(
+        self,
+        ids: Optional[Sequence[str]] = None,
+        *,
+        fields: Sequence[str] = ("voltage", "spikes", "rates_hz"),
+    ) -> Observation:
+        """Read selected cells only. spikes means final-tick events, not window counts."""
+        ids = (
+            self.model.neuron_ids
+            if ids is None
+            else tuple(ids)
+            if not isinstance(ids, str)
+            else ids
+        )
+        indices = self.neurons.resolve(ids)
+        if isinstance(fields, str):
+            raise ValueError("fields must be a sequence of field names")
+        fields = tuple(fields)
+        if (
+            not fields
+            or len(set(fields)) != len(fields)
+            or set(fields) - {"voltage", "spikes", "rates_hz"}
+        ):
+            raise ValueError("fields must be unique names from voltage, spikes, rates_hz")
+        return Observation(
+            self._backend.tick,
+            self._backend.tick * self.config.dt_ms,
+            tuple(ids),
+            self._backend.observe_selected(indices, fields),
+        )
+
+    def bind_readout(
+        self, channels: Mapping[str, Sequence[str]], *, scale_hz: Optional[float] = None
+    ) -> "FlyBrain":
+        """Bind arbitrary channel names to mean-rate readouts; no graph changes."""
+        self._motor.bind(
+            channels, scale_hz=self.config.action_rate_hz if scale_hz is None else scale_hz
+        )
+        return self
+
+    def action(self) -> Union[MotorAction, ChannelAction]:
         """Read motor intensities without advancing time or consuming state."""
-        return self._motor.decode(self.state.rates_hz)
+        indices = self._motor.indices
+        rates = self._backend.observe_selected(indices, ("rates_hz",))["rates_hz"]
+        return self._motor.decode(dict(zip(indices, rates)))
 
     def save(self, path: PathLike) -> Path:
         """Atomically write a self-contained JSON checkpoint (never pickle)."""
         path = Path(path)
         payload = {
-            "schema_version": 1,
+            "schema_version": 2,
             "dynamics_revision": self._backend.dynamics_revision,
             "backend": self.backend,
             "model": self.model.to_dict(),
@@ -103,6 +174,8 @@ class FlyBrain:
             "config": self.config.to_dict(),
             "state": self._backend.snapshot(),
             "pending_stimuli": self._sensory.snapshot(),
+            "pending_currents": self.drive.snapshot(),
+            "readout": self._motor.snapshot(),
         }
         raw = json.dumps(payload, indent=2, allow_nan=False) + "\n"
         temporary = None
@@ -125,7 +198,7 @@ class FlyBrain:
         """Construct a new brain, including active stimuli and all dynamic state."""
         try:
             data = json.loads(Path(path).read_text(encoding="utf-8"))
-            if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+            if type(data["schema_version"]) is not int or data["schema_version"] not in (1, 2):
                 raise ValueError("unsupported checkpoint schema_version")
             model = Connectome.from_dict(data["model"])
             if model.fingerprint != data["model_sha256"]:
@@ -139,6 +212,11 @@ class FlyBrain:
                 raise ValueError("incompatible dynamics_revision")
             brain._backend.restore(data["state"])
             brain._sensory.restore(data["pending_stimuli"])
+            if data["schema_version"] == 2:
+                if "silenced" not in data["state"]:
+                    raise ValueError("checkpoint is missing intervention state")
+                brain.drive.restore(data["pending_currents"])
+                brain._motor.restore(data["readout"])
             return brain
         except (ValueError, TypeError, KeyError, IndexError, AttributeError, OverflowError) as exc:
             raise CheckpointError(f"Invalid checkpoint: {exc}") from exc

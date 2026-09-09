@@ -2,7 +2,7 @@
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from importlib.resources import files
 from pathlib import Path
 from types import MappingProxyType
@@ -26,6 +26,7 @@ class Connectome:
     sensory: Mapping[str, Tuple[int, ...]]
     motor: Mapping[str, Tuple[int, ...]]
     provenance: Mapping[str, str]
+    annotations: Mapping[str, Mapping[str, str]] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if not isinstance(self.name, str) or not self.name:
@@ -67,6 +68,15 @@ class Connectome:
         ):
             raise ValueError("provenance must map strings to strings")
         object.__setattr__(self, "provenance", MappingProxyType(dict(self.provenance)))
+        annotations = {}
+        known_ids = set(ids)
+        for neuron_id, record in self.annotations.items():
+            if neuron_id not in known_ids or not isinstance(record, Mapping):
+                raise ValueError("annotations must map known neuron IDs to attribute mappings")
+            if any(not isinstance(k, str) or not isinstance(v, str) for k, v in record.items()):
+                raise ValueError("neuron annotations must map strings to strings")
+            annotations[neuron_id] = MappingProxyType(dict(record))
+        object.__setattr__(self, "annotations", MappingProxyType(annotations))
 
     @classmethod
     def from_dict(cls, data: dict) -> "Connectome":
@@ -84,7 +94,15 @@ class Connectome:
             motor = {k: tuple(index[n] for n in v) for k, v in data["motor"].items()}
         except KeyError as exc:
             raise ValueError(f"missing model field or unknown neuron ID: {exc}") from exc
-        return cls(data["name"], ids, edges, sensory, motor, data.get("provenance", {}))
+        return cls(
+            data["name"],
+            ids,
+            edges,
+            sensory,
+            motor,
+            data.get("provenance", {}),
+            data.get("annotations", {}),
+        )
 
     @classmethod
     def load(cls, source: Union[str, Path] = "toy") -> "Connectome":
@@ -95,7 +113,7 @@ class Connectome:
         return cls.from_dict(json.loads(raw))
 
     def to_dict(self) -> dict:
-        return {
+        data = {
             "schema_version": 1,
             "name": self.name,
             "neuron_ids": list(self.neuron_ids),
@@ -107,6 +125,10 @@ class Connectome:
             "motor": {k: [self.neuron_ids[i] for i in v] for k, v in self.motor.items()},
             "provenance": dict(self.provenance),
         }
+        # Preserve schema-1 fingerprints for existing models without annotations.
+        if self.annotations:
+            data["annotations"] = {n: dict(a) for n, a in self.annotations.items()}
+        return data
 
     @property
     def fingerprint(self) -> str:

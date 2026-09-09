@@ -63,3 +63,16 @@ whole-brain CPU benchmarks. No real-time full-brain claim is made.
 Backends must agree on edge summation semantics, threshold/reset order, fixed dt,
 refractory counting and pulse boundaries. Begin WASM with float64 and deterministic
 reference traces; document tolerances if a future accelerator uses float32.
+
+## Open interfaces added in 0.2 alpha
+
+The facade also owns an ID/annotation index, direct-current scheduler and
+replaceable mean-rate readout. `advance()` returns only clock progress;
+`observe(ids, fields=...)` and `action()` read only the required backend arrays.
+CPU stepping is still a Python loop; GPU batch execution remains planned.
+
+Silencing is a runtime mask: new spikes are suppressed and voltage is held at
+reset from the next tick; previous spikes still propagate and rate history decays.
+It does not mutate the anatomical graph. Current schedules are consumed only
+after a successful backend step. Schema-2 checkpoints include direct currents,
+readout configuration and masks; schema 1 remains readable.

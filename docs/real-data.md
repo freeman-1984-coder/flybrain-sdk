@@ -1,7 +1,17 @@
 # From MaleCNS / FlyWire data to a runnable model
 
+## Implemented in 0.2 alpha
+
+A frozen-selection MaleCNS importer now lives in `flybrain.importers.malecns`,
+behind the optional `datasets` extra. The first [published model and recipe](../models/male-cns-escape-v1/README.md)
+retain original IDs, counts, annotations, source SHA256 pins and assumed dynamics.
+It runs without Arrow or CUDA after conversion. See that model card for exact
+reproduction commands and validation. Full-brain calibration and the FlyWire
+importer remain future work. The original broader integration plan follows.
+
+
 The first release solves installation, CPU dynamics, a shared API and explicit
-downloads. The next milestone is a **small, reproducible real-connectome subgraph**,
+downloads. The initial milestone was a **small, reproducible real-connectome subgraph**,
 not a claim that the complete brain is already simulated accurately.
 
 ## 1. Pin the source
@@ -19,7 +29,7 @@ never silently mix identifiers or annotations across releases.
 
 ## 2. Add isolated importers
 
-Create `flybrain.importers.malecns` and `flybrain.importers.flywire` behind a future
+MaleCNS now implements this design; add `flybrain.importers.flywire` behind the
 `[datasets]` extra containing Arrow tooling. Inspect actual file schemas and record
 a tested column mapping. Keep core install dependencies unchanged. Each importer
 should accept downloaded paths, a frozen list of neuron IDs and a conversion policy.

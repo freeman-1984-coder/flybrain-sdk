@@ -1,5 +1,27 @@
 # flybrain-sdk：无需 CUDA 的果蝇连接组仿真 SDK
 
+## 0.2 alpha：真实小回路与开放接口
+
+新增 313 个真实 MaleCNS 神经元、20,607 条连接的实验模型，约 3.8 MB，
+使用时显式下载，之后可以离线重用。连接来源真实；LIF 参数、刺激和动作映射是建模假设。
+
+```python
+from flybrain import FlyBrain
+
+brain = FlyBrain.load("male-cns-escape-v1", download=True)
+gf = brain.neurons.select(cell_type="DNp01")
+brain.bind_readout({"flash": gf})
+brain.stimulate("looming_left", duration_ms=100)
+brain.advance(duration_ms=100)
+print(brain.action().to_dict())
+```
+
+支持按 ID/注释选择细胞、直接注入电流、只观察指定细胞，以及可恢复的静默干预。
+新检查点保存自定义输出和刺激，继续兼容旧检查点。CUDA/WASM 尚未实现。
+详见 [API](api.md)、[模型卡](../models/male-cns-escape-v1/README.md) 和
+[整体设计](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md)。
+
+
 Python MVP 已实现 CPU 运行、感觉输入、动作读出、状态保存与恢复。
 安装后运行 `python examples/quickstart.py` 即可离线体验。
 

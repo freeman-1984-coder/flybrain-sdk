@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flybrain-sdk"
-version = "0.1.0a1"
+version = "0.2.0a1"
 description = "CPU-first connectome simulation for games and experiments. No CUDA required."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -29,6 +29,7 @@ Documentation = "https://freeman-1984-coder.github.io/flybrain-sdk/api.html"
 Issues = "https://github.com/freeman-1984-coder/flybrain-sdk/issues"
 
 [project.optional-dependencies]
+datasets = ["pyarrow>=14"]
 dev = ["pytest>=8", "build>=1.2", "twine>=6", "ruff>=0.9"]
 
 [tool.setuptools.packages.find]

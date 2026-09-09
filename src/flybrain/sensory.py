@@ -50,13 +50,21 @@ class SensoryEncoder:
         )
 
     def current(self) -> np.ndarray:
+        current = self.peek()
+        self.consume()
+        return current
+
+    def peek(self) -> np.ndarray:
         current = np.zeros(len(self.model.neuron_ids), dtype=np.float64)
         for pulse in self._pending:
             indices = list(self.model.sensory[pulse["channel"]])
             current[indices] += pulse["strength"] * self.config.input_gain
+        return current
+
+    def consume(self) -> None:
+        for pulse in self._pending:
             pulse["remaining_steps"] -= 1
         self._pending = [p for p in self._pending if p["remaining_steps"] > 0]
-        return current
 
     def clear(self) -> None:
         self._pending.clear()

@@ -26,6 +26,7 @@ class CPUBackend(Backend):
         self._spikes = np.zeros(self.n, dtype=bool)
         self._refractory = np.zeros(self.n, dtype=np.int64)
         self._rates = np.zeros(self.n, dtype=np.float64)
+        self._silenced = np.zeros(self.n, dtype=bool)
 
     def step(self, current: np.ndarray) -> None:
         current = np.asarray(current, dtype=np.float64)
@@ -35,7 +36,7 @@ class CPUBackend(Backend):
         synaptic = np.bincount(
             self._post, weights=self._weights * self._spikes[self._pre], minlength=self.n
         )
-        available = self._refractory == 0
+        available = (self._refractory == 0) & ~self._silenced
         voltage = (
             self.config.rest
             + (self._voltage - self.config.rest) * self._leak
@@ -55,6 +56,17 @@ class CPUBackend(Backend):
         self._refractory, self._rates = refractory, rates
         self._tick += 1
 
+    @property
+    def tick(self) -> int:
+        return self._tick
+
+    def observe_selected(self, indices: tuple, fields: tuple) -> dict:
+        arrays = {"voltage": self._voltage, "spikes": self._spikes, "rates_hz": self._rates}
+        return {name: tuple(arrays[name][list(indices)].tolist()) for name in fields}
+
+    def set_silenced(self, indices: tuple, enabled: bool) -> None:
+        self._silenced[list(indices)] = enabled
+
     def observe(self) -> SimulationState:
         return SimulationState(
             self._tick,
@@ -71,6 +83,7 @@ class CPUBackend(Backend):
             "spikes": self._spikes.tolist(),
             "refractory": self._refractory.tolist(),
             "rates_hz": self._rates.tolist(),
+            "silenced": self._silenced.tolist(),
         }
 
     def restore(self, state: dict) -> None:
@@ -89,6 +102,14 @@ class CPUBackend(Backend):
         refractory = [positive_int(v, "refractory", allow_zero=True) for v in state["refractory"]]
         if any(v > self._hold_ticks for v in refractory):
             raise ValueError("checkpoint refractory counter is out of bounds")
+        silenced = state.get("silenced", [False] * self.n)
+        if (
+            not isinstance(silenced, list)
+            or len(silenced) != self.n
+            or any(type(v) is not bool for v in silenced)
+        ):
+            raise ValueError("silenced must contain one boolean per neuron")
         self._tick, self._voltage, self._rates = tick, voltage, rates
         self._spikes = np.array(state["spikes"], dtype=bool)
         self._refractory = np.array(refractory, dtype=np.int64)
+        self._silenced = np.array(silenced, dtype=bool)

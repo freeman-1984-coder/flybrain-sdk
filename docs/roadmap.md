@@ -1,5 +1,18 @@
 # Roadmap
 
+## Available in 0.2.0a1
+
+- Reproducible, opt-in MaleCNS escape subgraph with a model card and CPU measurements.
+- Exact source-ID/annotation selection, direct currents and selected observations.
+- Arbitrary named rate readouts, reversible spike silencing and schema-2 checkpoints.
+- The previous alpha API and schema-1 checkpoint reader remain supported.
+
+Next: an interactive circuit explorer and game sandbox sharing these interfaces,
+exportable demo kits, optional CUDA tested on hardware, then audio and rhythm
+examples. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
+proposed architecture; proposal-only APIs are not current API documentation.
+
+
 ## Available in 0.1.0a1
 
 - Python src-layout package, NumPy CPU LIF simulation and offline toy circuit.

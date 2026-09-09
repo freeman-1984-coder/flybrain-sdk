@@ -16,7 +16,7 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**Alpha status:** the bundled demo is a hand-authored circuit with 12 LIF neurons, not a biological fruit-fly brain. MaleCNS/FlyWire source URLs and downloads are included; converting those data into calibrated runnable models is the next milestone. CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.2 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
 ## Install and run
 
@@ -69,6 +69,32 @@ See [dynamics and backend contract](docs/architecture.md) for equations, spike t
 
 ## Models are downloaded only when requested
 
+Run the real anatomical subgraph with an explicit first download:
+
+```python
+brain = FlyBrain.load("male-cns-escape-v1", download=True)
+brain.stimulate("looming_left", duration_ms=100)
+brain.advance(duration_ms=100)
+gf = brain.neurons.select(cell_type="DNp01")
+print(brain.observe(gf, fields=["rates_hz"]).to_dict())
+```
+
+The model is experimental: wiring is measured, while its dynamics and mappings
+are assumptions. No Arrow/CUDA dependency is needed to use the converted bundle.
+
+Use your own output names and directly drive or silence selected cells:
+
+```python
+brain.bind_readout({"flash": gf})
+brain.drive.current(gf, amplitude=2, duration_ms=20, units="normalized")
+brain.advance(duration_ms=20)
+print(brain.action()["flash"])
+brain.intervene.silence(gf)  # enabled=False releases the intervention
+```
+
+See [the offline open-circuit example](examples/open_circuit.py) and
+[real-model reproduction](models/male-cns-escape-v1/README.md).
+
 ```python
 from flybrain import list_models, model_info, fetch_model
 
@@ -87,7 +113,7 @@ python -m flybrain models download male-cns-v1.0 --asset annotations
 ```
 
 `fetch_model()` returns file paths. Raw Feather/NPY data cannot yet be passed straight to `FlyBrain.load()`.
-Nothing large is shipped in the wheel or fetched at import/load time. See the [catalog and cache contract](docs/models.md) and [real-data integration plan](docs/real-data.md).
+The wheel contains no large model. Biological model downloads require explicit `download=True`; importing the package and loading the toy remain offline. See the [catalog and cache contract](docs/models.md) and [real-data integration plan](docs/real-data.md).
 
 ## Scope and scientific honesty
 
@@ -100,7 +126,7 @@ Code and original toy data are MIT. Third-party datasets retain their own licens
 Issues and pull requests are welcome. Good starting areas:
 
 - Add a versioned model source with license, attribution, sizes and integrity metadata.
-- Implement a small reproducible MaleCNS/FlyWire subgraph importer with explicit sensory/motor mappings.
+- Add a FlyWire importer or another MaleCNS recipe with explicit mappings and validation.
 - Add a Godot/Unity adapter or a headless game example.
 - Port the reference dynamics to WASM and match Python reference traces.
 

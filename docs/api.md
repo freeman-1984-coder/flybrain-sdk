@@ -1,5 +1,50 @@
 # Python API reference
 
+Version: 0.2.0a1. CPU is implemented; CUDA and WASM remain unavailable.
+
+## Open circuit API
+
+`brain.neurons.select(ids=None, **attributes)` returns immutable source-ID tuples
+in model order, intersecting exact attribute matches. Available attribute names
+are in `brain.neurons.attributes`. The real escape model supplies `cell_type`,
+`side`, `status` and `consensus_nt`. Missing fields and empty selections are
+errors; the SDK does not guess anatomy from IDs. Direct methods also accept lists
+of known string IDs, including large numeric IDs.
+
+`brain.drive.current(ids, *, amplitude, duration_ms, units="normalized")` queues
+a signed current for the next tick. Unlike named stimuli, amplitude is not
+multiplied by `input_gain` or constrained to [0,1]. It must be finite. Only
+normalized units are supported by this dynamics revision. Overlapping direct
+and named stimuli add. `brain.drive.clear()` cancels direct currents;
+`clear_stimuli()` cancels named stimuli only.
+
+`brain.advance(duration_ms=100)` advances without exporting the full neural state
+and returns `Progress(tick, time_ms)`. Both direct-current durations and `advance`
+require an integer multiple of dt (within a 1e-9 tick conversion tolerance).
+Legacy named-stimulus duration rounding remains unchanged for compatibility.
+
+`brain.observe(ids=None, fields=("voltage", "spikes", "rates_hz"))` returns a
+detached `Observation` with IDs, tick, time and selected values. Fields must be
+unique supported names. This transfers only selected cells/fields. `spikes`
+means events at the final tick, not a count over an `advance` window.
+
+`brain.bind_readout({"volume": ids, "flash": other_ids}, scale_hz=100)` replaces
+the output mapping without changing graph connections. `action()` then returns a
+`ChannelAction`; use `action["volume"]` or `action.to_dict()`. Each value is
+`clip(mean(rates_hz[ids]) / scale_hz, 0, 1)`. This is a configurable rate readout,
+not a trained decoder. Binding `{}` permits an experiment with no action outputs.
+Invalid replacement mappings leave the previous mapping intact.
+
+`brain.intervene.silence(ids, enabled=True)` suppresses new spikes beginning with
+the next tick and holds voltage at reset. Spikes already emitted still propagate;
+historical firing rates decay normally. `enabled=False` releases selected cells.
+This operation does not remove edges or alter the model fingerprint. The mask is
+included in checkpoints.
+
+Examples: [offline custom output](../examples/open_circuit.py),
+[real source data](../examples/real_connectome.py),
+[model assumptions](../models/male-cns-escape-v1/README.md).
+
 ## Load and observe
 
 ```python
@@ -12,8 +57,10 @@ print(state.tick, state.time_ms, state.voltage, state.spikes, state.rates_hz)
 print(brain.action().walk)
 ```
 
-`FlyBrain.load(model="toy", *, backend="cpu", config=None)` accepts the builtin name,
-a local JSON path, or a validated `Connectome`. It never downloads. Recognized raw
+`FlyBrain.load(model="toy", *, backend="cpu", config=None, download=False, cache_dir=None)`
+accepts the builtin name, a local JSON model/bundle, a validated `Connectome`, or
+a ready catalog entry. Downloading requires explicit `download=True`; subsequent
+loads verify and reuse the local cache. Recognized raw
 catalog IDs raise an explanatory error. `available_backends()` returns a mapping
 of recognized names to runtime availability.
 
@@ -39,9 +86,10 @@ camera pixels, images, odor chemistry, or raw sensor measurements.
 
 `step(steps=1)` takes a positive integer; it advances simulation time, not wall
 clock time. The default timestep is 1 ms. The game loop chooses how many ticks to
-run per frame. Calling `action()` is a pure read and returns `MotorAction`.
-`to_dict()` produces ordinary JSON-compatible values. Motor channels missing from
-a custom model output zero. Unsupported motor names are rejected in this MVP.
+run per frame. `action()` is a pure read. The legacy toy/escape readout returns
+`MotorAction`, with missing legacy fields zero. Arbitrary model channels and
+`bind_readout()` return `ChannelAction`, a mapping with only the configured names.
+Both have `to_dict()`; all current readouts are clipped mean-rate intensities.
 
 ## Checkpoints
 
@@ -54,7 +102,9 @@ continued = FlyBrain.restore("brain.checkpoint.json", backend="cpu")
 atomic file replacement. `restore()` is a class method returning a **new** brain.
 The checkpoint embeds the model and its SHA256 fingerprint, config, dynamics
 revision, tick, voltages, previous spikes, refractory counters, filtered firing
-rates, and all pending stimuli. No pickle or code execution is used.
+rates, pending named stimuli, direct currents, silencing masks, annotations and
+readout configuration. New files use checkpoint schema 2; schema 1 remains
+readable. No pickle or code execution is used.
 
 Unknown schema/dynamics versions, altered model fingerprints, invalid vector
 shapes and nonfinite state are rejected with `CheckpointError`. File access
@@ -67,7 +117,8 @@ future backends is not promised. A fingerprint checks consistency, not authentic
 
 Use `Connectome.from_dict()` or edit a copy of `Connectome.load().to_dict()`.
 Schema version 1 contains `name`, string `neuron_ids`, `synapses` (pre ID, post ID,
-signed `weight`), `sensory` and `motor` port maps, and string-valued `provenance`.
+signed `weight`), `sensory` and `motor` port maps, string-valued `provenance`,
+and optional per-ID `annotations` whose attribute keys and values are strings.
 IDs are kept as strings, including numeric source IDs. Duplicate neuron IDs,
 unknown edge endpoints and nonfinite weights are invalid. Parallel edges add.
 Models have immutable neuron/edge tuples and port maps. The normalized model
