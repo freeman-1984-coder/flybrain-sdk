@@ -1,0 +1,52 @@
+"""Edit the recipe or replace components in build_session(). No CUDA required."""
+
+import argparse
+import json
+from pathlib import Path
+
+from flybrain import FlyBrain, LIFConfig
+from flybrain.demos import DodgeArena, PulseScore
+from flybrain.projects import export_run
+from flybrain.session import LinearEncoder, RateReadout, Session
+
+ROOT = Path(__file__).resolve().parent
+
+
+def build_session(recipe, *, download=False):
+    if type(recipe.get("schema_version")) is not int or recipe["schema_version"] != 1:
+        raise ValueError("Unsupported project recipe")
+    reference = recipe["model"]
+    local = ROOT / reference
+    if local.is_file():
+        reference = local
+    brain = FlyBrain.load(
+        reference, backend=recipe["backend"], config=LIFConfig(**recipe["config"]),
+        download=download,
+    )
+    if brain.model.fingerprint != recipe["model_fingerprint"]:
+        raise ValueError("Model changed: review mappings and update the recipe fingerprint")
+    # These ordinary Python objects are the extension points. No plugin registry needed.
+    encoder = LinearEncoder.from_snapshot(recipe["encoder"])
+    readout = RateReadout.from_snapshot(recipe["readout"])
+    factory = {"dodge": DodgeArena.from_snapshot, "tones": PulseScore.from_snapshot}[
+        recipe["template"]
+    ]
+    environment = factory(recipe["environment"])
+    return Session(brain, encoder, readout, environment, period_ms=recipe["period_ms"]), factory
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--frames", type=int, default=300)
+    parser.add_argument("--download", action="store_true")
+    parser.add_argument("--output", type=Path, default=ROOT / "runs" / "first")
+    args = parser.parse_args()
+    if not 1 <= args.frames <= 10000:
+        parser.error("frames must be in 1..10000")
+    recipe = json.loads((ROOT / "recipe.json").read_text(encoding="utf-8"))
+    session, factory = build_session(recipe, download=args.download)
+    print(json.dumps(export_run(session, args.output, args.frames, environment_factory=factory)))
+
+
+if __name__ == "__main__":
+    main()

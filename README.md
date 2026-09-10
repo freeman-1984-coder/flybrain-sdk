@@ -20,6 +20,22 @@ print(brain.action().to_dict())
 
 **0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
+## Make your own demo
+
+After installation (no repository examples needed):
+
+```sh
+flybrain doctor
+flybrain init my-fly --template dodge
+cd my-fly
+python app.py --output runs/first
+```
+
+Edit `recipe.json` to change input and output mappings, or replace components in
+`app.py`. Use `--template tones` for sound. Projects include versioned requirements,
+source and attribution. Output viewers replay recorded Python runs.
+[Guide](docs/demo-kits.md) · [What developers are building and what we learned](docs/research-2026-09-10.zh-CN.md).
+
 ## Game and audio demo kits
 
 The same `Session` loop now supports replaceable feature encoders, rate readouts and environments, with full checkpoints and verified feedback replay. Try [the demo gallery and original circuit audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html), then generate your own:

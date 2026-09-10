@@ -1,5 +1,11 @@
 # Roadmap
 
+## Available in 0.4.0a2
+
+- Installed `flybrain` command: doctor, demo list/run, editable project generation.
+- Editable input/output recipes, pinned model identity, source and attribution export.
+- [Fresh X/source research and priorities](research-2026-09-10.zh-CN.md).
+
 ## Available in 0.4.0a1
 
 - Composable Python sessions with current encoders, rate readouts and JSON environments.
@@ -27,8 +33,8 @@ rhythm demo kits sharing the open core. Browser WASM remains a separate backend.
 - Arbitrary named rate readouts, reversible spike silencing and schema-2 checkpoints.
 - The previous alpha API and schema-1 checkpoint reader remain supported.
 
-The circuit lab and basic exportable demo shipped in 0.3. Game, audio and rhythm
-templates and optional CUDA still need implementation. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
+The circuit lab shipped in 0.3 and basic game/audio sessions in 0.4. Live game,
+streaming audio, trained rhythm templates and validated CUDA remain open. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
 proposed architecture; proposal-only APIs are not current API documentation.
 
 
