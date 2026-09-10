@@ -5,6 +5,8 @@
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
+**Live game:** [Open the browser sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) — add obstacles, tune mappings, inspect neural control, save and verify recordings. [Adapter guide](docs/live-sandbox.md).
+
 **Try without installing:** [Circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html) — stimulate toy or real cells, silence outputs, inspect rates, download an editable HTML demo, or [replay an exported experiment in Python](docs/browser-lab.md).
 
 [![CI](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml)
@@ -22,6 +24,30 @@ print(brain.action().to_dict())
 ```
 
 **0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+
+## Make your own demo
+
+After installation (no repository examples needed):
+
+```sh
+flybrain doctor
+flybrain init my-fly --template dodge
+cd my-fly
+python app.py --output runs/first
+```
+
+Edit `recipe.json` to change input and output mappings, or replace components in
+`app.py`. Use `--template tones` for sound. Projects include versioned requirements,
+source and attribution. Output viewers replay recorded Python runs.
+[Guide](docs/demo-kits.md) · [What developers are building and what we learned](docs/research-2026-09-10.zh-CN.md).
+
+## Connect a Godot game
+
+The [Godot CPU adapter](examples/godot/README.md) runs an actual Godot 4 scene
+with a Python neural controller. Start `python examples/godot/bridge.py`, then
+open `examples/godot/project.godot` and press F5. Run offline with the toy or
+opt into the real MaleCNS subgraph. Save and restore the paired world/brain state.
+[Website quickstart](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html#godot).
 
 ## Game and audio demo kits
 
@@ -143,7 +169,7 @@ Issues and pull requests are welcome. Good starting areas:
 
 - Add a versioned model source with license, attribution, sizes and integrity metadata.
 - Add a FlyWire importer or another MaleCNS recipe with explicit mappings and validation.
-- Add a Godot/Unity adapter or a headless game example.
+- Extend the Godot adapter, add a Unity adapter or contribute a new environment.
 - Port the reference dynamics to WASM and match Python reference traces.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [roadmap](docs/roadmap.md), and the [TypeScript CPU runtime](packages/js/README.md). New contributors can use the model request, bug report, or feature request templates. Pull requests run CI before review.

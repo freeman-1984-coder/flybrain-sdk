@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live connectome game sandbox — flybrain-sdk · No CUDA required</title>
+<meta name="description" content="Run a live CPU fruit-fly connectome game in your browser. Add obstacles, tune input and output mappings, inspect neural control, save and replay experiments.">
+<link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/live.html"><meta name="robots" content="index,follow">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="live.css">
+</head><body><a class="skip" href="#main">Skip to content</a><div class="wrap">
+<header class="nav"><a class="brand" href="./">flybrain<span>_sdk</span></a><nav aria-label="Main navigation"><a href="live.html">Live sandbox</a><a href="demos.html">Demo kits</a><a href="lab.html">Circuit lab</a><a href="api.html">Python API</a><a href="https://github.com/freeman-1984-coder/flybrain-sdk">GitHub ↗</a></nav></header>
+<main id="main"><div class="eyebrow">Live simulation / JavaScript CPU / No CUDA required</div>
+<h1>A small brain.<br> A world you can change.</h1>
+<p class="intro">Place obstacles. Tune the connection between world and brain. Watch neural activity steer the player.</p>
+<div class="model-bar"><div><strong id="model-name">Loading toy circuit…</strong><p id="model-detail">The default model is a hand-designed, 12-neuron demo.</p></div><div class="tools"><button id="toy" disabled>Use toy</button><button id="real" disabled>Load real circuit · 3.8 MB</button></div></div>
+<div class="workspace"><section class="world-panel" aria-label="Interactive arena">
+<div class="toolbar"><button id="run" class="primary" data-ready disabled>Run</button><button id="step" data-ready disabled>Step 20 ms</button><button id="reset" data-ready disabled>Reset same seed</button><span id="clock">0 ms · frame 0</span></div>
+<canvas id="arena" width="800" height="480" tabindex="0" role="img" aria-label="Live obstacle arena. Click to place an obstacle; keyboard users can use the add obstacle controls below."></canvas>
+<div class="arena-footer"><span>Click the arena to place an obstacle.</span><span id="score">0 passed · 0 collisions</span></div>
+<div class="tools"><label>Position <input id="position" type="range" min="0" max="1" step="0.05" value="0.3" data-ready disabled></label><button id="add" data-ready disabled>Add obstacle near player</button><button id="clear" data-ready disabled>Clear obstacles</button></div>
+<p id="status" role="status" aria-live="polite">Preparing the local simulation…</p>
+</section><aside class="inspector" aria-label="Input and action inspector">
+<h2>Follow the signal</h2><p>Every 20 ms: observe → stimulate → simulate → apply.</p>
+<div class="signal"><span>01 · Input now</span><strong id="input">Left 0.000 · Right 0.000</strong></div>
+<label class="setting">Input gain <output id="input-value">2.0</output><input id="input-gain" type="range" min="0" max="4" step="0.1" value="2" data-ready disabled></label>
+<div class="signal"><span>02 · Output cell activity</span><strong id="rates">0.0 Hz · 0.0 Hz</strong><small id="cells">—</small></div>
+<label class="setting">Output gain <output id="output-value">1.0</output><input id="output-gain" type="range" min="0" max="2" step="0.1" value="1" data-ready disabled></label>
+<button id="silence" aria-pressed="false" data-ready disabled>Silence output cells</button>
+<p class="small">Silencing prevents new spikes; existing filtered activity decays over time.</p>
+<div class="signal"><span>03 · Last requested steering</span><strong id="requested">0.000</strong></div>
+<div class="signal"><span>04 · Last applied steering</span><strong id="applied">0.000</strong><small>Movement is clipped at the arena walls.</small></div>
+<p class="small" id="speed">Paused. Neural time does not advance.</p>
+</aside></div>
+<section class="save-panel"><h2>Keep an experiment. Continue it later.</h2><p>Checkpoints preserve the brain, arena and current settings. Recordings include your obstacle edits, gain changes and silencing events; verification recomputes the run.</p>
+<div class="tools"><button id="save" data-ready disabled>Save checkpoint</button><button id="export" data-ready disabled>Export recording</button><label class="file-label">Restore / verify JSON <input id="restore" type="file" accept=".json,application/json" data-ready disabled></label></div>
+<p id="download-note" hidden><a id="download-file">Download prepared JSON</a></p>
+<details id="export-fallback" hidden><summary>Copy JSON if downloads are unavailable</summary><p class="small">Copy the complete text into a .json file to restore it later.</p><textarea id="export-json" aria-label="Exported experiment JSON" rows="5" readonly spellcheck="false"></textarea></details>
+<p class="small">Everything runs locally after model loading. Imports stay on your device. Up to 100 seconds per recording; export and reset to start another. These JSON formats currently replay in JavaScript, not Python.</p></section>
+<section class="explain"><h2>Build on this</h2><p>This is a reference environment adapter built on the same <code>FlyBrain</code> JavaScript CPU runtime as the circuit lab. Its default fixed-step behavior is checked against Python <code>Session</code> and <code>DodgeArena</code>. Downloading a model is optional.</p>
+<div class="code"><div class="label">Generate an editable Python equivalent</div><pre><code>flybrain init my-fly --template dodge
+cd my-fly
+python app.py --output runs/first</code></pre></div>
+<p><a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/live-sandbox.md">Integration, timing and replay guide →</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/packages/js/src/dodge.ts">Adapter source</a></p>
+<h2>What is modeled?</h2><p>The toy circuit is artificial. The real option uses 313 cells from MaleCNS v1.0 with measured connectivity, assumed LIF dynamics and engineered input/output mappings. GF activity is assigned to steering for this demo; that is not its natural behavioral meaning. There is no trained policy, rescue controller or claim of biological fidelity.</p>
+<p><a href="male-cns-escape.html">Model provenance and assumptions</a> · <a href="demos.html">Recorded comparisons and sound</a> · <a href="contribute.html">Contribute an adapter</a></p>
+</section></main><footer><span>flybrain-sdk · MIT · Independent open-source project</span><span><a href="license.txt">Code license</a> · <a href="llms.txt">For AI tools</a></span></footer></div>
+<script type="module" src="js/live.js"></script></body></html>

@@ -2,7 +2,7 @@
 
 **No CUDA required.** These Python examples use the same `Session` loop with replaceable input projection, rate readout and environment adapters. The toy and pinned real MaleCNS escape circuit are supported by the presets. The real graph is anatomical; every input projection, LIF parameter and game/audio mapping here is an engineered assumption.
 
-[Gallery and audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html) · [Live circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)
+[Live game sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) · [Gallery and audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html) · [Live circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)
 
 ## Generate your own demo
 
@@ -17,6 +17,36 @@ python examples/demo_session.py tones --model male-cns-escape-v1 --download --ou
 ```
 
 Each command writes `recording.json`, `session.json` and `replay.html`, then verifies the full recorded feedback loop. The tone demo also writes `tones.wav`. Open the HTML to inspect playback; its slider and speed controls change the view, not the simulation. Modify the Python recipe and rerun it to generate different behavior. The website's existing circuit lab runs a live brain; the new gallery viewers are clearly labeled recordings.
+
+## Create an editable project (0.4.0a2)
+
+After installing the SDK, these commands also work without a repository checkout:
+
+```sh
+flybrain doctor
+flybrain demos list
+flybrain init my-fly --template dodge
+cd my-fly
+python app.py --output runs/first
+```
+
+`python -m flybrain` is an equivalent entry point. `init` writes ordinary source,
+editable `recipe.json`, a pinned Git-tag requirement, README, LICENSE and model
+attribution. Existing project/output directories are never overwritten. Change
+`encoder.weights` or `readout.channels`, then run to a new output directory;
+replace components in `build_session()` for more extensive changes. The model
+fingerprint rejects accidental mismatches between a model and its mappings.
+
+To start with the real model, use
+`flybrain init my-real --template tones --model male-cns-escape-v1 --download`.
+The download is explicit; subsequent runs use the cache. A fresh machine must
+pass `--download` when running that generated app. A raw full dataset is not a
+ready-made demo model. All presets remain CPU based and have no learning.
+
+For an immediate run without project generation:
+`flybrain demos run tones --frames 300 --output work/tones`.
+`doctor` runs a small local CPU check, reports backend availability, and uses no
+network. Availability is not CUDA conformance. No PyPI publication is assumed.
 
 ## One loop, three replaceable parts
 
@@ -96,4 +126,5 @@ pytest tests/test_session.py
 
 The script loads the checked-in, pinned real model, regenerates three six-second replays and the WAV, and verifies each feedback trace before writing `site/demos/manifest.json`. The manifest records environment versions, model checksum, scenario outcomes and artifact checksums. HTML viewers omit the full graph and need no network to play. Keep the code license and model attribution when sharing exports.
 
-Still planned: a live game integration using these boundaries, engine adapters, streaming audio/features, trained readouts with held-out evaluation, and validated CUDA. The current templates provide runnable, inspectable starting points for that work.
+The [live browser sandbox](live-sandbox.md) now implements the dodge reference
+with Python parity checks. Still planned: external engine adapters, streaming audio/features, trained readouts with held-out evaluation, and validated CUDA. The current templates provide runnable, inspectable starting points for that work.

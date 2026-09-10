@@ -12,5 +12,6 @@ This project currently supports installation from GitHub and release wheels.
 5. Configure PyPI trusted publishing under the real package owner before publishing
    to PyPI. Start on TestPyPI if needed. Never put publishing tokens into this repo.
 
-The TypeScript package remains private until a runtime exists. Do not publish
-interface declarations as if they were a working WASM brain.
+The TypeScript workspace package has a tested JavaScript CPU runtime and remains
+private pending its own packaging/registry release process. It is not a working
+WASM backend; do not publish or describe it as one.

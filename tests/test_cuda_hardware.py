@@ -128,3 +128,44 @@ def test_backend_owns_stream_ordering(gpu):
         cpu.step(np.full(cpu.n, 2.0))
         cpu.set_silenced((0,), True)
         assert_state(cpu.observe(), cuda.observe())
+
+
+@pytest.mark.parametrize("model", ["toy", ROOT / "models/male-cns-escape-v1/model.json"])
+def test_feedback_sessions_and_external_cross_device_restore(gpu, model):
+    from flybrain.demos import DodgeArena, make_demo
+    from flybrain.external import ExternalController
+    from flybrain.session import Session, compare
+
+    expected = make_demo("dodge", model=model)
+    accelerated = make_demo("dodge", model=model, backend="cuda")
+    demo = make_demo("dodge", model=model, backend="cuda")
+    external = ExternalController(demo.brain, demo.encoder, demo.readout)
+    world = demo.environment
+    for seq in range(60):
+        obs = world.observe()
+        action = external.offer(seq, obs)
+        tick = external.brain.progress.tick
+        assert external.offer(seq, obs) == action
+        assert external.brain.progress.tick == tick
+        applied = world.apply(action["requested"], 20)
+        external.acknowledge(seq, applied)
+        reference = expected.step()
+        frame = accelerated.step()
+        for controls in (action["requested"], frame.requested):
+            compare(controls, reference.requested)
+        compare(applied, reference.applied)
+        compare(frame.applied, reference.applied)
+        compare(world.snapshot(), reference.environment)
+        compare(frame.environment, reference.environment)
+        assert_state(expected.brain.state, external.brain.state)
+        assert_state(expected.brain.state, accelerated.brain.state)
+        if seq in (29, 44):
+            backend = "cpu" if seq == 29 else "cuda"
+            external = ExternalController.from_snapshot(external.snapshot(), backend=backend)
+            accelerated = Session.from_snapshot(
+                accelerated.snapshot(),
+                environment_factory=DodgeArena.from_snapshot,
+                backend=backend,
+            )
+            assert external.brain.snapshot()["backend"] == backend
+            assert accelerated.brain.snapshot()["backend"] == backend

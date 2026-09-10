@@ -58,3 +58,13 @@ paths = fetch_model("flywire-v783", assets=["neuron_ids"])
 WASM/CUDA 只预留接口。欢迎通过 Issue 和 Pull Request 一起完善；无需 GPU。
 
 [英文首页](../README.md) · [贡献指南](../CONTRIBUTING.md) · [真实数据接入计划](real-data.md)
+
+## Godot 游戏接入（0.4.0a4）
+
+安装 Python 包后，在仓库目录运行 `python examples/godot/bridge.py`，
+再用 Godot 4.7.2 打开 `examples/godot/project.godot`，按 F5 和 Run / pause。
+默认人工小回路离线运行；服务增加 `--model male-cns-escape-v1 --download`
+可按需下载真实 313 神经元子回路。游戏负责世界，SDK 负责神经计算，
+感觉编码与动作读出均可替换。支持成对保存/恢复世界与脑状态，断线停止。
+
+[完整使用说明](../examples/godot/README.md) · [网站示例](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html#godot)

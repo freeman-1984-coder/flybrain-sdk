@@ -4,11 +4,23 @@
 <link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/demos.html"><meta name="robots" content="index,follow">
 <meta property="og:type" content="website"><meta property="og:title" content="Game and audio demo kits — flybrain-sdk">
 <meta property="og:description" content="Build and replay game or audio demos with the same CPU connectome Session API. Download recordings, inspect controls, and hear neural-rate sonification."><meta property="og:url" content="https://freeman-1984-coder.github.io/flybrain-sdk/demos.html">
-<link rel="stylesheet" href="style.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "flybrain-sdk", "description": "Build and replay game or audio demos with the same CPU connectome Session API. Download recordings, inspect controls, and hear neural-rate sonification.", "codeRepository": "https://github.com/freeman-1984-coder/flybrain-sdk", "url": "https://freeman-1984-coder.github.io/flybrain-sdk/", "programmingLanguage": ["Python", "TypeScript"], "runtimePlatform": "Python 3.9+ / NumPy CPU", "license": "https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/LICENSE", "version": "0.4.0a1"}</script></head>
-<body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="nav"><a class="brand" href="./">flybrain<span>_sdk</span></a><nav aria-label="Main navigation"><a href="demos.html">Demo kits</a><a href="lab.html">Circuit lab</a><a href="api.html">Python API</a><a href="models.html">Models</a><a href="contribute.html">Contribute</a><a href="https://github.com/freeman-1984-coder/flybrain-sdk">GitHub ↗</a></nav></header><main id="main"><article class="article"><div class="eyebrow">Demo kits / Same core / No CUDA required</div>
+<link rel="stylesheet" href="style.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "flybrain-sdk", "description": "Build and replay game or audio demos with the same CPU connectome Session API. Download recordings, inspect controls, and hear neural-rate sonification.", "codeRepository": "https://github.com/freeman-1984-coder/flybrain-sdk", "url": "https://freeman-1984-coder.github.io/flybrain-sdk/", "programmingLanguage": ["Python", "TypeScript"], "runtimePlatform": "Python 3.9+ / NumPy CPU", "license": "https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/LICENSE", "version": "0.4.0a4"}</script></head>
+<body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="nav"><a class="brand" href="./">flybrain<span>_sdk</span></a><nav aria-label="Main navigation"><a href="live.html">Live sandbox</a><a href="demos.html">Demo kits</a><a href="lab.html">Circuit lab</a><a href="api.html">Python API</a><a href="models.html">Models</a><a href="contribute.html">Contribute</a><a href="https://github.com/freeman-1984-coder/flybrain-sdk">GitHub ↗</a></nav></header><main id="main"><article class="article"><div class="eyebrow">Demo kits / Same core / No CUDA required</div>
 <h1>Observe. Connect.<br>Make it your own.</h1>
 <p>One Python session loop connects neural activity to a small game environment or synthesized sound. Run a preset, inspect the inputs and controls, then replace an adapter.</p>
-<div class="note"><strong>Choose the experience:</strong> the <a href="lab.html">circuit lab</a> runs a live simulation. The demos below are verified recordings from Python; playback controls inspect a run without recalculating its brain.</div>
+<div class="note"><strong>Choose the experience:</strong> the <a href="live.html">game sandbox</a> and <a href="lab.html">circuit lab</a> run live simulations. The demos below are verified recordings from Python; playback controls inspect a run without recalculating its brain.</div>
+<h2 id="godot">Godot connectome game adapter</h2>
+<p><strong>No CUDA required.</strong> Run an actual Godot 4 scene with the Python CPU SDK. Godot owns obstacles and movement; a replaceable encoder and neural readout supply steering. Includes pause, paired world/brain saves, restore and stop-on-disconnect behavior.</p>
+<div class="code"><div class="label">Python 3.9+ and Godot 4.7.2 · two terminals</div><pre><code>git clone --branch v0.4.0a4 https://github.com/freeman-1984-coder/flybrain-sdk.git
+cd flybrain-sdk
+python -m pip install -e .
+python examples/godot/bridge.py
+# In a second terminal, from the same directory:
+godot --path examples/godot</code></pre></div>
+<p>Alternatively import <code>examples/godot/project.godot</code> in Godot and press F5. Wait for the bridge to print its ready address, then click <strong>Run / pause</strong>. The artificial toy works offline after installation. For the real 313-cell model, restart the bridge with <code>--model male-cns-escape-v1 --download</code>.</p>
+<p>The scene advances 20 ms per acknowledged action, independently of rendering. Save completes any outstanding action before writing a checkpoint. Restore both the brain and the world together. The local HTTP bridge is a development example; it is not a hosted multiplayer service.</p>
+<p><a class="button" href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/v0.4.0a4/examples/godot/README.md">Godot setup and adapter guide</a> <a class="button secondary" href="https://github.com/freeman-1984-coder/flybrain-sdk/tree/v0.4.0a4/examples/godot">Get the editable scene</a></p>
+<p class="small">Verified with toy and real circuits against Python feedback traces and whole-brain checkpoints. Real anatomical wiring uses assumed LIF dynamics and engineered steering; no trained avoidance or biological fidelity is claimed.</p>
 <h2>Neural dodge</h2><p>A player moves left or right as obstacles descend. Neural outputs determine steering; the environment reports the movement actually applied. Both recordings use the same seed, real 313-cell model and six-second duration.</p>
 <p><a class="button" href="demos/dodge-replay.html">Watch the neural run</a> <a class="button secondary" href="demos/dodge-silenced.html">Compare silenced outputs</a></p>
 <p class="small">This single example is a causal comparison, not evidence of learned avoidance or general task performance. Input currents and GF-to-steering mappings are engineered.</p>
@@ -17,9 +29,10 @@
 <p><a href="demos/tones-replay.html">Inspect recorded input and output gains →</a> · <a href="demos/tones.wav" download>Download WAV</a></p>
 <p class="small">This is sonification, not musical understanding or a trained rhythm-game policy. The sound is synthesized from applied output gains.</p>
 <h2>Generate and edit your own</h2><div class="code"><div class="label">From a repository checkout</div><pre><code>pip install -e .
-python examples/demo_session.py dodge --output work/dodge
-python examples/demo_session.py tones --output work/tones</code></pre></div>
-<p>Each command writes a complete session checkpoint, verified recording and standalone HTML playback. The tone kit also exports WAV. Add <code>--model male-cns-escape-v1 --download</code> for the real model, fetched only on request.</p>
+flybrain init my-fly --template dodge
+cd my-fly
+python app.py --output runs/first</code></pre></div>
+<p>The generated project contains editable <code>recipe.json</code>, <code>app.py</code>, pinned requirements and attribution. Change input gains or output weights, then rerun to a new directory. The app exports a checkpoint, verified recording and HTML playback. Use <code>--template tones</code> at creation for WAV output. Add <code>--model male-cns-escape-v1 --download</code> to <code>flybrain init</code> for a real model recipe.</p>
 <div class="code"><div class="label">One loop for both kits</div><pre><code>from flybrain.demos import make_demo
 
 session = make_demo("dodge")
@@ -27,8 +40,9 @@ frame = session.step()
 print(frame.observation)
 print(frame.requested, frame.applied)
 session.save("session.json")</code></pre></div>
+<p>Check your installation with <code>flybrain doctor</code>; discover templates with <code>flybrain demos list</code>. These commands also work outside a repository checkout after installing the package.</p>
 <h2>Replace the parts that matter</h2><p>Change the feature-to-current projection, the rate-to-action readout, or the environment while keeping the same neural runtime and checkpoint format. The session tracks fractional timing, pending inputs and environment state.</p>
 <p><a class="button" href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/demo-kits.md">Read the integration guide</a> <a class="button secondary" href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/examples/demo_session.py">Edit the example</a></p>
 <p><a href="demos/manifest.json">Build manifest and checksums</a> · <a href="male-cns-escape.html">Source model and assumptions</a> · <a href="contribute.html">Contribute a kit</a></p>
-<p>Live game integrations, engine adapters, streaming audio and learned readouts remain future work. CUDA development is separate and still requires actual-device validation.</p>
+<p>The live browser game is available in the <a href="live.html">sandbox</a>. The Godot adapter is available above; additional engines, streaming audio and learned readouts remain future work. CUDA development is separate and still requires actual-device validation.</p>
 </article></main><footer><span>flybrain-sdk · MIT · Independent open-source project</span><span><a href="https://github.com/freeman-1984-coder/flybrain-sdk/issues">Issues</a> · <a href="llms.txt">For AI tools</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/README.zh-CN.md">中文文档</a></span></footer></div></body></html>

@@ -1,6 +1,6 @@
 # Experimental CUDA backend — hardware validation pending
 
-This development branch implements a CuPy/CUDA reference backend. **It has not yet passed an actual NVIDIA-device run.** The published v0.3 alpha remains CPU-first. CPU tests and successful import of a cloud runner do not demonstrate GPU conformance or speedup. Do not advertise production CUDA support from this branch yet.
+This development branch implements a CuPy/CUDA reference backend. **It has not yet passed an actual NVIDIA-device run.** The published v0.4.0a4 remains CPU-first. CPU tests and successful import of a cloud runner do not demonstrate GPU conformance or speedup. Do not advertise production CUDA support from this branch yet.
 
 ## Optional installation
 
@@ -43,7 +43,7 @@ The [CuPy RawKernel API](https://docs.cupy.dev/en/stable/reference/generated/cup
 
 `validate_cuda.py` requires an actual CuPy-visible NVIDIA device, runs the hardware suite with `FLYBRAIN_REQUIRE_CUDA=1`, rejects skipped tests, then times toy and real circuits on CPU and GPU. Without a device it writes a failed report and exits nonzero. Ordinary CPU CI skips those hardware tests explicitly.
 
-The suite compares every cell over 180 ticks for toy, real and signed/parallel-edge synthetic graphs at two timesteps (1,080 comparison ticks), plus cross-device checkpoints with pending stimuli, custom readout, interventions, selected observations, invalid-state handling and stream isolation. Spikes/clock must match exactly; voltage/rates use absolute tolerance `1e-10`. A report includes environment versions, device, source hashes, passed test counts, configuration, warmup and per-run timings. This covers the reported hardware and cases only.
+The suite has 12 required cases. It compares every cell over 180 ticks for toy, real and signed/parallel-edge synthetic graphs at two timesteps (1,080 comparison ticks), plus cross-device checkpoints with pending stimuli, custom readout, interventions, selected observations, invalid-state handling and stream isolation. Spikes/clock must match exactly; voltage/rates use absolute tolerance `1e-10`. A report includes environment versions, device, source hashes, passed test counts, configuration, warmup and per-run timings. This covers the reported hardware and cases only.
 
 Acceptance before merging/advertising CUDA:
 
@@ -69,3 +69,19 @@ modal run scripts/validate_cuda_modal.py --output cuda-validation.json
 This command starts remote compute and can incur charges. As checked on 2026-09-10, [Modal's published pricing](https://modal.com/pricing) lists T4 at $0.000164/second, CPU at $0.0000131/core/second, and RAM at $0.00000222/GiB/second. Ten minutes at the configured allocations is about $0.112 in execution charges, before build/startup/other charges. This estimate is not an enforced account-wide dollar cap. Review current pricing and available account credits before running; no credits are assumed. Use a $1 trial budget and verify the ephemeral app stops in the provider console when the run finishes or is canceled.
 
 The runner definition was checked against the local Modal SDK without invoking any remote function. It remains untested remotely. [Modal GPU documentation](https://modal.com/docs/guide/gpu) describes device selection. Recheck container termination and actual billed usage before considering the rental step finished.
+
+## Game integration (development branch only)
+
+The draft now includes the v0.4.0a4 Godot and project-generation changes.
+`make_demo(..., backend="cuda")` selects CUDA for Python sessions.
+`ExternalController.from_snapshot(data, backend="cpu")` explicitly restores a
+GPU checkpoint onto CPU, or vice versa with `backend="cuda"`. The new hardware
+cases compare both session and acknowledged external feedback against CPU for toy
+and real circuits, including CUDA → CPU → CUDA continuation. They remain unrun
+until NVIDIA hardware is available.
+
+On a configured NVIDIA host, the experimental Godot bridge accepts
+`python examples/godot/bridge.py --backend cuda`. Its chosen backend applies to
+fresh sessions and imported checkpoints. The default remains CPU; a saved backend
+label cannot change the bridge's explicitly selected device. Actual Godot with
+CUDA has not been verified.

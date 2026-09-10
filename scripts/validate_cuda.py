@@ -60,7 +60,7 @@ def validate(report):
             k: sum(int(s.get(k, 0)) for s in suites)
             for k in ("tests", "failures", "errors", "skipped")
         }
-        if counts["tests"] < 10 or any(counts[k] for k in ("failures", "errors", "skipped")):
+        if counts["tests"] < 12 or any(counts[k] for k in ("failures", "errors", "skipped")):
             raise RuntimeError(f"Incomplete CUDA validation: {counts}")
         report["conformance"] = counts
     report["benchmarks"] = []
