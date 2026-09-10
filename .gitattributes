@@ -1,0 +1,2 @@
+# Catalog checksums authenticate exact model bytes on every checkout platform.
+*.json text eol=lf

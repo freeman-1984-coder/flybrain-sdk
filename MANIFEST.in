@@ -1,4 +1,4 @@
-include README.md LICENSE CONTRIBUTING.md
+include README.md LICENSE CONTRIBUTING.md .gitattributes
 recursive-include examples *.py
 recursive-include scripts *.py *.mjs
 recursive-include models *.json *.md
