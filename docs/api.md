@@ -1,6 +1,6 @@
 # Python API reference
 
-Version: 0.3.0a1. CPU is implemented; CUDA and WASM remain unavailable.
+Version: 0.4.0a1. CPU is implemented; CUDA and WASM remain unavailable.
 
 ## Open circuit API
 
@@ -127,3 +127,7 @@ format is an MVP interchange format, not an efficient whole-brain storage format
 ## Browser experiment replay
 
 Use `flybrain.experiment.replay_experiment(recording, download=False)` to verify and continue supported browser lab recordings in Python. See the [browser guide](browser-lab.md) for format, limits and the CLI example.
+
+## Composable sessions
+
+`FlyBrain.progress` reads the clock without exporting arrays. `snapshot()` and `from_snapshot()` expose the same checkpoint as plain JSON-compatible data. The `flybrain.session` module composes feature encoders, rate readouts and environments with a shared clock, save/restore and feedback replay. See [demo kits](demo-kits.md).

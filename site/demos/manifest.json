@@ -1,0 +1,97 @@
+{
+  "format": "flybrain-demo-gallery",
+  "schema_version": 1,
+  "sdk_version": "0.4.0a1",
+  "source_sha256": {
+    "src/flybrain/__init__.py": "e8fdc3cb12edcb6d5a59103a174306093e9dc83e5a3b5c3bbce9a54783a33262",
+    "src/flybrain/__main__.py": "2347638970ea1633bb8a026103fa812639f17262375c147cbce7d66eb2dd00c9",
+    "src/flybrain/backends/__init__.py": "5f7ff4c97620a006398ec8c66f19f1489d0b86a149b731ff8b7df6c93b6f8691",
+    "src/flybrain/backends/base.py": "bb28e7aa30f3cb3b676243e6e3767242d5daa27458b5e5a96b218232aaa1de81",
+    "src/flybrain/backends/cpu.py": "20ff6d342efe088f161b800f825175b77b754e42378e7879e6ff5007da5fe11a",
+    "src/flybrain/brain.py": "e9ea19aea644bcbdcc686b6e79ee5767f4c620cdeb063cf69fd7a014a87e9450",
+    "src/flybrain/config.py": "a7f274ce09c28701db19b4dec154b30771890e9ac6a8527ddcc7f6d68e6d29b8",
+    "src/flybrain/data/__init__.py": "6b42fe29f9b5a6f3e309d4fd947212a6a49b92c095e9f815519360dc14924790",
+    "src/flybrain/demos.py": "ad45e3a91920affae56b74f2b3d2d1d0b8eab41d705acf3ccd4fbba8b8a5cee6",
+    "src/flybrain/drive.py": "b018bcf2c820ef58ab160204890b465c0702bfba6ca75c65f2d1b33ebb9cac24",
+    "src/flybrain/errors.py": "9cb4ab6569602298ee1047ff1abfdadef14cd4eee7deae4fcc16bd0e2614f012",
+    "src/flybrain/experiment.py": "ae423d017ad86e5fd1d2c49c6c33b73c6d2a339a7e299c25d1195cb2ac10d03c",
+    "src/flybrain/importers/__init__.py": "d6171134397cf1089cc14419f114172a77863ca90c83bc8cb6780dcb3cc74394",
+    "src/flybrain/importers/malecns.py": "f0b1fda6403807f127eb839510f66cc567143535a479446e66ed8bcfdea6507d",
+    "src/flybrain/model.py": "4ee80b0dc5cc9b8d31067b7817e42b273660cdd7b2ac469eae7146a027824173",
+    "src/flybrain/motor.py": "7dac900576636fb267e5a4a9578731bf5b541e8ea5baf747476fe56db29c8026",
+    "src/flybrain/neurons.py": "9cfb9c65e7940ec3e930273a00b15417615a486a348aef362ec4760067233690",
+    "src/flybrain/registry.py": "503d2eb6e9124b3c2fe7452f4ca8edd1f5128d135a0a406d1c902bf01cb0ef81",
+    "src/flybrain/sensory.py": "13403eb880fc7c04496d8f5a0405d7b7c116f19b0a69887dff25368c5d291dd3",
+    "src/flybrain/session.py": "0e04b67cc0f32f4d5b109b2e8bfdb9082d0f27e295df2718b5a597f8a2e3192a",
+    "src/flybrain/viewer.py": "26d71040003ac8deff35bd5c0fb42be9d47a0af49a41754795b20fb608910cad"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "model_asset_sha256": "ff38cfff0c76345cc2f250e992f95b0bf19863b434d8f97f926da6975cb93a35",
+  "frames": 300,
+  "period_ms": 20,
+  "runs": [
+    {
+      "name": "dodge-replay",
+      "verified_replay": true,
+      "initial_silence": false,
+      "final_environment": {
+        "type": "dodge-arena-v1",
+        "seed": 7,
+        "rng": 1550419440,
+        "frame": 300,
+        "x": 0.43726414715041845,
+        "blocks": [
+          {
+            "x": 0.4026896093040705,
+            "y": 0.4800000000000003
+          }
+        ],
+        "collisions": 0,
+        "passed": 6
+      }
+    },
+    {
+      "name": "dodge-silenced",
+      "verified_replay": true,
+      "initial_silence": true,
+      "final_environment": {
+        "type": "dodge-arena-v1",
+        "seed": 7,
+        "rng": 1550419440,
+        "frame": 300,
+        "x": 0.5,
+        "blocks": [
+          {
+            "x": 0.4026896093040705,
+            "y": 0.4800000000000003
+          }
+        ],
+        "collisions": 1,
+        "passed": 5
+      }
+    },
+    {
+      "name": "tones-replay",
+      "verified_replay": true,
+      "initial_silence": false,
+      "final_environment": {
+        "type": "pulse-score-v1",
+        "elapsed": [
+          6000,
+          1
+        ],
+        "last_applied": {
+          "tone_a": 0.00033395397105104416,
+          "tone_b": 0.06053658501553291
+        }
+      }
+    }
+  ],
+  "files": {
+    "dodge-replay.html": "3baf517b2592e5cb540450505bcaa4c5f539561f8d1153a0f5926a1cb5fb55af",
+    "dodge-silenced.html": "4c37d7651786fbf4246f608d3f64b33fadec80f9bec42066b2b86bc35fecb832",
+    "tones-replay.html": "ef9c22fc6253bb8c4b9ab04cc5f6041103e48a2fc3a5062632f009a3334840a4",
+    "tones.wav": "28b3119f2f504758add036f7e75b99242845846dda06ae0593b08fc0a2b8ae65"
+  }
+}

@@ -1,5 +1,8 @@
 # flybrain-sdk：无需 CUDA 的果蝇连接组仿真 SDK
 
+0.4 新增：统一 Session 循环、可替换输入/输出/环境、避障和声音模板、完整过程回放，以及可继续生成的 WAV。试用[示例与音频](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html)，查看[接入指南](demo-kits.md)。示例页是明确标注的录制回放；实验室仍是浏览器现场仿真。
+
+
 无需安装也能先玩：[在线回路实验室](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)。可给细胞刺激、静默输出、查看活动；真实回路点击后才下载。页面还能导出可编辑的单文件 HTML demo，或导出实验记录，在 Python 中重放并核验结果。浏览器当前使用 JavaScript CPU，不需要 CUDA 或 WASM。详见[实验室与 demo 指南](browser-lab.md)。
 
 

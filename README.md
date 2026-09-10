@@ -18,7 +18,18 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**0.3 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+
+## Game and audio demo kits
+
+The same `Session` loop now supports replaceable feature encoders, rate readouts and environments, with full checkpoints and verified feedback replay. Try [the demo gallery and original circuit audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html), then generate your own:
+
+```sh
+python examples/demo_session.py dodge --output work/dodge
+python examples/demo_session.py tones --output work/tones
+```
+
+These produce recordings, checkpoints and standalone playback HTML; tones also exports WAV. Gallery viewers play recorded Python runs, while the circuit lab runs live. See the [session and adapter guide](docs/demo-kits.md) for code and limitations.
 
 ## Install and run
 

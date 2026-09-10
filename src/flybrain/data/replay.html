@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>flybrain-sdk recorded demo</title>
+<style>body{font:16px/1.6 system-ui;max-width:960px;margin:32px auto;padding:20px;background:#f5f7fc;color:#192640}h1{line-height:1.2}button,select{font:inherit;padding:8px 18px;border:1px solid #aebbd6;border-radius:8px;background:white;color:#2445ab;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #708fe1}canvas{display:block;width:100%;height:360px;background:white;border:1px solid #d1daeb;border-radius:14px;margin:20px 0}input{width:100%}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px;border-radius:10px;font-size:13px}.small{font-size:13px;color:#596780}@media(max-width:600px){.grid{grid-template-columns:1fr}canvas{height:280px}}</style>
+<p class="small">RECORDED SIMULATION · NO CUDA REQUIRED</p><h1 id="title"></h1>
+<p>This is a recorded Python run. Playback controls change the view; they do not rerun the brain or change the environment.</p>
+<p id="model"></p><button id="play">Play</button> <button id="reset">Reset view</button>
+<label>Speed <select id="speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></label>
+<canvas id="scene" aria-label="Recorded simulation; exact state is also shown below"></canvas>
+<label for="position">Recording position</label><input id="position" type="range" min="0" value="0">
+<p id="clock" role="status"></p><div class="grid"><div><h2>Observed input</h2><pre id="observation"></pre></div><div><h2>Requested → applied</h2><pre id="actions"></pre></div></div>
+<details><summary>Exact environment state</summary><pre id="environment"></pre></details>
+<p class="small">Input projections, LIF parameters and application controls are engineered assumptions. No training or biological task competence is claimed. For the real MaleCNS model, source anatomy is CC BY 4.0 (FlyEM/HHMI Janelia and collaborators); see the model card.</p>
+<p><a href="https://github.com/freeman-1984-coder/flybrain-sdk">Source and editable Python examples</a> · <a href="https://freeman-1984-coder.github.io/flybrain-sdk/male-cns-escape.html">Model card</a></p>
+<details><summary>Code license</summary><pre>MIT License
+
+Copyright (c) 2026 flybrain-sdk contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre></details>
+<script>
+const data=__DATA__;
+const $=id=>document.getElementById(id);
+let index=0, playing=false, last=null, accumulator=0;
+$('title').textContent=data.kind==='dodge-arena-v1'?'Neural dodge · replay':'Circuit tones · gain replay';
+$('model').textContent=`Model: ${data.model} · ${data.frames.length} recorded frames · ${data.initial_silenced} cells initially silenced`;
+$('position').max=data.frames.length-1;
+function draw(){
+ const f=data.frames[index],env=f.environment;
+ $('position').value=index;
+ $('clock').textContent=`Frame ${f.index} · ${f.elapsed_ms.toFixed(1)} ms · neural tick ${f.brain_tick}`;
+ $('observation').textContent=JSON.stringify(f.observation,null,2);
+ $('actions').textContent=JSON.stringify({requested:f.requested,applied:f.applied},null,2);
+ $('environment').textContent=JSON.stringify(env,null,2);
+ const canvas=$('scene'),rect=canvas.getBoundingClientRect(),dpr=devicePixelRatio||1;
+ canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);
+ const c=canvas.getContext('2d');c.scale(dpr,dpr);const w=rect.width,h=rect.height;
+ if(data.kind==='dodge-arena-v1'){
+  const left=30,width=w-60,top=30,height=h-90;
+  c.strokeStyle='#cbd5e7';c.strokeRect(left,top,width,height);
+  c.fillStyle='#e79544';for(const b of env.blocks)c.fillRect(left+b.x*width-12,top+b.y*height-8,24,16);
+  c.fillStyle='#4164dd';c.fillRect(left+env.x*width-14,top+height-5,28,18);
+  c.font='14px system-ui';c.fillStyle='#30425e';c.fillText(`Passed ${env.passed} · collisions ${env.collisions}`,30,h-18);
+ }else{
+  const colors=['#4164dd','#9e58c8'];
+  ['tone_a','tone_b'].forEach((name,k)=>{
+   const gain=f.applied[name],x=w*(k?0.67:0.33);
+   c.fillStyle=colors[k];c.fillRect(x-35,h-60-gain*(h-100),70,gain*(h-100));
+   c.fillStyle='#30425e';c.font='15px system-ui';c.textAlign='center';c.fillText(`${name}: ${gain.toFixed(3)}`,x,h-28);
+  });
+ }
+}
+function pause(){playing=false;$('play').textContent='Play';last=null;accumulator=0;}
+function animate(now){
+ if(playing){if(last!==null)accumulator+=(now-last)*Number($('speed').value);last=now;
+  const steps=Math.floor(accumulator/data.period_ms);
+  if(steps){accumulator-=steps*data.period_ms;index=Math.min(data.frames.length-1,index+steps);draw();}
+  if(index===data.frames.length-1)pause();}
+ requestAnimationFrame(animate);
+}
+$('play').onclick=()=>{if(playing)pause();else{if(index===data.frames.length-1)index=0;playing=true;$('play').textContent='Pause';draw();}};
+$('reset').onclick=()=>{pause();index=0;draw();};
+$('position').oninput=()=>{pause();index=Number($('position').value);draw();};
+addEventListener('resize',draw);draw();requestAnimationFrame(animate);
+</script></html>
