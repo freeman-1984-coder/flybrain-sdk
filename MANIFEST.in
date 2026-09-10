@@ -1,5 +1,5 @@
 include README.md LICENSE CONTRIBUTING.md .gitattributes
-recursive-include examples *.py
+recursive-include examples *.py *.gd *.uid *.godot *.tscn *.md
 recursive-include scripts *.py *.mjs
 recursive-include models *.json *.md
 recursive-include tests *.py *.json

@@ -38,6 +38,14 @@ Edit `recipe.json` to change input and output mappings, or replace components in
 source and attribution. Output viewers replay recorded Python runs.
 [Guide](docs/demo-kits.md) · [What developers are building and what we learned](docs/research-2026-09-10.zh-CN.md).
 
+## Connect a Godot game
+
+The [Godot CPU adapter](examples/godot/README.md) runs an actual Godot 4 scene
+with a Python neural controller. Start `python examples/godot/bridge.py`, then
+open `examples/godot/project.godot` and press F5. Run offline with the toy or
+opt into the real MaleCNS subgraph. Save and restore the paired world/brain state.
+[Website quickstart](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html#godot).
+
 ## Game and audio demo kits
 
 The same `Session` loop now supports replaceable feature encoders, rate readouts and environments, with full checkpoints and verified feedback replay. Try [the demo gallery and original circuit audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html), then generate your own:
@@ -158,7 +166,7 @@ Issues and pull requests are welcome. Good starting areas:
 
 - Add a versioned model source with license, attribution, sizes and integrity metadata.
 - Add a FlyWire importer or another MaleCNS recipe with explicit mappings and validation.
-- Add a Godot/Unity adapter or a headless game example.
+- Extend the Godot adapter, add a Unity adapter or contribute a new environment.
 - Port the reference dynamics to WASM and match Python reference traces.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [roadmap](docs/roadmap.md), and the [TypeScript CPU runtime](packages/js/README.md). New contributors can use the model request, bug report, or feature request templates. Pull requests run CI before review.
