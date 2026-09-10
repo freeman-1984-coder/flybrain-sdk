@@ -2,7 +2,7 @@
 
 
 class BackendUnavailableError(RuntimeError):
-    """A recognized backend has no runtime in this release."""
+    """A backend cannot run because its runtime, device or compiler is unavailable."""
 
 
 class CheckpointError(ValueError):

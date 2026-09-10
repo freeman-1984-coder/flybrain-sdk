@@ -10,13 +10,19 @@ __all__ = ["Backend", "CPUBackend", "SimulationState", "available_backends", "cr
 
 
 def available_backends() -> dict:
-    return {"cpu": True, "wasm": False, "cuda": False}
+    from .cuda import cuda_available
+
+    return {"cpu": True, "wasm": False, "cuda": cuda_available()}
 
 
 def create_backend(name: str, model: Connectome, config: LIFConfig) -> Backend:
     if name == "cpu":
         return CPUBackend(model, config)
-    if name in ("wasm", "cuda"):
+    if name == "cuda":
+        from .cuda import CUDABackend
+
+        return CUDABackend(model, config)
+    if name == "wasm":
         raise BackendUnavailableError(
             f"Backend {name!r} is a reserved interface, not implemented in this release. "
             "Use backend='cpu'. No CUDA required."

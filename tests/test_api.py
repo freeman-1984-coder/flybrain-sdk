@@ -59,10 +59,9 @@ def test_nondefault_dt_and_clear_stimuli():
     assert brain.state.time_ms == 5
 
 
-@pytest.mark.parametrize("backend", ["cuda", "wasm"])
-def test_backend_slots_fail_explicitly(backend):
+def test_wasm_slot_fails_explicitly():
     with pytest.raises(BackendUnavailableError, match="not implemented"):
-        FlyBrain.load(backend=backend)
+        FlyBrain.load(backend="wasm")
 
 
 def test_unknown_backend_and_raw_model():

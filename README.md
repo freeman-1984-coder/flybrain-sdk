@@ -1,5 +1,8 @@
 # flybrain-sdk
 
+> Development branch: [experimental CUDA implementation and hardware-validation plan](docs/cuda.md). Actual NVIDIA validation is pending; the released v0.3 features described below remain CPU-based.
+
+
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
 **Try without installing:** [Circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html) — stimulate toy or real cells, silence outputs, inspect rates, download an editable HTML demo, or [replay an exported experiment in Python](docs/browser-lab.md).
