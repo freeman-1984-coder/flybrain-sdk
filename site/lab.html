@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interactive fruit-fly circuit lab — flybrain-sdk</title>
+<meta name="description" content="Run a real MaleCNS neural subgraph in your browser. Stimulate cells, silence outputs, inspect live activity and export an editable demo. No CUDA required.">
+<link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/lab.html"><meta name="robots" content="index,follow">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="lab.css">
+</head><body><a class="skip" href="#main">Skip to content</a><div class="wrap">
+<header class="nav"><a class="brand" href="./">flybrain<span>_sdk</span></a><nav aria-label="Main navigation"><a href="lab.html" aria-current="page">Circuit lab</a><a href="api.html">Python API</a><a href="models.html">Models</a><a href="contribute.html">Contribute</a></nav></header>
+<main id="main"><div class="lab-heading"><div><div class="eyebrow">Live simulation · No CUDA required</div><h1>Circuit lab</h1></div><div class="model-buttons"><button id="load-real">Load real circuit · 3.8 MB</button><button id="load-toy" class="quiet" data-needs-model disabled>Use toy</button></div></div>
+<div class="model-strip"><strong id="model-name">Loading toy…</strong><span id="model-count">Browser CPU · no server simulation</span></div>
+<p id="model-note" class="small">Start with an artificial offline circuit, or explicitly download a real anatomical subgraph.</p>
+<p id="status" role="status" aria-live="polite">Preparing the simulation…</p>
+<div class="lab-layout"><aside class="controls panel" aria-label="Experiment controls">
+<h2>Stimulate</h2><label for="stimulus">Input channel</label><select id="stimulus" data-needs-model disabled></select>
+<label for="strength">Strength <output id="strength-value">1.0</output></label><input id="strength" type="range" min="0" max="1" step="0.1" value="1" data-needs-model disabled>
+<label for="duration">Duration (ms)</label><input id="duration" type="number" min="1" max="10000" step="1" value="100" data-needs-model disabled>
+<button id="stimulate" data-needs-model disabled>Apply stimulus</button>
+<div class="control-divider"></div><h2>Intervene</h2><label for="target">Cells to silence or release</label><select id="target" data-needs-model disabled></select>
+<button id="silence" class="quiet" data-needs-model disabled>Toggle silence</button><p id="silenced" class="small">No cells silenced</p>
+<div class="control-divider"></div><h2>Keep your experiment</h2><button id="export" class="quiet" data-needs-model disabled>Export recording</button><button id="template" class="quiet" data-needs-model disabled>Download editable demo</button>
+<p class="small">Everything runs on your device. Exports are saved locally.</p>
+</aside><div class="workbench"><div class="panel">
+<div class="transport"><div><strong id="time">0 ms</strong><span id="events" class="small">0 recorded commands</span></div><div><button id="run" data-needs-model disabled>Run</button><button id="step" class="quiet" data-needs-model disabled>+20 ms</button><button id="reset" class="quiet" data-needs-model disabled>Reset</button></div></div>
+<canvas id="network" aria-label="Grouped neural activity. Population rates are provided below."></canvas><p class="caption">Grouped activity. Positions are schematic; lines show retained connections between groups.</p>
+<div id="groups" class="groups"></div>
+<div class="control-divider"></div><h2>Activity over time</h2><canvas id="history" aria-label="Population firing rate history, with a separate color for each group."></canvas><p class="caption">Filtered firing rates · up to 250 samples · each sample follows 20 simulated milliseconds. Display speed depends on your device.</p>
+</div><div class="panel readout-panel"><div><h2>Application output</h2><p id="action-values" class="mono">No output yet</p><p class="small">This lamp maps the largest output intensity to brightness. It is an application effect, not biological movement.</p></div><div class="lamp" id="lamp"><span id="lamp-value">0.000</span></div></div>
+<div class="panel"><h2>Inspect a cell</h2><label for="cells">Source neuron ID</label><select id="cells" data-needs-model disabled></select><p id="cell-state" class="mono">Load a model to inspect its state.</p></div></div></div>
+<section class="lab-guide"><h2>Try a causal comparison</h2><ol><li>Load the real circuit. Select <code>looming_left</code>, apply a 100 ms stimulus, then run. Observe the GF group and output.</li><li>Reset, silence “All output neurons”, and repeat the same stimulus. Input populations can respond while new GF spikes are suppressed.</li><li>Export the recording to reproduce the run in Python, or download a standalone HTML demo and edit its marked input/output section.</li></ol><p>Recorded inputs are artificial current drives; this page does not simulate retinal images, natural escape behavior or learning. <a href="male-cns-escape.html">Read the source, assumptions and model card.</a></p>
+<div class="code"><div class="label">Replay a downloaded recording in Python · repository checkout</div><pre><code>python examples/replay_experiment.py flybrain-experiment.json --download</code></pre></div><p><a href="https://github.com/freeman-1984-coder/flybrain-sdk/tree/main/packages/js">Browser runtime source</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/browser-lab.md">Guide and Python parity checks</a></p></section>
+</main><footer><span>Code MIT · Real model CC BY 4.0 · Independent project</span><a href="llms.txt">For AI tools</a></footer></div><script type="module" src="js/lab.js"></script></body></html>

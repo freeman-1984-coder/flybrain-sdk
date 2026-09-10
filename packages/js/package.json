@@ -1,10 +1,21 @@
 {
   "name": "@flybrain-sdk/core",
-  "version": "0.1.0-alpha.1",
+  "version": "0.3.0-alpha.1",
   "private": true,
-  "description": "Draft TypeScript contract for flybrain-sdk; no WASM runtime yet",
+  "description": "Float64 CPU connectome runtime for Node and browsers; WASM and CUDA remain planned",
   "type": "module",
-  "types": "./src/index.ts",
-  "scripts": {"typecheck": "tsc --noEmit"},
-  "devDependencies": {"typescript": "^5.7.0"}
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }

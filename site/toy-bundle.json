@@ -1,0 +1,129 @@
+{
+  "format": "flybrain-model-bundle",
+  "schema_version": 1,
+  "model": {
+    "schema_version": 1,
+    "name": "toy-v1",
+    "neuron_ids": [
+      "sense.food",
+      "sense.looming_left",
+      "sense.looming_right",
+      "sense.touch",
+      "relay.food",
+      "relay.escape_left",
+      "relay.escape_right",
+      "relay.touch",
+      "motor.walk",
+      "motor.turn_left",
+      "motor.turn_right",
+      "motor.jump"
+    ],
+    "synapses": [
+      {
+        "pre": "sense.food",
+        "post": "relay.food",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.food",
+        "post": "motor.walk",
+        "weight": 16.0
+      },
+      {
+        "pre": "sense.looming_left",
+        "post": "relay.escape_right",
+        "weight": 16.0
+      },
+      {
+        "pre": "sense.looming_right",
+        "post": "relay.escape_left",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.escape_right",
+        "post": "motor.turn_right",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.escape_left",
+        "post": "motor.turn_left",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.escape_right",
+        "post": "motor.jump",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.escape_left",
+        "post": "motor.jump",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.escape_right",
+        "post": "motor.walk",
+        "weight": -16.0
+      },
+      {
+        "pre": "relay.escape_left",
+        "post": "motor.walk",
+        "weight": -16.0
+      },
+      {
+        "pre": "sense.touch",
+        "post": "relay.touch",
+        "weight": 16.0
+      },
+      {
+        "pre": "relay.touch",
+        "post": "motor.jump",
+        "weight": 16.0
+      }
+    ],
+    "sensory": {
+      "food": [
+        "sense.food"
+      ],
+      "looming_left": [
+        "sense.looming_left"
+      ],
+      "looming_right": [
+        "sense.looming_right"
+      ],
+      "touch": [
+        "sense.touch"
+      ]
+    },
+    "motor": {
+      "walk": [
+        "motor.walk"
+      ],
+      "turn_left": [
+        "motor.turn_left"
+      ],
+      "turn_right": [
+        "motor.turn_right"
+      ],
+      "jump": [
+        "motor.jump"
+      ]
+    },
+    "provenance": {
+      "source": "Original hand-authored synthetic circuit; not biological data",
+      "dataset_version": "toy-v1",
+      "license": "MIT"
+    }
+  },
+  "config": {
+    "dt_ms": 1.0,
+    "tau_ms": 10.0,
+    "rest": 0.0,
+    "reset": 0.0,
+    "threshold": 1.0,
+    "refractory_ms": 2.0,
+    "input_gain": 2.0,
+    "rate_tau_ms": 50.0,
+    "action_rate_hz": 100.0
+  },
+  "model_sha256": "ba1701cf092e8b6acb8d36aa70f86f46b4521e4bb5f6f463efb3d8824b4bac6c"
+}

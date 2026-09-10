@@ -1,5 +1,8 @@
 # flybrain-sdk：无需 CUDA 的果蝇连接组仿真 SDK
 
+无需安装也能先玩：[在线回路实验室](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)。可给细胞刺激、静默输出、查看活动；真实回路点击后才下载。页面还能导出可编辑的单文件 HTML demo，或导出实验记录，在 Python 中重放并核验结果。浏览器当前使用 JavaScript CPU，不需要 CUDA 或 WASM。详见[实验室与 demo 指南](browser-lab.md)。
+
+
 ## 0.2 alpha：真实小回路与开放接口
 
 新增 313 个真实 MaleCNS 神经元、20,607 条连接的实验模型，约 3.8 MB，

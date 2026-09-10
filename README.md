@@ -2,6 +2,8 @@
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
+**Try without installing:** [Circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html) — stimulate toy or real cells, silence outputs, inspect rates, download an editable HTML demo, or [replay an exported experiment in Python](docs/browser-lab.md).
+
 [![CI](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -16,7 +18,7 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**0.2 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.3 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
 ## Install and run
 
@@ -130,7 +132,7 @@ Issues and pull requests are welcome. Good starting areas:
 - Add a Godot/Unity adapter or a headless game example.
 - Port the reference dynamics to WASM and match Python reference traces.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md), [roadmap](docs/roadmap.md), and the [TypeScript contract](packages/js/README.md). New contributors can use the model request, bug report, or feature request templates. Pull requests run CI before review.
+Read [CONTRIBUTING.md](CONTRIBUTING.md), [roadmap](docs/roadmap.md), and the [TypeScript CPU runtime](packages/js/README.md). New contributors can use the model request, bug report, or feature request templates. Pull requests run CI before review.
 
 ## Build a distribution
 

@@ -9,7 +9,9 @@ need a CUDA device. Small, focused changes are easiest to review.
 4. Run `pytest`, `ruff check .`, `ruff format --check .`, and the quickstart.
 5. Open a pull request explaining the change, evidence and limitations.
 
-For TypeScript contract changes, run `npm ci && npm run typecheck` in `packages/js`.
+For TypeScript/runtime changes, generate the Python references, run `npm test`
+in `packages/js`, sync the compiled website runtime and replay the exported
+fixtures with Python. Follow the [browser guide](docs/browser-lab.md#runtime-parity-and-development).
 Python CI must stay network-independent: mock download responses, never fetch a
 full dataset in tests. For a deliberate live smoke test, use a small catalog asset
 and a temporary cache. Model-source submissions need version, URL, size, license,

@@ -1,6 +1,6 @@
 # Python API reference
 
-Version: 0.2.0a1. CPU is implemented; CUDA and WASM remain unavailable.
+Version: 0.3.0a1. CPU is implemented; CUDA and WASM remain unavailable.
 
 ## Open circuit API
 
@@ -123,3 +123,7 @@ IDs are kept as strings, including numeric source IDs. Duplicate neuron IDs,
 unknown edge endpoints and nonfinite weights are invalid. Parallel edges add.
 Models have immutable neuron/edge tuples and port maps. The normalized model
 format is an MVP interchange format, not an efficient whole-brain storage format.
+
+## Browser experiment replay
+
+Use `flybrain.experiment.replay_experiment(recording, download=False)` to verify and continue supported browser lab recordings in Python. See the [browser guide](browser-lab.md) for format, limits and the CLI example.

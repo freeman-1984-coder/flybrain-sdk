@@ -1,0 +1,105 @@
+{
+  "format": "flybrain-experiment",
+  "schema_version": 1,
+  "model_id": "toy",
+  "model_sha256": "ba1701cf092e8b6acb8d36aa70f86f46b4521e4bb5f6f463efb3d8824b4bac6c",
+  "model_asset_sha256": null,
+  "dynamics_revision": "lif-exact-v1",
+  "config": {
+    "dt_ms": 1,
+    "tau_ms": 10,
+    "rest": 0,
+    "reset": 0,
+    "threshold": 1,
+    "refractory_ms": 2,
+    "input_gain": 2,
+    "rate_tau_ms": 50,
+    "action_rate_hz": 100
+  },
+  "duration_ticks": 101,
+  "commands": [
+    {
+      "tick": 0,
+      "op": "stimulate",
+      "channel": "food",
+      "strength": 1,
+      "duration_ms": 150
+    },
+    {
+      "tick": 21,
+      "op": "silence",
+      "ids": [
+        "motor.walk",
+        "motor.turn_left",
+        "motor.turn_right",
+        "motor.jump"
+      ],
+      "enabled": true
+    },
+    {
+      "tick": 40,
+      "op": "silence",
+      "ids": [
+        "motor.walk",
+        "motor.turn_left",
+        "motor.turn_right",
+        "motor.jump"
+      ],
+      "enabled": false
+    }
+  ],
+  "expected": {
+    "state": {
+      "tick": 101,
+      "time_ms": 101,
+      "voltage": [
+        0.36253849384403647,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "spikes": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "rates_hz": [
+        95.64251122650921,
+        0,
+        0,
+        0,
+        97.57461811680874,
+        0,
+        0,
+        0,
+        89.64173685182209,
+        0,
+        0,
+        0
+      ]
+    },
+    "action": {
+      "walk": 0.8964173685182208,
+      "turn_left": 0,
+      "turn_right": 0,
+      "jump": 0
+    }
+  }
+}

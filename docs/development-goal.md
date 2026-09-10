@@ -5,8 +5,10 @@ Move beyond the toy SDK to a reproducible, CPU-only real-connectome experiment.
 The CPU path remains required. User steering on 2026-09-10 additionally requests
 real optional CUDA support, reusable demo kits and a more open architecture.
 The current design proposal is [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md).
-Its proposed APIs are not implemented features. The design phase precedes further
-expansion of the existing implementation.
+RFC signatures remain proposals unless listed in the current API guide.
+Implemented slices now include the open Python API, real model, JS CPU circuit
+lab, standalone HTML templates and verified browser-to-Python replay. CUDA,
+engine adapters, general environment sessions and audio/learning remain open.
 
 Acceptance criteria:
 

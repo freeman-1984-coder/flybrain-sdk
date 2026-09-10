@@ -5,11 +5,15 @@
 Working: NumPy CPU backend, synthetic 12-neuron toy, sensory/motor APIs,
 schema-2 JSON checkpoints, direct current injection, annotation selection,
 custom output channels, selected observations, reversible silencing, and a
-3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.2.0a1.
+3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.3.0a1.
+Also working: JavaScript CPU runtime, interactive browser circuit lab, standalone
+HTML demo export and Python replay of browser stimulus/intervention recordings.
 Raw MaleCNS/FlyWire downloads also remain available.
 Not yet implemented: calibrated biological models, full-brain real-time guarantees,
-WASM/CUDA runtimes, NPM runtime, learning or plasticity. No PyPI publication yet.
+WASM/CUDA runtimes, learning or plasticity. No PyPI or NPM publication yet.
 
+- [Interactive circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)
+- [Browser/demo/replay guide](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/browser-lab.md)
 - [Quickstart](https://freeman-1984-coder.github.io/flybrain-sdk/api.html)
 - [Model catalog](https://freeman-1984-coder.github.io/flybrain-sdk/models.html)
 - [Runnable real model](https://freeman-1984-coder.github.io/flybrain-sdk/male-cns-escape.html)
