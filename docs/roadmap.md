@@ -1,5 +1,15 @@
 # Roadmap
 
+## Available in 0.4.0a1
+
+- Composable Python sessions with current encoders, rate readouts and JSON environments.
+- Exact fractional clock allocation and complete session checkpoints/feedback replay.
+- Deterministic dodge and tone templates, recorded viewers, and resumable WAV export.
+- [Integration guide](demo-kits.md) and a gallery with a silenced-output comparison.
+
+Still open: live game integrations, engine adapters, streaming audio and learned readouts.
+CUDA implementation is in a separate draft PR pending actual-device validation.
+
 ## Available in 0.3.0a1
 
 - JavaScript float64 CPU runtime with toy/real cross-language trace tests.

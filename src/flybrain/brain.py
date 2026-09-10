@@ -49,6 +49,11 @@ class FlyBrain:
         return tuple(self.model.sensory)
 
     @property
+    def progress(self) -> Progress:
+        """Inspect the neural clock without transferring state arrays."""
+        return Progress(self._backend.tick, self._backend.tick * self.config.dt_ms)
+
+    @property
     def state(self) -> SimulationState:
         return self._backend.observe()
 
@@ -162,10 +167,9 @@ class FlyBrain:
         rates = self._backend.observe_selected(indices, ("rates_hz",))["rates_hz"]
         return self._motor.decode(dict(zip(indices, rates)))
 
-    def save(self, path: PathLike) -> Path:
-        """Atomically write a self-contained JSON checkpoint (never pickle)."""
-        path = Path(path)
-        payload = {
+    def snapshot(self) -> dict:
+        """Return a detached, JSON-compatible checkpoint, including pending inputs."""
+        return {
             "schema_version": 2,
             "dynamics_revision": self._backend.dynamics_revision,
             "backend": self.backend,
@@ -177,6 +181,11 @@ class FlyBrain:
             "pending_currents": self.drive.snapshot(),
             "readout": self._motor.snapshot(),
         }
+
+    def save(self, path: PathLike) -> Path:
+        """Atomically write a self-contained JSON checkpoint (never pickle)."""
+        path = Path(path)
+        payload = self.snapshot()
         raw = json.dumps(payload, indent=2, allow_nan=False) + "\n"
         temporary = None
         try:
@@ -198,6 +207,14 @@ class FlyBrain:
         """Construct a new brain, including active stimuli and all dynamic state."""
         try:
             data = json.loads(Path(path).read_text(encoding="utf-8"))
+        except (ValueError, TypeError) as exc:
+            raise CheckpointError(f"Invalid checkpoint: {exc}") from exc
+        return cls.from_snapshot(data, backend=backend)
+
+    @classmethod
+    def from_snapshot(cls, data: dict, *, backend: Optional[str] = None) -> "FlyBrain":
+        """Validate and construct from data; never imports or executes recorded code."""
+        try:
             if type(data["schema_version"]) is not int or data["schema_version"] not in (1, 2):
                 raise ValueError("unsupported checkpoint schema_version")
             model = Connectome.from_dict(data["model"])
