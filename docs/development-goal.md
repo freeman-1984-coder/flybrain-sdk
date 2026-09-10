@@ -39,3 +39,8 @@ Acceptance criteria:
 Search discoverability is part of the goal. Technical accessibility, accurate
 content and machine-readable documentation can be delivered and verified; search
 indexing and rankings remain decisions of external search providers.
+
+Development preview: `examples/godot` connects an actual Godot 4.7.2 scene to the
+Python CPU runtime with explicit action acknowledgements and paired world/brain
+checkpoints. Headless conformance covers toy and real models; native window and
+file-dialog verification is pending before release. See its README for the gate.
