@@ -1,11 +1,12 @@
-# Godot CPU adapter (development preview)
+# Godot CPU adapter
 
 **No CUDA required.** A real Godot 4 scene owns the world while the installed
 Python SDK owns the neural simulation. It runs offline with the artificial toy;
 the existing 313-cell MaleCNS bundle is an explicit optional download.
 
-This feature branch has headless engine conformance tests. Interactive window and
-file-dialog verification is still pending; this is not part of v0.4.0a3.
+Available in v0.4.0a4. Verified with actual Godot 4.7.2 processes on macOS and
+Linux CI. Native macOS run/pause, save/restore, file-dialog cancellation and
+service-disconnect recovery were checked on 2026-09-11.
 
 ## Run from this checkout
 
@@ -18,7 +19,7 @@ python -m pip install -e .
 python examples/godot/bridge.py
 ```
 
-Import `examples/godot/project.godot` in Godot and run the project (F6/F5), or in
+Import `examples/godot/project.godot` in Godot and run the project (F5), or in
 another terminal run `godot --path examples/godot`. Click **Run / pause**.
 The initial scene is paused. Wait for the bridge to print its ready address before
 starting Godot; optional model download happens before the server starts listening.

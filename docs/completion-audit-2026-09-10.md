@@ -40,3 +40,19 @@ Audio input, learned readouts, additional dynamics, button/pose adapters and mor
 models are future product directions from the design investigation. They are not
 claimed as implemented, and adding them does not replace the unresolved delivery
 gates above. No paid GPU resource has been started by this audit.
+
+## 2026-09-11 Godot follow-up
+
+The native interaction gate above is now passed on macOS with Godot 4.7.2:
+run/pause held frame 62; save/restore returned to the same scene and continued;
+saving while running paused at frame 114 with brain tick 2280. The native file
+picker restored that checkpoint; cancel returned without changing the world.
+Stopping the bridge during play stopped the scene at frame 212, zeroed applied
+control and disabled Run. Restarting the bridge and scene reset to frame 0.
+The native dialog also avoids the misleading permission message observed in
+Godot's custom file picker. Dialog nodes are freed after selection or cancel.
+
+This follow-up prepares v0.4.0a4; the earlier wheel digests and clean-cache audit
+above remain historical evidence for v0.4.0a3. The new release includes the Godot
+adapter, reusable ExternalController and updated public demo/AI-tool guidance.
+CUDA still requires actual NVIDIA execution; no GPU resource has been rented.

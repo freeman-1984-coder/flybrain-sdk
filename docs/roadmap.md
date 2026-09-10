@@ -1,11 +1,19 @@
 # Roadmap
 
+## Available in 0.4.0a4
+
+- Actual Godot 4 CPU scene, offline toy and optional real MaleCNS model.
+- Reusable ExternalController with acknowledged controls and complete checkpoints.
+- Engine feedback parity, new-process continuation and eight fault cases in CI.
+- Native macOS run/pause, save/restore and disconnect recovery verified.
+- [Godot setup and contract](../examples/godot/README.md).
+
 ## Available in 0.4.0a3
 
 - Live JavaScript CPU game sandbox using toy or the pinned real circuit.
 - Scene edits, input/output gains, silencing, whole-session checkpoints and verified replay.
 - 300 Python feedback frames check the reference game adapter against Session/DodgeArena.
-- [Live adapter and format guide](live-sandbox.md). External engine adapters remain open.
+- [Live adapter and format guide](live-sandbox.md). Godot follows in 0.4.0a4.
 
 ## Available in 0.4.0a2
 
@@ -20,7 +28,7 @@
 - Deterministic dodge and tone templates, recorded viewers, and resumable WAV export.
 - [Integration guide](demo-kits.md) and a gallery with a silenced-output comparison.
 
-Still open: external engine adapters, streaming audio and learned readouts.
+Still open: additional engine adapters, streaming audio and learned readouts.
 CUDA implementation is in a separate draft PR pending actual-device validation.
 
 ## Available in 0.3.0a1
@@ -30,7 +38,7 @@ CUDA implementation is in a separate draft PR pending actual-device validation.
 - Standalone editable HTML export and browser command recordings replayed in Python.
 - [Browser guide](browser-lab.md) with exact semantics and current limitations.
 
-Next: optional CUDA tested on hardware, engine/game adapters, then audio and
+Next: optional CUDA tested on hardware, additional game adapters, then audio and
 rhythm demo kits sharing the open core. Browser WASM remains a separate backend.
 
 ## Available in 0.2.0a1
@@ -40,8 +48,8 @@ rhythm demo kits sharing the open core. Browser WASM remains a separate backend.
 - Arbitrary named rate readouts, reversible spike silencing and schema-2 checkpoints.
 - The previous alpha API and schema-1 checkpoint reader remain supported.
 
-The circuit lab shipped in 0.3 and basic game/audio sessions in 0.4. Live game,
-streaming audio, trained rhythm templates and validated CUDA remain open. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
+The circuit lab shipped in 0.3; basic game/audio sessions, the live game and Godot
+adapter shipped in 0.4. Streaming audio, trained rhythm templates and validated CUDA remain open. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
 proposed architecture; proposal-only APIs are not current API documentation.
 
 
@@ -62,7 +70,7 @@ proposed architecture; proposal-only APIs are not current API documentation.
 
 ## Then: integrations and scale
 
-- Godot/Unity adapters and richer game examples.
+- Extend Godot, add Unity and richer game examples.
 - Compact sparse-array model/checkpoint format for large graphs.
 - WASM reference implementation and TypeScript package.
 - Optional CUDA backend, only after cross-backend conformance tests.

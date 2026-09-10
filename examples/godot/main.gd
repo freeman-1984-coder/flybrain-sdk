@@ -63,10 +63,15 @@ func _ready() -> void:
 		running = false
 		var picker = FileDialog.new()
 		picker.access = FileDialog.ACCESS_FILESYSTEM
+		picker.use_native_dialog = true
 		picker.current_dir = OS.get_user_data_dir()
 		picker.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 		picker.add_filter("*.json", "Session JSON")
-		picker.file_selected.connect(restore_file)
+		picker.file_selected.connect(func(path):
+			restore_file(path)
+			picker.queue_free()
+		)
+		picker.canceled.connect(picker.queue_free)
 		add_child(picker)
 		picker.popup_centered(Vector2i(700, 450))
 	)

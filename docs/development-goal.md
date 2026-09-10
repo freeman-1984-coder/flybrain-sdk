@@ -8,7 +8,7 @@ The current design proposal is [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.z
 RFC signatures remain proposals unless listed in the current API guide.
 Implemented slices now include the open Python API, real model, JS CPU circuit
 lab, standalone HTML templates and verified browser-to-Python replay. CUDA,
-external engine adapters, streaming audio and learning remain open.
+additional engine adapters, streaming audio and learning remain open.
 The live browser game now shares the JS CPU core and is checked against Python feedback.
 Basic composable sessions, recorded dodge/sonification kits and full feedback replay
 are implemented; CUDA remains a separate draft awaiting hardware validation.
@@ -40,9 +40,10 @@ Search discoverability is part of the goal. Technical accessibility, accurate
 content and machine-readable documentation can be delivered and verified; search
 indexing and rankings remain decisions of external search providers.
 
-Development preview: `examples/godot` connects an actual Godot 4.7.2 scene to the
+Godot integration: `examples/godot` connects an actual Godot 4.7.2 scene to the
 Python CPU runtime with explicit action acknowledgements and paired world/brain
-checkpoints. Headless conformance covers toy and real models; native window and
-file-dialog verification is pending before release. See its README for the gate.
+checkpoints. Headless conformance covers toy and real models. Native macOS run/pause,
+save/restore, file-dialog cancellation and disconnect/reset checks passed on
+2026-09-11. See its README for usage and verification.
 
 Current evidence and remaining release gates: [delivery audit](completion-audit-2026-09-10.md).
