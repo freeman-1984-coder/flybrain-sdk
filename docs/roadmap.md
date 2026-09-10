@@ -1,5 +1,12 @@
 # Roadmap
 
+## Available in 0.4.0a3
+
+- Live JavaScript CPU game sandbox using toy or the pinned real circuit.
+- Scene edits, input/output gains, silencing, whole-session checkpoints and verified replay.
+- 300 Python feedback frames check the reference game adapter against Session/DodgeArena.
+- [Live adapter and format guide](live-sandbox.md). External engine adapters remain open.
+
 ## Available in 0.4.0a2
 
 - Installed `flybrain` command: doctor, demo list/run, editable project generation.
@@ -13,7 +20,7 @@
 - Deterministic dodge and tone templates, recorded viewers, and resumable WAV export.
 - [Integration guide](demo-kits.md) and a gallery with a silenced-output comparison.
 
-Still open: live game integrations, engine adapters, streaming audio and learned readouts.
+Still open: external engine adapters, streaming audio and learned readouts.
 CUDA implementation is in a separate draft PR pending actual-device validation.
 
 ## Available in 0.3.0a1

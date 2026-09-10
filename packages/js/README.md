@@ -43,3 +43,14 @@ Python checkpoint files. The lab exports a command recording for Python replay.
 See [the browser guide](../../docs/browser-lab.md) for exact semantics, parity
 coverage, build instructions, licensing and limits. Run the core in a worker
 when connecting a continuously updating game UI.
+
+## Live game reference adapter
+
+`@flybrain-sdk/core/dodge` exports `DodgeSession` for a fixed-20ms toy/real
+obstacle arena, including scene edits, gain controls, full checkpoints and replay.
+It uses the same CPU FlyBrain core; it is a reference adapter, not a universal
+game engine. See [live sandbox guide](../../docs/live-sandbox.md).
+
+Run `python scripts/dodge_reference.py` from the repository before `npm test`
+to regenerate the 300-frame Python feedback reference. The private package is
+not published to NPM.

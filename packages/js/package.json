@@ -1,6 +1,6 @@
 {
   "name": "@flybrain-sdk/core",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0-alpha.1",
   "private": true,
   "description": "Float64 CPU connectome runtime for Node and browsers; WASM and CUDA remain planned",
   "type": "module",
@@ -17,5 +17,15 @@
   "files": [
     "dist",
     "README.md"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dodge": {
+      "types": "./dist/dodge.d.ts",
+      "import": "./dist/dodge.js"
+    }
+  }
 }

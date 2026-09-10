@@ -2,7 +2,7 @@
 
 **No CUDA required.** These Python examples use the same `Session` loop with replaceable input projection, rate readout and environment adapters. The toy and pinned real MaleCNS escape circuit are supported by the presets. The real graph is anatomical; every input projection, LIF parameter and game/audio mapping here is an engineered assumption.
 
-[Gallery and audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html) · [Live circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)
+[Live game sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) · [Gallery and audio](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html) · [Live circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)
 
 ## Generate your own demo
 
@@ -126,4 +126,5 @@ pytest tests/test_session.py
 
 The script loads the checked-in, pinned real model, regenerates three six-second replays and the WAV, and verifies each feedback trace before writing `site/demos/manifest.json`. The manifest records environment versions, model checksum, scenario outcomes and artifact checksums. HTML viewers omit the full graph and need no network to play. Keep the code license and model attribution when sharing exports.
 
-Still planned: a live game integration using these boundaries, engine adapters, streaming audio/features, trained readouts with held-out evaluation, and validated CUDA. The current templates provide runnable, inspectable starting points for that work.
+The [live browser sandbox](live-sandbox.md) now implements the dodge reference
+with Python parity checks. Still planned: external engine adapters, streaming audio/features, trained readouts with held-out evaluation, and validated CUDA. The current templates provide runnable, inspectable starting points for that work.

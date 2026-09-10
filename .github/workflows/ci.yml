@@ -44,10 +44,11 @@ jobs:
         with:
           node-version: "22"
       - run: python scripts/browser_reference.py
+      - run: python scripts/dodge_reference.py
       - run: npm ci && npm run build
         working-directory: packages/js
       - run: node scripts/build-browser-site.mjs
       - run: npm test
         working-directory: packages/js
       - run: pytest tests/test_experiment.py
-      - run: git diff --exit-code -- site/js/runtime.js site/toy-bundle.json site/license.txt
+      - run: git diff --exit-code -- site/js/runtime.js site/js/dodge-runtime.js site/toy-bundle.json site/license.txt

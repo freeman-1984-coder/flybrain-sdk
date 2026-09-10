@@ -8,7 +8,8 @@ The current design proposal is [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.z
 RFC signatures remain proposals unless listed in the current API guide.
 Implemented slices now include the open Python API, real model, JS CPU circuit
 lab, standalone HTML templates and verified browser-to-Python replay. CUDA,
-engine adapters, live game integrations, streaming audio and learning remain open.
+external engine adapters, streaming audio and learning remain open.
+The live browser game now shares the JS CPU core and is checked against Python feedback.
 Basic composable sessions, recorded dodge/sonification kits and full feedback replay
 are implemented; CUDA remains a separate draft awaiting hardware validation.
 

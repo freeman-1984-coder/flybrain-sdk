@@ -5,19 +5,23 @@
 Working: NumPy CPU backend, synthetic 12-neuron toy, sensory/motor APIs,
 schema-2 JSON checkpoints, direct current injection, annotation selection,
 custom output channels, selected observations, reversible silencing, and a
-3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.4.0a2.
+3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.4.0a3.
 Also working: JavaScript CPU runtime, interactive browser circuit lab, standalone
 HTML demo export and Python replay of browser stimulus/intervention recordings.
 Also working: Python Session with replaceable current encoders, rate readouts and
 JSON environments; deterministic dodge and tone demo kits, full feedback replay,
 standalone recorded viewers and WAV sonification with checkpoint continuation.
-The gallery is recorded playback; the circuit lab remains a live simulation.
+The gallery is recorded playback; the circuit lab and game sandbox are live simulations.
+The game supports obstacle edits, mapping gains, silencing, JS checkpoints and
+verified full-feedback replay. Its 20 ms reference adapter is tested against Python.
 Also working: `flybrain doctor`, `flybrain demos list/run`, and `flybrain init`
 for editable Python projects with recipe.json, attribution and pinned model identity.
 Raw MaleCNS/FlyWire downloads also remain available.
 Not yet implemented: calibrated biological models, full-brain real-time guarantees,
 WASM/CUDA runtimes, learning or plasticity. No PyPI or NPM publication yet.
 
+- [Live game sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html)
+- [Live adapter and replay guide](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/live-sandbox.md)
 - [Game/audio demo kits](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html)
 - [Session integration guide](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/demo-kits.md)
 - [Interactive circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html)

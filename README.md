@@ -2,6 +2,8 @@
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
+**Live game:** [Open the browser sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) — add obstacles, tune mappings, inspect neural control, save and verify recordings. [Adapter guide](docs/live-sandbox.md).
+
 **Try without installing:** [Circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html) — stimulate toy or real cells, silence outputs, inspect rates, download an editable HTML demo, or [replay an exported experiment in Python](docs/browser-lab.md).
 
 [![CI](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/freeman-1984-coder/flybrain-sdk/actions/workflows/ci.yml)
