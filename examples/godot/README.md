@@ -111,6 +111,7 @@ restore/reset rather than repeating the same integration.
 
 ```sh
 python scripts/verify_godot.py /absolute/path/to/godot
+python scripts/verify_godot_failures.py /absolute/path/to/godot
 ```
 
 The script starts a temporary loopback bridge, runs **Godot itself** for 120 frames,
@@ -121,6 +122,12 @@ absolute tolerance 1e-9 (integer clocks exact). It uses repository model data;
 there is no model download during verification. It also checks that stale actions
 and mismatched world/brain saves are rejected before movement. CI pins the engine archive and
 checks its SHA256 before executing it.
+
+The fault suite runs the real engine against malformed start/action/ack/checkpoint
+responses, a dropped connection and a response delayed beyond the timeout. The
+last two cases drop a response after neural integration: the engine remains at
+its last applied frame, clears active control and requires recovery. These checks
+exercise transport failure; they do not replace visual interaction checks.
 
 Useful manual checks before release: run/pause at several points, save/restore
 through the file dialog, stop the bridge while running and confirm the scene stops,

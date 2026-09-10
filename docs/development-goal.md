@@ -44,3 +44,5 @@ Development preview: `examples/godot` connects an actual Godot 4.7.2 scene to th
 Python CPU runtime with explicit action acknowledgements and paired world/brain
 checkpoints. Headless conformance covers toy and real models; native window and
 file-dialog verification is pending before release. See its README for the gate.
+
+Current evidence and remaining release gates: [delivery audit](completion-audit-2026-09-10.md).

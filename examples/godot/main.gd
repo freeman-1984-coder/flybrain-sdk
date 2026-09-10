@@ -123,6 +123,9 @@ func offer() -> void:
 	current = {"observation": world.observe()}
 	send("/offer", {"seq": seq, "observation": current.observation})
 
+func valid_integer(value, maximum: float = 9007199254740991.0) -> bool:
+	return (value is int or value is float) and is_finite(value) and value >= 0 and value <= maximum and floor(value) == value
+
 func received(result: int, code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	busy = false
 	if failed: return
@@ -134,6 +137,9 @@ func received(result: int, code: int, _headers: PackedStringArray, body: PackedB
 		stop("Invalid bridge response.")
 		return
 	if operation == "/start":
+		if not value.get("session") is String or value.session.is_empty() or value.session.length() > 128 or not value.get("model") is String or not valid_integer(value.get("next_seq"), 4294967295.0) or not valid_integer(value.get("base_tick")):
+			stop("Invalid start response.")
+			return
 		session_id = value.session
 		seq = int(value.next_seq)
 		base_tick = int(value.base_tick)
@@ -149,7 +155,7 @@ func received(result: int, code: int, _headers: PackedStringArray, body: PackedB
 		running = limit > 0
 		if running: offer()
 	elif operation == "/offer":
-		if value.get("seq") != seq or value.get("duration_ms") != 20.0 or value.get("brain_tick") != base_tick + (seq + 1) * 20 or Time.get_ticks_msec() - issued_at > 2000:
+		if not valid_integer(value.get("seq")) or not valid_integer(value.get("brain_tick")) or value.get("seq") != seq or value.get("duration_ms") != 20.0 or value.get("brain_tick") != base_tick + (seq + 1) * 20 or Time.get_ticks_msec() - issued_at > 2000:
 			stop("Outdated action rejected. Restart both participants.")
 			return
 		if not value.get("requested") is Dictionary or value.requested.keys() != ["steer"] or not (value.requested.steer is float or value.requested.steer is int) or not is_finite(value.requested.steer):
@@ -162,7 +168,7 @@ func received(result: int, code: int, _headers: PackedStringArray, body: PackedB
 		queue_redraw()
 		send("/ack", {"seq": seq, "applied": current.applied})
 	elif operation == "/ack":
-		if value.get("ack") != seq:
+		if not valid_integer(value.get("ack")) or value.get("ack") != seq:
 			stop("Acknowledgement mismatch.")
 			return
 		trace.append(current.duplicate(true))
@@ -177,6 +183,9 @@ func received(result: int, code: int, _headers: PackedStringArray, body: PackedB
 		await get_tree().create_timer(0.02).timeout
 		if running: offer()
 	elif operation == "/checkpoint":
+		if not value.get("checkpoint_json") is String or value.checkpoint_json.is_empty():
+			stop("Invalid checkpoint response.")
+			return
 		var destination = save_path if saving else trace_path
 		if not destination.is_empty():
 			var file = FileAccess.open(destination, FileAccess.WRITE)
