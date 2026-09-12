@@ -1,6 +1,6 @@
 # flybrain-sdk
 
-> Development branch: [experimental CUDA backend](docs/cuda.md), validated on NVIDIA A16-2Q (12/12 hardware tests). Small circuits are slower on this reference GPU path. [Train an external reflex readout](examples/REFLEX_TRAINING.md). Released v0.4.0a4 is CPU-only.
+> Development branch: [experimental CUDA backend](docs/cuda.md). [Full FlyWire benchmark](docs/validation/flywire-full-a16.md): 139,255 neurons, all 16.85M source rows, CPU/CUDA parity and 10 seconds of continuous simulation on A16-8Q. CUDA median 11.55 seconds per simulated second (not real time). [Train an external reflex readout](examples/REFLEX_TRAINING.md). Released v0.4.0a4 is CPU-only.
 
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.

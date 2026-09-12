@@ -84,3 +84,12 @@ On a configured NVIDIA host, the experimental Godot bridge accepts
 fresh sessions and imported checkpoints. The default remains CPU; a saved backend
 label cannot change the bridge's explicitly selected device. Actual Godot with
 CUDA has not been verified.
+
+## Complete FlyWire brain benchmark
+
+The [full FlyWire v783 report](validation/flywire-full-a16.md) validates all 139,255
+proofread neurons and 16,847,997 source rows on A16-8Q. CPU/CUDA parity, backend
+checkpoint replay, 10 seconds of continuous simulated time, and 171 regression
+tests passed. CUDA median 11.55 seconds per simulated second versus CPU 110.96
+seconds on that host. This is faster than the SDK CPU reference, but not real time.
+[Reproduce the full-graph test](fullbrain-validation.md).
