@@ -2,6 +2,9 @@
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
+**Full-brain CUDA benchmark (experimental branch):** [139,255 FlyWire neurons on a real NVIDIA GPU](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html). Complete published proofread graph, CPU/CUDA checks, reproducible timing and evidence. Released v0.4.0a4 remains CPU-only.
+
+
 **Live game:** [Open the browser sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) — add obstacles, tune mappings, inspect neural control, save and verify recordings. [Adapter guide](docs/live-sandbox.md).
 
 **Try without installing:** [Circuit lab](https://freeman-1984-coder.github.io/flybrain-sdk/lab.html) — stimulate toy or real cells, silence outputs, inspect rates, download an editable HTML demo, or [replay an exported experiment in Python](docs/browser-lab.md).

@@ -25,10 +25,19 @@ WASM, biological learning or plasticity. No PyPI or NPM publication yet.
 
 Experimental development branch (not v0.4.0a4): optional CuPy CUDA backend passed
 12/12 actual NVIDIA A16-2Q hardware tests. Small circuits are slower on CUDA.
+Full FlyWire v783 test on A16-8Q: all 139,255 proofread neurons and all 16,847,997
+source neuron-pair/neuropil rows (54,492,922 contacts), no extra pruning.
+200 active CPU/CUDA ticks compared across all neurons every 25 ticks; checkpoint
+replay and 10,000 additional CUDA ticks passed. 171 tests passed, none skipped.
+Median wall time per simulated second: CPU 110.955 s, CUDA 11.552 s (not real time).
+This is an experimental script with assumed LIF dynamics and artificial currents,
+not a catalog-ready whole-brain behavior model.
+
 Reflex School trains only a three-weight external readout on fixed 313-cell
 MaleCNS dynamics: 50% to 100% on 80 balanced held-out two-choice trials.
 It is a limited resetting task, not biological plasticity or general game skill.
 
+- [Complete FlyWire CUDA benchmark and evidence](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html)
 - [Reflex School recorded learning experiment](https://freeman-1984-coder.github.io/flybrain-sdk/reflex.html)
 - [Godot CPU adapter](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html#godot)
 - [Godot integration reference](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/examples/godot/README.md)

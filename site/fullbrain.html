@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full FlyWire brain CUDA benchmark — 139,255 neurons · flybrain-sdk</title>
+<meta name="description" content="Actual NVIDIA GPU test of all 139,255 FlyWire v783 neurons using flybrain-sdk. Complete published proofread graph, CPU/CUDA parity, timing, checkpoint replay, and downloadable evidence.">
+<link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html"><meta name="robots" content="index,follow"><link rel="stylesheet" href="style.css">
+<style>.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:32px 0}.metric{border:1px solid var(--line,#d8dfd8);border-radius:12px;padding:22px}.metric strong{display:block;font-size:clamp(25px,4vw,42px);line-height:1.2;margin:10px 0}.metric span{font-size:14px}.article{max-width:1000px}@media(max-width:650px){.metrics{grid-template-columns:1fr}}</style></head>
+<body><a class="skip" href="#main">Skip to content</a><div class="wrap"><header class="nav"><a class="brand" href="./">flybrain<span>_sdk</span></a><nav aria-label="Main navigation"><a href="reflex.html">Reflex School</a><a href="models.html">Models</a><a href="api.html">Python API</a><a href="https://github.com/freeman-1984-coder/flybrain-sdk">GitHub ↗</a></nav></header>
+<main id="main"><article class="article"><div class="eyebrow">Full FlyWire v783 / Actual NVIDIA GPU / Experimental branch</div><h1>完整脑图。<br>真实 CUDA 实测。</h1>
+<p>这次加载全部已校对的 FlyWire v783 脑神经元，运行 SDK 自己的 CUDA 后端。没有抽取小回路，也没有额外删除弱连接。原始报告、校验值和复现脚本均公开。</p>
+<div class="metrics"><div class="metric"><span>全部已校对神经元</span><strong>139,255</strong><span>包含无连接的神经元</span></div><div class="metric"><span>保留的连接表行</span><strong>16,847,997</strong><span>按神经元对与脑区汇总</span></div><div class="metric"><span>这些行代表的突触接触</span><strong>54,492,922</strong><span>官方表内的接触计数总和</span></div></div>
+<div class="note"><strong>通过了什么：</strong>完整图的 LIF 仿真、全体神经元的 CPU/CUDA 数值对照、状态恢复，以及连续运行检查。<strong>范围：</strong>使用真实解剖连接，动力学、输入和递质作用是简化假设。这不是完整果蝇行为或意识的复现，也不是训练成果。</div>
+<h2>模拟 1 秒，需要多久？</h2><p>同一台 NVIDIA A16-8Q 服务器、同一个网络和输入。预热后各测三次，以下取中位数；加载与编译单独计时。</p>
+<div class="table-scroll"><table><thead><tr><th>后端</th><th>模拟 1 秒的实际耗时</th><th>相对实时</th></tr></thead><tbody><tr><td>NumPy CPU</td><td>110.955 秒</td><td>0.01×</td></tr><tr><td>CuPy CUDA</td><td>11.552 秒</td><td>0.09×</td></tr></tbody></table></div>
+<p>本次 CUDA 吞吐为 CPU 的 <strong>9.61 倍</strong>。计时包含逐步输入上传和错误同步，不包括数据下载、模型加载、编译和网页渲染。这个数字仅适用于此配置和测试输入。</p>
+<h2>逐项核对</h2><ul><li>两份原始文件通过官方 MD5 校验；报告另存 SHA-256。</li><li>16,847,997 行原始连接全部保留，额外丢弃 0 行；最低接触数为 1。</li><li>先验证 20 步静息，再比较 200 步有活动输入；每 25 步检查全部神经元。脉冲和不应期计数完全一致，电压最大差异 0。</li><li>完整后端状态通过 JSON 往返，恢复后 30 步结果完全复现。</li><li>另外连续运行 10,000 步，即 10 秒模拟时间；每 100 步检查全部状态，未出现非有限或越界状态。</li><li>连续运行期间记录 93,609,984 次脉冲，139,254 个神经元至少放电一次。输入是人工电流，不是视觉重建。</li></ul>
+<h2>实际资源占用</h2><p>测试卡显存 7.82 GiB；结束时 CuPy 内存池在用约 200.8 MiB。这不包含驱动和全部 CUDA 上下文开销，也不代表显存峰值。进程主机内存峰值约 6.79 GiB；当前导入器使用 Python 对象，因此主机内存开销明显大于纯图数组。</p>
+<h2>开发者如何复现</h2><p>使用实验分支 <code>feat/cuda-reference</code>，按<a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/feat/cuda-reference/docs/fullbrain-validation.md">复现指南</a>下载官方数据并安装可选 CUDA 依赖。</p>
+<div class="code"><pre><code>python scripts/validate_fullbrain.py \
+  --data-dir data \
+  --output results/fullbrain.json</code></pre></div>
+<p>当前全脑入口是研究验证脚本，尚未包装成带感觉和动作语义的一键模型。常规 CPU 安装仍然 <strong>No CUDA required</strong>；正式 alpha 版本与实验分支分别标注。</p>
+<p><a class="button" href="experiments/fullbrain-cuda.json" download>下载完整 JSON 报告</a> <a class="button secondary" href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/5cb825507a05a50c0a0c7200e3c130d547f77663/scripts/validate_fullbrain.py">查看本次运行的脚本 ↗</a></p>
+<p><a href="experiments/fullbrain-hardware-gate.json">同机 CUDA 硬件测试</a> · <a href="https://zenodo.org/records/10676866">FlyWire Consortium 官方数据</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/pull/4">CUDA 开发 PR</a></p>
+<p class="small">Whole-brain connectome simulation benchmark. Full published proofread brain graph; not the entire nervous system or unproofread EM segmentation. Fixed LIF dynamics, assumed transmitter signs and incoming weight normalization. Tested on 2026-09-12T16:39:35Z.</p>
+</article></main><footer><span>flybrain-sdk · MIT code · Independent open-source project</span><a href="llms.txt">For AI tools</a></footer></div></body></html>
