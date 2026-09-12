@@ -1,6 +1,6 @@
-# Experimental CUDA backend — hardware validation pending
+# Experimental CUDA backend — A16 hardware validation passed
 
-This development branch implements a CuPy/CUDA reference backend. **It has not yet passed an actual NVIDIA-device run.** The published v0.4.0a4 remains CPU-first. CPU tests and successful import of a cloud runner do not demonstrate GPU conformance or speedup. Do not advertise production CUDA support from this branch yet.
+This development branch implements a CuPy/CUDA reference backend. **All 12 required hardware cases passed on a Vultr NVIDIA A16-2Q on 2026-09-12 UTC.** The published v0.4.0a4 remains CPU-only. This is experimental compatibility support, not a speedup claim: the 313-cell model took 2.64 seconds per simulated second on this GPU, versus 0.108 seconds on the same host CPU. See [the measured report](validation/a16-20260912.md).
 
 ## Optional installation
 
@@ -31,7 +31,7 @@ Unavailable dependencies, devices or kernel compilation raise `BackendUnavailabl
 
 ## What the implementation does
 
-- One CUDA thread owns one postsynaptic row. Stable ordering keeps original parallel-edge accumulation order. It uses float64 and disables fused multiply-add to preserve separate reference operations; conformance must still be measured.
+- One CUDA thread owns one postsynaptic row. Stable ordering keeps original parallel-edge accumulation order. It uses float64 and disables fused multiply-add to preserve separate reference operations; the reported hardware suite measures conformance.
 - The graph, voltage, spikes, refractory counters, filtered rates and silencing mask reside on one GPU. Each instance owns a stream so external CuPy stream contexts do not reorder its operations.
 - One kernel advances one tick using previous-tick spikes. It writes separate output buffers. A scalar error flag is checked before committing the tick, preserving state on nonfinite voltage errors.
 - Selected observations transfer only requested cells/fields. Full observations and checkpoints explicitly transfer full state. Restore uses the existing CPU validation rules, with temporary CPU graph/state allocation.
@@ -77,8 +77,7 @@ The draft now includes the v0.4.0a4 Godot and project-generation changes.
 `ExternalController.from_snapshot(data, backend="cpu")` explicitly restores a
 GPU checkpoint onto CPU, or vice versa with `backend="cuda"`. The new hardware
 cases compare both session and acknowledged external feedback against CPU for toy
-and real circuits, including CUDA → CPU → CUDA continuation. They remain unrun
-until NVIDIA hardware is available.
+and real circuits, including CUDA → CPU → CUDA continuation. Both cases passed on the reported A16 device.
 
 On a configured NVIDIA host, the experimental Godot bridge accepts
 `python examples/godot/bridge.py --backend cuda`. Its chosen backend applies to

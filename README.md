@@ -1,6 +1,6 @@
 # flybrain-sdk
 
-> Development branch: [experimental CUDA implementation and hardware-validation plan](docs/cuda.md). Actual NVIDIA validation is pending; the released v0.4 features described below remain CPU-based.
+> Development branch: [experimental CUDA backend](docs/cuda.md), validated on NVIDIA A16-2Q (12/12 hardware tests). Small circuits are slower on this reference GPU path. [Train an external reflex readout](examples/REFLEX_TRAINING.md). Released v0.4.0a4 is CPU-only.
 
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
@@ -23,7 +23,7 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). This development branch adds an experimental CUDA runtime; WASM remains unimplemented. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
 ## Make your own demo
 
@@ -105,7 +105,7 @@ Game movement and rendering stay in your application; see [game_loop.py](example
 | --- | --- |
 | `cpu` | Working reference implementation, NumPy edge lists, float64 |
 | `wasm` | Reserved name; raises `BackendUnavailableError` |
-| `cuda` | Reserved name; raises `BackendUnavailableError`; no CUDA dependencies |
+| `cuda` | Experimental optional CuPy runtime; 12/12 A16 hardware cases passed; unavailable without NVIDIA/CuPy |
 
 See [dynamics and backend contract](docs/architecture.md) for equations, spike timing and limitations.
 
