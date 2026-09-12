@@ -20,7 +20,6 @@ from .cpu import CPUBackend
 # and avoids nondeterministic floating-point atomic accumulation. Disable FMA to
 # preserve the reference's separate multiplication and addition operations.
 _KERNEL = r"""
-#include <math.h>
 extern "C" __global__ void lif_tick(
     int n, const long long* row, const int* pre, const double* weights,
     const double* current, const double* old_v, const unsigned char* old_spikes,
