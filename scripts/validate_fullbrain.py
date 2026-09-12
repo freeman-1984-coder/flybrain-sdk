@@ -34,6 +34,21 @@ def digest(path, algorithm="sha256"):
     return h.hexdigest()
 
 
+def map_source_ids(ids, source_ids):
+    """Match large IDs exactly; mixed uint64/int64 search may promote to float64."""
+    ids, source_ids = np.asarray(ids), np.asarray(source_ids)
+    if ids.dtype.kind not in "iu" or source_ids.dtype.kind not in "iu":
+        raise ValueError("Source neuron IDs must have integer storage")
+    if (ids < 0).any() or (source_ids < 0).any():
+        raise ValueError("Source neuron IDs must be nonnegative")
+    ids = ids.astype(np.uint64, copy=False)
+    source_ids = source_ids.astype(np.uint64, copy=False)
+    indices = np.searchsorted(ids, source_ids)
+    if (indices >= len(ids)).any() or not np.array_equal(ids[indices], source_ids):
+        raise ValueError("Source edge references an unknown neuron")
+    return indices
+
+
 def load_fullbrain(data_dir):
     import pyarrow.feather as feather
 
@@ -51,11 +66,7 @@ def load_fullbrain(data_dir):
     table = feather.read_table(data_dir / "proofread_connections_783.feather", columns=columns)
     raw_pre = table[columns[0]].to_numpy()
     raw_post = table[columns[1]].to_numpy()
-    pre, post = np.searchsorted(ids, raw_pre), np.searchsorted(ids, raw_post)
-    if (pre >= len(ids)).any() or (post >= len(ids)).any():
-        raise ValueError("Source edge references an unknown neuron")
-    if not np.array_equal(ids[pre], raw_pre) or not np.array_equal(ids[post], raw_post):
-        raise ValueError("Source edge references an unknown neuron")
+    pre, post = map_source_ids(ids, raw_pre), map_source_ids(ids, raw_post)
     counts = table["syn_count"].to_numpy().astype(np.int64)
     if (counts <= 0).any():
         raise ValueError("Source synapse counts must be positive")
