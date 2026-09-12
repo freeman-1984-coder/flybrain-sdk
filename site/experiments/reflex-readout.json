@@ -1,0 +1,19 @@
+{
+  "format": "flybrain-external-reflex-readout-v1",
+  "neuron_ids": [
+    "10010",
+    "10001"
+  ],
+  "scale_hz": 100,
+  "bias_feature": 1,
+  "weights": [
+    1.519173498105741,
+    -1.5165301881263553,
+    -0.047701659405415736
+  ],
+  "model_fingerprint": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+  "actions": [
+    "left",
+    "right"
+  ]
+}

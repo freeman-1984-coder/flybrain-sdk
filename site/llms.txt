@@ -21,8 +21,15 @@ Also working: Godot 4 CPU scene and reusable ExternalController offer/ack bounda
 Start examples/godot/bridge.py, then open examples/godot/project.godot in Godot.
 Raw MaleCNS/FlyWire downloads also remain available.
 Not yet implemented: calibrated biological models, full-brain real-time guarantees,
-WASM/CUDA runtimes, learning or plasticity. No PyPI or NPM publication yet.
+WASM, biological learning or plasticity. No PyPI or NPM publication yet.
 
+Experimental development branch (not v0.4.0a4): optional CuPy CUDA backend passed
+12/12 actual NVIDIA A16-2Q hardware tests. Small circuits are slower on CUDA.
+Reflex School trains only a three-weight external readout on fixed 313-cell
+MaleCNS dynamics: 50% to 100% on 80 balanced held-out two-choice trials.
+It is a limited resetting task, not biological plasticity or general game skill.
+
+- [Reflex School recorded learning experiment](https://freeman-1984-coder.github.io/flybrain-sdk/reflex.html)
 - [Godot CPU adapter](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html#godot)
 - [Godot integration reference](https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/examples/godot/README.md)
 - [Live game sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html)
