@@ -9,7 +9,6 @@ import gc
 import hashlib
 import json
 import platform
-import resource
 import time
 from pathlib import Path
 
@@ -291,7 +290,11 @@ def main():
         }
         report["gpu_pool_used_bytes"] = cp.get_default_memory_pool().used_bytes()
         report["gpu_pool_reserved_bytes"] = cp.get_default_memory_pool().total_bytes()
-        report["host_peak_rss_kib_linux"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        report["host_peak_rss_kib_linux"] = None
+        if platform.system() == "Linux":
+            import resource
+
+            report["host_peak_rss_kib_linux"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         report["status"] = "passed"
     except Exception as exc:
         report["status"] = "failed"

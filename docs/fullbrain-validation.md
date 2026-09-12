@@ -5,6 +5,10 @@ row in the official proofread connections table. It uses the SDK's actual
 `Connectome`, `CPUBackend`, and `CUDABackend`, without replacing their execution
 paths. No neuron selection, minimum-count pruning, or synthetic graph is used.
 
+The pinned source contains **16,847,997 neuron-pair/neuropil rows**, representing
+**54,492,922 synaptic contacts**. Multiple rows may connect the same pair in
+different neuropils. All endpoints match the official 139,255-neuron list.
+
 ## Reproduce on an NVIDIA host
 
 Use the experimental CUDA branch. A 32 GB system-memory host gives headroom for
@@ -25,6 +29,11 @@ Download source: [FlyWire Consortium, v783.0, Zenodo](https://zenodo.org/records
 The runner checks both published MD5 values, then records SHA-256 values and byte
 sizes. A missing or different file fails the test. The raw data are not bundled
 in the package or redistributed by this repository.
+
+The neuron list stores IDs as `uint64`, while the connection table uses `int64`.
+Normalize both to the same integer type before lookup: mixed signed/unsigned
+NumPy searches can promote large IDs to `float64` and lose their identity. The
+runner rejects floating-point IDs and includes regression cases above 2^53.
 
 ## What is checked
 
