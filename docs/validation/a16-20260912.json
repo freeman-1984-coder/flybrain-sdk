@@ -1,0 +1,141 @@
+{
+  "format": "flybrain-cuda-validation",
+  "schema_version": 1,
+  "status": "passed",
+  "started_at": "2026-09-12T15:00:22.452207+00:00",
+  "source_sha256": {
+    "scripts/validate_cuda.py": "113060288dc4865065542870ba102d085785327edcb6a6eb7a781e47a0528dea",
+    "src/flybrain/__init__.py": "de9596a06a4de0a04303795a10ae0a6d8cbbc7705a5e60ad566b4c1bfad65971",
+    "src/flybrain/__main__.py": "c125d73bf421cac3c6a8f4185ae56516db20cc91831e006c42c544c7b873dfb9",
+    "src/flybrain/backends/__init__.py": "6c94a5cc4be4916e569562041036a6e169b13b228d2bc2dffc0494cff90bd64a",
+    "src/flybrain/backends/base.py": "bb28e7aa30f3cb3b676243e6e3767242d5daa27458b5e5a96b218232aaa1de81",
+    "src/flybrain/backends/cpu.py": "20ff6d342efe088f161b800f825175b77b754e42378e7879e6ff5007da5fe11a",
+    "src/flybrain/backends/cuda.py": "da6f944b0075733d668615ec73f2822cdf740d404d06d2e8309afec1a63b9e9b",
+    "src/flybrain/brain.py": "e9ea19aea644bcbdcc686b6e79ee5767f4c620cdeb063cf69fd7a014a87e9450",
+    "src/flybrain/config.py": "a7f274ce09c28701db19b4dec154b30771890e9ac6a8527ddcc7f6d68e6d29b8",
+    "src/flybrain/data/__init__.py": "6b42fe29f9b5a6f3e309d4fd947212a6a49b92c095e9f815519360dc14924790",
+    "src/flybrain/demos.py": "ad45e3a91920affae56b74f2b3d2d1d0b8eab41d705acf3ccd4fbba8b8a5cee6",
+    "src/flybrain/drive.py": "b018bcf2c820ef58ab160204890b465c0702bfba6ca75c65f2d1b33ebb9cac24",
+    "src/flybrain/errors.py": "fcded1de58450030889fa069c4fa9f924344accc92418f8e93099639744f2b0d",
+    "src/flybrain/experiment.py": "ae423d017ad86e5fd1d2c49c6c33b73c6d2a339a7e299c25d1195cb2ac10d03c",
+    "src/flybrain/external.py": "8b853fe406607bc13c2680e3d686c0b6ca6fc470328a0dbcdce4590f72585f34",
+    "src/flybrain/importers/__init__.py": "d6171134397cf1089cc14419f114172a77863ca90c83bc8cb6780dcb3cc74394",
+    "src/flybrain/importers/malecns.py": "f0b1fda6403807f127eb839510f66cc567143535a479446e66ed8bcfdea6507d",
+    "src/flybrain/model.py": "4ee80b0dc5cc9b8d31067b7817e42b273660cdd7b2ac469eae7146a027824173",
+    "src/flybrain/motor.py": "7dac900576636fb267e5a4a9578731bf5b541e8ea5baf747476fe56db29c8026",
+    "src/flybrain/neurons.py": "9cfb9c65e7940ec3e930273a00b15417615a486a348aef362ec4760067233690",
+    "src/flybrain/projects.py": "ec85f320ac654d11da885d72825ede716b25be2d6d1d7d91795e78db8252a3f2",
+    "src/flybrain/registry.py": "503d2eb6e9124b3c2fe7452f4ca8edd1f5128d135a0a406d1c902bf01cb0ef81",
+    "src/flybrain/sensory.py": "13403eb880fc7c04496d8f5a0405d7b7c116f19b0a69887dff25368c5d291dd3",
+    "src/flybrain/session.py": "0e04b67cc0f32f4d5b109b2e8bfdb9082d0f27e295df2718b5a597f8a2e3192a",
+    "src/flybrain/viewer.py": "26d71040003ac8deff35bd5c0fb42be9d47a0af49a41754795b20fb608910cad",
+    "tests/test_cuda_hardware.py": "16ec1436ca16842edcc095a249e061ed797c94d644dcf428ee20399fca6bc102"
+  },
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "cupy": "14.2.0",
+    "device": "NVIDIA A16-2Q",
+    "compute_capability": [
+      8,
+      6
+    ],
+    "device_memory_bytes": 1964965888,
+    "cuda_driver": 12040,
+    "cuda_runtime": 12090
+  },
+  "conformance": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "benchmarks": [
+    {
+      "model": "toy-v1",
+      "fingerprint": "ba1701cf092e8b6acb8d36aa70f86f46b4521e4bb5f6f463efb3d8824b4bac6c",
+      "neurons": 12,
+      "edges": 12,
+      "config": {
+        "dt_ms": 1.0,
+        "tau_ms": 10.0,
+        "rest": 0.0,
+        "reset": 0.0,
+        "threshold": 1.0,
+        "refractory_ms": 2.0,
+        "input_gain": 2.0,
+        "rate_tau_ms": 50.0,
+        "action_rate_hz": 100.0
+      },
+      "simulated_ms_per_repeat": 1000,
+      "warmup_ms": 100,
+      "timings": {
+        "cpu_load_seconds": 0.0002442290000317371,
+        "cpu": {
+          "seconds": [
+            0.02785182699994948,
+            0.02760493999994651,
+            0.027172675999963758
+          ],
+          "median_seconds": 0.02760493999994651
+        },
+        "cuda_load_seconds": 0.12077638699997806,
+        "cuda": {
+          "seconds": [
+            2.557725829999981,
+            2.629756971000006,
+            2.527393785999948
+          ],
+          "median_seconds": 2.557725829999981
+        }
+      }
+    },
+    {
+      "model": "male-cns-escape-v1",
+      "fingerprint": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+      "neurons": 313,
+      "edges": 20607,
+      "config": {
+        "dt_ms": 1.0,
+        "tau_ms": 10.0,
+        "rest": 0.0,
+        "reset": 0.0,
+        "threshold": 1.0,
+        "refractory_ms": 2.0,
+        "input_gain": 2.0,
+        "rate_tau_ms": 50.0,
+        "action_rate_hz": 100.0
+      },
+      "simulated_ms_per_repeat": 1000,
+      "warmup_ms": 100,
+      "timings": {
+        "cpu_load_seconds": 0.1308009670000274,
+        "cpu": {
+          "seconds": [
+            0.11087149200000113,
+            0.10837631200001852,
+            0.10773501699998178
+          ],
+          "median_seconds": 0.10837631200001852
+        },
+        "cuda_load_seconds": 0.11967941799991877,
+        "cuda": {
+          "seconds": [
+            2.63953883399995,
+            2.582605983999997,
+            2.640352118999999
+          ],
+          "median_seconds": 2.63953883399995
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Correctness-first CUDA: host current upload and scalar synchronization each tick.",
+    "These timings cover only toy and 313-cell circuit, not whole-brain scaling.",
+    "Loading/compilation reported separately; execution includes inputs and action readout.",
+    "Conformance applies to tested cases and reported device/software, not all CUDA hardware."
+  ],
+  "finished_at": "2026-09-12T15:01:02.554374+00:00"
+}

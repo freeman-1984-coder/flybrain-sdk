@@ -1,0 +1,849 @@
+{
+  "status": "passed",
+  "started_utc": "2026-09-12T16:39:35Z",
+  "python": "3.12.3",
+  "numpy": "2.5.3",
+  "script_sha256": "12bfd2df4a80be66cc75183a75f06eebcb1f46b9a160ed82472f004800cd5d41",
+  "config": {
+    "dt_ms": 1.0,
+    "tau_ms": 10.0,
+    "rest": 0.0,
+    "reset": 0.0,
+    "threshold": 1.0,
+    "refractory_ms": 2.0,
+    "input_gain": 2.0,
+    "rate_tau_ms": 50.0,
+    "action_rate_hz": 100.0
+  },
+  "model": {
+    "dataset": "FlyWire v783 / Zenodo 10676866",
+    "source_url": "https://zenodo.org/records/10676866",
+    "sources": {
+      "proofread_root_ids_783.npy": {
+        "md5": "e0e6c19732fd8c7a4e39a2d170105421",
+        "sha256": "7c7b7e818e9232e5ab64793d52ba20574dbe9da3a6509fbc74193b0f259a01be",
+        "bytes": 1114168
+      },
+      "proofread_connections_783.feather": {
+        "md5": "f48f972d262323a102aed49af1396b8a",
+        "sha256": "24f960ae3e7d4f8cd30db3b62e99fb5179cc3d1e76d8c155bfb441e9737d3faf",
+        "bytes": 852022274
+      }
+    },
+    "neurons": 139255,
+    "source_rows": 16847997,
+    "retained_rows": 16847997,
+    "discarded_rows": 0,
+    "synaptic_contacts": 54492922,
+    "rows_are": "neuron-pair/neuropil aggregates, retained as parallel weighted edges",
+    "isolated_neurons": 616,
+    "nt_score_nonfinite_entries": 10392,
+    "neurons_without_nt_evidence": 1250,
+    "assumed_sign_counts": {
+      "positive": 95386,
+      "negative": 43869
+    },
+    "weight_policy": "incoming abs-sum 2.5; GABA/GLUT negative, others/unknown positive",
+    "minimum_contacts": 1,
+    "additional_pruning": false,
+    "graph_arrays_sha256": "bd02d6a2c8a5a4a27cf482fbb333648babe7aa1747952674a25694be6cc41f5c"
+  },
+  "model_load_seconds": 63.94955811400007,
+  "cpu_init_seconds": 3.273527094999963,
+  "cuda_init_and_compile_seconds": 6.7739249129999735,
+  "device": {
+    "name": "NVIDIA A16-8Q",
+    "memory_bytes": 8394047488,
+    "cupy": "14.2.0",
+    "driver": 12040,
+    "runtime": 12090
+  },
+  "cuda_kernel_sha256": "da6f944b0075733d668615ec73f2822cdf740d404d06d2e8309afec1a63b9e9b",
+  "rest_check": "20 ticks; all neurons at rest, no spikes",
+  "parity": {
+    "ticks": 200,
+    "all_neurons_compared_every": 25,
+    "exact_spikes_and_refractory": true,
+    "atol": 1e-10,
+    "total_spikes": 1863638,
+    "checks": [
+      {
+        "tick": 45,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 70,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 95,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 120,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 145,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 170,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 195,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      },
+      {
+        "tick": 220,
+        "voltage": 0.0,
+        "rates_hz": 0.0
+      }
+    ]
+  },
+  "checkpoint_replay_exact": true,
+  "timings": {
+    "cpu": {
+      "wall_seconds": [
+        110.95522328200002,
+        110.81536086300014,
+        113.70247338600007
+      ],
+      "median_seconds": 110.95522328200002,
+      "simulated_ms_per_repeat": 1000,
+      "warmup_ticks": 100,
+      "includes": "SDK step, host input upload and per-tick error sync"
+    },
+    "cuda": {
+      "wall_seconds": [
+        11.551658382000142,
+        11.55760231399995,
+        11.549266215999978
+      ],
+      "median_seconds": 11.551658382000142,
+      "simulated_ms_per_repeat": 1000,
+      "warmup_ticks": 100,
+      "includes": "SDK step, host input upload and per-tick error sync"
+    }
+  },
+  "stability": {
+    "ticks": 10000,
+    "simulated_ms": 10000,
+    "wall_seconds_including_observation": 122.0339100839999,
+    "total_spikes": 93609984,
+    "ever_spiking_neurons": 139254,
+    "trace": [
+      {
+        "tick": 3450,
+        "voltage_min": -0.11559652259505011,
+        "voltage_max": 0.9999895975010603,
+        "mean_rate_hz": 67.06434093072953,
+        "spiking_neurons": 9954
+      },
+      {
+        "tick": 3550,
+        "voltage_min": -0.08183970444976454,
+        "voltage_max": 0.9999855442040886,
+        "mean_rate_hz": 67.31109008337248,
+        "spiking_neurons": 10455
+      },
+      {
+        "tick": 3650,
+        "voltage_min": -0.06286764324206404,
+        "voltage_max": 0.9999805083223539,
+        "mean_rate_hz": 67.2512843650405,
+        "spiking_neurons": 9951
+      },
+      {
+        "tick": 3750,
+        "voltage_min": -0.11745189490049097,
+        "voltage_max": 0.9999952816834452,
+        "mean_rate_hz": 67.35758989498028,
+        "spiking_neurons": 10186
+      },
+      {
+        "tick": 3850,
+        "voltage_min": -0.04616095464256996,
+        "voltage_max": 0.9999942284270661,
+        "mean_rate_hz": 67.22809650682696,
+        "spiking_neurons": 8925
+      },
+      {
+        "tick": 3950,
+        "voltage_min": -0.007009385116817967,
+        "voltage_max": 0.9999986690501007,
+        "mean_rate_hz": 67.19958574064901,
+        "spiking_neurons": 9730
+      },
+      {
+        "tick": 4050,
+        "voltage_min": -0.044506418753874774,
+        "voltage_max": 0.9999951806205629,
+        "mean_rate_hz": 67.34036686161755,
+        "spiking_neurons": 10501
+      },
+      {
+        "tick": 4150,
+        "voltage_min": -0.04505158655941583,
+        "voltage_max": 0.9999816411409089,
+        "mean_rate_hz": 67.18654480380874,
+        "spiking_neurons": 10014
+      },
+      {
+        "tick": 4250,
+        "voltage_min": -0.07875496389674917,
+        "voltage_max": 0.9999980287483852,
+        "mean_rate_hz": 67.24529152473103,
+        "spiking_neurons": 9961
+      },
+      {
+        "tick": 4350,
+        "voltage_min": -0.04736940171429964,
+        "voltage_max": 0.9999966045808074,
+        "mean_rate_hz": 67.0933686400383,
+        "spiking_neurons": 8844
+      },
+      {
+        "tick": 4450,
+        "voltage_min": -0.052571104472888354,
+        "voltage_max": 0.9999984261276116,
+        "mean_rate_hz": 67.07703919699696,
+        "spiking_neurons": 9925
+      },
+      {
+        "tick": 4550,
+        "voltage_min": -0.07777007824024756,
+        "voltage_max": 0.9999890797056991,
+        "mean_rate_hz": 67.29155923037514,
+        "spiking_neurons": 10338
+      },
+      {
+        "tick": 4650,
+        "voltage_min": -0.07831540385875636,
+        "voltage_max": 0.99999375592485,
+        "mean_rate_hz": 67.26288618192817,
+        "spiking_neurons": 9989
+      },
+      {
+        "tick": 4750,
+        "voltage_min": -0.10053549289188887,
+        "voltage_max": 0.9999889628571436,
+        "mean_rate_hz": 67.37750588031031,
+        "spiking_neurons": 10181
+      },
+      {
+        "tick": 4850,
+        "voltage_min": -0.10608450356278502,
+        "voltage_max": 0.9999986090582871,
+        "mean_rate_hz": 67.21681196307753,
+        "spiking_neurons": 8840
+      },
+      {
+        "tick": 4950,
+        "voltage_min": -0.027146605660307202,
+        "voltage_max": 0.9999993604464132,
+        "mean_rate_hz": 67.17094616325474,
+        "spiking_neurons": 9754
+      },
+      {
+        "tick": 5050,
+        "voltage_min": -0.04397753563072931,
+        "voltage_max": 0.999982590661741,
+        "mean_rate_hz": 67.37565417157613,
+        "spiking_neurons": 10477
+      },
+      {
+        "tick": 5150,
+        "voltage_min": -0.08616274543423365,
+        "voltage_max": 0.9999949345323343,
+        "mean_rate_hz": 67.17790689126392,
+        "spiking_neurons": 9721
+      },
+      {
+        "tick": 5250,
+        "voltage_min": -0.046711955288540476,
+        "voltage_max": 0.9999991512374585,
+        "mean_rate_hz": 67.23139424304442,
+        "spiking_neurons": 10082
+      },
+      {
+        "tick": 5350,
+        "voltage_min": -0.02476119733948481,
+        "voltage_max": 0.999986427960802,
+        "mean_rate_hz": 67.07299011220921,
+        "spiking_neurons": 8691
+      },
+      {
+        "tick": 5450,
+        "voltage_min": -0.0996224376520764,
+        "voltage_max": 0.9999941249940852,
+        "mean_rate_hz": 67.0427422768387,
+        "spiking_neurons": 9723
+      },
+      {
+        "tick": 5550,
+        "voltage_min": -0.10977285002379454,
+        "voltage_max": 0.9999981131552123,
+        "mean_rate_hz": 67.32428193758479,
+        "spiking_neurons": 10487
+      },
+      {
+        "tick": 5650,
+        "voltage_min": -0.0833817539242762,
+        "voltage_max": 0.9999890795310341,
+        "mean_rate_hz": 67.25515676831881,
+        "spiking_neurons": 9859
+      },
+      {
+        "tick": 5750,
+        "voltage_min": -0.06949309069751593,
+        "voltage_max": 0.9999927215966372,
+        "mean_rate_hz": 67.36228280602525,
+        "spiking_neurons": 10046
+      },
+      {
+        "tick": 5850,
+        "voltage_min": -0.058250811231086476,
+        "voltage_max": 0.9999992750923041,
+        "mean_rate_hz": 67.2240088142249,
+        "spiking_neurons": 8713
+      },
+      {
+        "tick": 5950,
+        "voltage_min": -0.035571498865049504,
+        "voltage_max": 0.9999996358511132,
+        "mean_rate_hz": 67.20242522500871,
+        "spiking_neurons": 9867
+      },
+      {
+        "tick": 6050,
+        "voltage_min": -0.04397753563072931,
+        "voltage_max": 0.9999936256837443,
+        "mean_rate_hz": 67.33517765874498,
+        "spiking_neurons": 10398
+      },
+      {
+        "tick": 6150,
+        "voltage_min": -0.07275338541136224,
+        "voltage_max": 0.999991313174541,
+        "mean_rate_hz": 67.18259044945907,
+        "spiking_neurons": 9959
+      },
+      {
+        "tick": 6250,
+        "voltage_min": -0.020539511691826468,
+        "voltage_max": 0.9999985019482293,
+        "mean_rate_hz": 67.2604855251281,
+        "spiking_neurons": 10194
+      },
+      {
+        "tick": 6350,
+        "voltage_min": -0.08280797433980508,
+        "voltage_max": 0.9999990772188605,
+        "mean_rate_hz": 67.08445042876814,
+        "spiking_neurons": 8617
+      },
+      {
+        "tick": 6450,
+        "voltage_min": -0.11099340921470113,
+        "voltage_max": 0.9999984263525178,
+        "mean_rate_hz": 67.05034794052928,
+        "spiking_neurons": 9717
+      },
+      {
+        "tick": 6550,
+        "voltage_min": -0.10719728933524277,
+        "voltage_max": 0.9999978484989671,
+        "mean_rate_hz": 67.30034245320799,
+        "spiking_neurons": 10450
+      },
+      {
+        "tick": 6650,
+        "voltage_min": -0.12894936694250106,
+        "voltage_max": 0.999994916205347,
+        "mean_rate_hz": 67.2416533818782,
+        "spiking_neurons": 9826
+      },
+      {
+        "tick": 6750,
+        "voltage_min": -0.08992878475815315,
+        "voltage_max": 0.9999880991122568,
+        "mean_rate_hz": 67.39993289989418,
+        "spiking_neurons": 10202
+      },
+      {
+        "tick": 6850,
+        "voltage_min": -0.10495258930783062,
+        "voltage_max": 0.9999768642451157,
+        "mean_rate_hz": 67.24656586925937,
+        "spiking_neurons": 8914
+      },
+      {
+        "tick": 6950,
+        "voltage_min": -0.007009385116817967,
+        "voltage_max": 0.9999957225491628,
+        "mean_rate_hz": 67.18299853632055,
+        "spiking_neurons": 9736
+      },
+      {
+        "tick": 7050,
+        "voltage_min": -0.04954967912757604,
+        "voltage_max": 0.9999911980160259,
+        "mean_rate_hz": 67.34899532516216,
+        "spiking_neurons": 10371
+      },
+      {
+        "tick": 7150,
+        "voltage_min": -0.08616274543423365,
+        "voltage_max": 0.9999909483427109,
+        "mean_rate_hz": 67.166285979015,
+        "spiking_neurons": 9863
+      },
+      {
+        "tick": 7250,
+        "voltage_min": -0.07875496389674917,
+        "voltage_max": 0.9999992669599813,
+        "mean_rate_hz": 67.23073792079948,
+        "spiking_neurons": 9924
+      },
+      {
+        "tick": 7350,
+        "voltage_min": -0.014830058968063504,
+        "voltage_max": 0.9999999717035446,
+        "mean_rate_hz": 67.08798690843696,
+        "spiking_neurons": 8763
+      },
+      {
+        "tick": 7450,
+        "voltage_min": -0.06141388743841219,
+        "voltage_max": 0.999984855792077,
+        "mean_rate_hz": 67.0575403650876,
+        "spiking_neurons": 9978
+      },
+      {
+        "tick": 7550,
+        "voltage_min": -0.07396865644485408,
+        "voltage_max": 0.9999945581094432,
+        "mean_rate_hz": 67.34020129191529,
+        "spiking_neurons": 10311
+      },
+      {
+        "tick": 7650,
+        "voltage_min": -0.0833817539242762,
+        "voltage_max": 0.9999968979400824,
+        "mean_rate_hz": 67.23566982430545,
+        "spiking_neurons": 9922
+      },
+      {
+        "tick": 7750,
+        "voltage_min": -0.09876404923209182,
+        "voltage_max": 0.9999965103547386,
+        "mean_rate_hz": 67.36788059406759,
+        "spiking_neurons": 10167
+      },
+      {
+        "tick": 7850,
+        "voltage_min": -0.051840833833350496,
+        "voltage_max": 0.9999844557210624,
+        "mean_rate_hz": 67.24712199332984,
+        "spiking_neurons": 8824
+      },
+      {
+        "tick": 7950,
+        "voltage_min": -0.08548808362908906,
+        "voltage_max": 0.9999958053486002,
+        "mean_rate_hz": 67.19423789909725,
+        "spiking_neurons": 9675
+      },
+      {
+        "tick": 8050,
+        "voltage_min": -0.04397753563072931,
+        "voltage_max": 0.9999762159595846,
+        "mean_rate_hz": 67.36469788395941,
+        "spiking_neurons": 10427
+      },
+      {
+        "tick": 8150,
+        "voltage_min": -0.10810261849745807,
+        "voltage_max": 0.999979290022849,
+        "mean_rate_hz": 67.18949405592127,
+        "spiking_neurons": 9937
+      },
+      {
+        "tick": 8250,
+        "voltage_min": -0.0772381161464117,
+        "voltage_max": 0.9999998955755657,
+        "mean_rate_hz": 67.26271273407194,
+        "spiking_neurons": 9918
+      },
+      {
+        "tick": 8350,
+        "voltage_min": -0.04736940171429964,
+        "voltage_max": 0.9999972788496558,
+        "mean_rate_hz": 67.08526524299982,
+        "spiking_neurons": 8781
+      },
+      {
+        "tick": 8450,
+        "voltage_min": -0.06141388743841219,
+        "voltage_max": 0.9999966168431719,
+        "mean_rate_hz": 67.06982981681674,
+        "spiking_neurons": 10035
+      },
+      {
+        "tick": 8550,
+        "voltage_min": -0.0915510085787222,
+        "voltage_max": 0.9999992625753078,
+        "mean_rate_hz": 67.30542968561147,
+        "spiking_neurons": 10474
+      },
+      {
+        "tick": 8650,
+        "voltage_min": -0.0833817539242762,
+        "voltage_max": 0.9999963036109479,
+        "mean_rate_hz": 67.25780241078981,
+        "spiking_neurons": 10015
+      },
+      {
+        "tick": 8750,
+        "voltage_min": -0.10735465867553078,
+        "voltage_max": 0.999994769891315,
+        "mean_rate_hz": 67.36336523024579,
+        "spiking_neurons": 10047
+      },
+      {
+        "tick": 8850,
+        "voltage_min": -0.05266316207744447,
+        "voltage_max": 0.9999961690120307,
+        "mean_rate_hz": 67.21779708432953,
+        "spiking_neurons": 8799
+      },
+      {
+        "tick": 8950,
+        "voltage_min": -0.09871200772911162,
+        "voltage_max": 0.9999999576148549,
+        "mean_rate_hz": 67.18804880423662,
+        "spiking_neurons": 9750
+      },
+      {
+        "tick": 9050,
+        "voltage_min": -0.13497190419999883,
+        "voltage_max": 0.9999988842493814,
+        "mean_rate_hz": 67.36698696234788,
+        "spiking_neurons": 10410
+      },
+      {
+        "tick": 9150,
+        "voltage_min": -0.06250751022993142,
+        "voltage_max": 0.9999841609918578,
+        "mean_rate_hz": 67.19537013988999,
+        "spiking_neurons": 9906
+      },
+      {
+        "tick": 9250,
+        "voltage_min": -0.07460402008060693,
+        "voltage_max": 0.9999992636777408,
+        "mean_rate_hz": 67.23868683775794,
+        "spiking_neurons": 10155
+      },
+      {
+        "tick": 9350,
+        "voltage_min": -0.06934792704136233,
+        "voltage_max": 0.9999943261798601,
+        "mean_rate_hz": 67.10638817435192,
+        "spiking_neurons": 8847
+      },
+      {
+        "tick": 9450,
+        "voltage_min": -0.08136418674870047,
+        "voltage_max": 0.9999950999238683,
+        "mean_rate_hz": 67.06669291885196,
+        "spiking_neurons": 9839
+      },
+      {
+        "tick": 9550,
+        "voltage_min": -0.04431331341574976,
+        "voltage_max": 0.9999933297187442,
+        "mean_rate_hz": 67.32301496735829,
+        "spiking_neurons": 10427
+      },
+      {
+        "tick": 9650,
+        "voltage_min": -0.05510759509734852,
+        "voltage_max": 0.999997452893792,
+        "mean_rate_hz": 67.26290317929494,
+        "spiking_neurons": 9836
+      },
+      {
+        "tick": 9750,
+        "voltage_min": -0.06640445903007341,
+        "voltage_max": 0.999992800647332,
+        "mean_rate_hz": 67.34595007829788,
+        "spiking_neurons": 9992
+      },
+      {
+        "tick": 9850,
+        "voltage_min": -0.058250811231086476,
+        "voltage_max": 0.9999946051328612,
+        "mean_rate_hz": 67.22708344830951,
+        "spiking_neurons": 8811
+      },
+      {
+        "tick": 9950,
+        "voltage_min": -0.007099497637813796,
+        "voltage_max": 0.9999921634166189,
+        "mean_rate_hz": 67.17719804923108,
+        "spiking_neurons": 9707
+      },
+      {
+        "tick": 10050,
+        "voltage_min": -0.08707899121647422,
+        "voltage_max": 0.9999913432550146,
+        "mean_rate_hz": 67.3440373303788,
+        "spiking_neurons": 10588
+      },
+      {
+        "tick": 10150,
+        "voltage_min": -0.08616274543423365,
+        "voltage_max": 0.9999993884359698,
+        "mean_rate_hz": 67.19354884529947,
+        "spiking_neurons": 10003
+      },
+      {
+        "tick": 10250,
+        "voltage_min": -0.07875496389674917,
+        "voltage_max": 0.9999969411128979,
+        "mean_rate_hz": 67.22224439453468,
+        "spiking_neurons": 9908
+      },
+      {
+        "tick": 10350,
+        "voltage_min": -0.10100243478366089,
+        "voltage_max": 0.9999954086854559,
+        "mean_rate_hz": 67.05995529336958,
+        "spiking_neurons": 8753
+      },
+      {
+        "tick": 10450,
+        "voltage_min": -0.03234725190129081,
+        "voltage_max": 0.9999882082715861,
+        "mean_rate_hz": 67.07509593564131,
+        "spiking_neurons": 10062
+      },
+      {
+        "tick": 10550,
+        "voltage_min": -0.047492329526488096,
+        "voltage_max": 0.9999985352994518,
+        "mean_rate_hz": 67.3224282823795,
+        "spiking_neurons": 10771
+      },
+      {
+        "tick": 10650,
+        "voltage_min": -0.0833817539242762,
+        "voltage_max": 0.9999908577762435,
+        "mean_rate_hz": 67.27061219001918,
+        "spiking_neurons": 9824
+      },
+      {
+        "tick": 10750,
+        "voltage_min": -0.09876404923209182,
+        "voltage_max": 0.9999995491460596,
+        "mean_rate_hz": 67.3740684333729,
+        "spiking_neurons": 10003
+      },
+      {
+        "tick": 10850,
+        "voltage_min": -0.07004505864590575,
+        "voltage_max": 0.9999821247527001,
+        "mean_rate_hz": 67.251239504972,
+        "spiking_neurons": 9016
+      },
+      {
+        "tick": 10950,
+        "voltage_min": -0.09110781578006885,
+        "voltage_max": 0.999996811150991,
+        "mean_rate_hz": 67.1931680632551,
+        "spiking_neurons": 9611
+      },
+      {
+        "tick": 11050,
+        "voltage_min": -0.07843184823956384,
+        "voltage_max": 0.9999980926662775,
+        "mean_rate_hz": 67.34722597042162,
+        "spiking_neurons": 10508
+      },
+      {
+        "tick": 11150,
+        "voltage_min": -0.08339485528609608,
+        "voltage_max": 0.99997858076323,
+        "mean_rate_hz": 67.1761817224516,
+        "spiking_neurons": 10011
+      },
+      {
+        "tick": 11250,
+        "voltage_min": -0.0772381161464117,
+        "voltage_max": 0.9999914188340859,
+        "mean_rate_hz": 67.22466263793778,
+        "spiking_neurons": 9892
+      },
+      {
+        "tick": 11350,
+        "voltage_min": -0.06210928763105778,
+        "voltage_max": 0.9999877394897115,
+        "mean_rate_hz": 67.08617917872073,
+        "spiking_neurons": 8774
+      },
+      {
+        "tick": 11450,
+        "voltage_min": -0.0604872504889828,
+        "voltage_max": 0.9999935557474546,
+        "mean_rate_hz": 67.06623477061119,
+        "spiking_neurons": 9786
+      },
+      {
+        "tick": 11550,
+        "voltage_min": -0.08858240133287115,
+        "voltage_max": 0.9999834129754329,
+        "mean_rate_hz": 67.32861492014412,
+        "spiking_neurons": 10604
+      },
+      {
+        "tick": 11650,
+        "voltage_min": -0.011434709425217283,
+        "voltage_max": 0.9999992872420616,
+        "mean_rate_hz": 67.26430129196291,
+        "spiking_neurons": 9911
+      },
+      {
+        "tick": 11750,
+        "voltage_min": -0.11745189490049097,
+        "voltage_max": 0.9999905396763037,
+        "mean_rate_hz": 67.36869963651105,
+        "spiking_neurons": 10047
+      },
+      {
+        "tick": 11850,
+        "voltage_min": -0.04616095464256996,
+        "voltage_max": 0.9999954037871843,
+        "mean_rate_hz": 67.22569235469207,
+        "spiking_neurons": 8874
+      },
+      {
+        "tick": 11950,
+        "voltage_min": -0.052186389686812724,
+        "voltage_max": 0.9999984232425193,
+        "mean_rate_hz": 67.17460285187822,
+        "spiking_neurons": 9803
+      },
+      {
+        "tick": 12050,
+        "voltage_min": -0.13497190419999883,
+        "voltage_max": 0.9999616744021302,
+        "mean_rate_hz": 67.35082166382736,
+        "spiking_neurons": 10384
+      },
+      {
+        "tick": 12150,
+        "voltage_min": -0.10290370669585,
+        "voltage_max": 0.9999951978399144,
+        "mean_rate_hz": 67.17887068289798,
+        "spiking_neurons": 9910
+      },
+      {
+        "tick": 12250,
+        "voltage_min": -0.07460402008060693,
+        "voltage_max": 0.9999998873943549,
+        "mean_rate_hz": 67.27338958612656,
+        "spiking_neurons": 10140
+      },
+      {
+        "tick": 12350,
+        "voltage_min": -0.09946971130878592,
+        "voltage_max": 0.999990645786353,
+        "mean_rate_hz": 67.06467325989254,
+        "spiking_neurons": 8675
+      },
+      {
+        "tick": 12450,
+        "voltage_min": -0.0996224376520764,
+        "voltage_max": 0.9999988580790913,
+        "mean_rate_hz": 67.0345934461271,
+        "spiking_neurons": 9867
+      },
+      {
+        "tick": 12550,
+        "voltage_min": -0.04010743959688938,
+        "voltage_max": 0.9999951069626082,
+        "mean_rate_hz": 67.30628000665028,
+        "spiking_neurons": 10429
+      },
+      {
+        "tick": 12650,
+        "voltage_min": -0.05510759509734852,
+        "voltage_max": 0.9999586159046434,
+        "mean_rate_hz": 67.23818815300999,
+        "spiking_neurons": 10009
+      },
+      {
+        "tick": 12750,
+        "voltage_min": -0.10104365072232922,
+        "voltage_max": 0.9999995233336846,
+        "mean_rate_hz": 67.3851941877823,
+        "spiking_neurons": 10018
+      },
+      {
+        "tick": 12850,
+        "voltage_min": -0.10158374963349073,
+        "voltage_max": 0.9999865120046632,
+        "mean_rate_hz": 67.26172198238622,
+        "spiking_neurons": 8945
+      },
+      {
+        "tick": 12950,
+        "voltage_min": -0.08721447324655712,
+        "voltage_max": 0.9999984232425193,
+        "mean_rate_hz": 67.18538002831895,
+        "spiking_neurons": 9847
+      },
+      {
+        "tick": 13050,
+        "voltage_min": -0.059184003604404,
+        "voltage_max": 0.9999996851586218,
+        "mean_rate_hz": 67.36587414265962,
+        "spiking_neurons": 10525
+      },
+      {
+        "tick": 13150,
+        "voltage_min": -0.08339485528609608,
+        "voltage_max": 0.9999965392663772,
+        "mean_rate_hz": 67.14961423382998,
+        "spiking_neurons": 9937
+      },
+      {
+        "tick": 13250,
+        "voltage_min": -0.07875496389674917,
+        "voltage_max": 0.9999986217992124,
+        "mean_rate_hz": 67.25223226842579,
+        "spiking_neurons": 9932
+      },
+      {
+        "tick": 13350,
+        "voltage_min": -0.06210928763105778,
+        "voltage_max": 0.9999983134575562,
+        "mean_rate_hz": 67.0790936263084,
+        "spiking_neurons": 8562
+      }
+    ]
+  },
+  "gpu_pool_used_bytes": 210532864,
+  "gpu_pool_reserved_bytes": 214013952,
+  "host_peak_rss_kib_linux": 7122432
+}

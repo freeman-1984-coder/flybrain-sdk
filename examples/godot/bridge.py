@@ -10,8 +10,9 @@ from flybrain.external import ExternalController
 
 
 class Bridge:
-    def __init__(self, model="toy", download=False):
-        demo = make_demo("dodge", model=model, download=download)
+    def __init__(self, model="toy", download=False, *, backend="cpu"):
+        self.backend = backend
+        demo = make_demo("dodge", model=model, download=download, backend=backend)
         self.initial = ExternalController(demo.brain, demo.encoder, demo.readout).snapshot()
         self.controller = None
         self.session_id = None
@@ -19,9 +20,11 @@ class Bridge:
     def dispatch(self, path, data):
         if path == "/start":
             if "checkpoint_json" in data:
-                controller = ExternalController.from_snapshot(json.loads(data["checkpoint_json"]))
+                controller = ExternalController.from_snapshot(
+                    json.loads(data["checkpoint_json"]), backend=self.backend
+                )
             else:
-                controller = ExternalController.from_snapshot(self.initial)
+                controller = ExternalController.from_snapshot(self.initial, backend=self.backend)
             if controller.period_ms != 20:
                 raise ValueError("Godot reference arena requires 20 ms")
             self.controller, self.session_id = controller, uuid.uuid4().hex
@@ -44,8 +47,8 @@ class Bridge:
         raise ValueError("unknown endpoint")
 
 
-def make_server(port=8766, *, model="toy", download=False):
-    bridge = Bridge(model, download)
+def make_server(port=8766, *, model="toy", download=False, backend="cpu"):
+    bridge = Bridge(model, download, backend=backend)
 
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
@@ -87,9 +90,12 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=8766)
     parser.add_argument("--model", default="toy")
     parser.add_argument("--download", action="store_true")
+    parser.add_argument("--backend", choices=("cpu", "cuda"), default="cpu")
     args = parser.parse_args()
     print("Preparing model before accepting game connections…", flush=True)
-    with make_server(args.port, model=args.model, download=args.download) as server:
+    with make_server(
+        args.port, model=args.model, download=args.download, backend=args.backend
+    ) as server:
         print(f"Godot bridge: http://127.0.0.1:{server.server_port} · {args.model}", flush=True)
         try:
             server.serve_forever()
