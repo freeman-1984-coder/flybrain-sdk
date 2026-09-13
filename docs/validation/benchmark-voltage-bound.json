@@ -1,0 +1,21 @@
+{
+  "config": {
+    "dt_ms": 1.0,
+    "tau_ms": 10.0,
+    "rest": 0.0,
+    "reset": 0.0,
+    "threshold": 1.0,
+    "refractory_ms": 2.0,
+    "input_gain": 2.0,
+    "rate_tau_ms": 50.0,
+    "action_rate_hz": 100.0
+  },
+  "incoming_weight": 2.5,
+  "presynaptic_current": 100.0,
+  "postsynaptic_current": 0.0,
+  "ticks": 2000,
+  "max_voltage": 0.9179135027773137,
+  "postsynaptic_spikes": 0,
+  "analytic_bound": 0.9179135027773139,
+  "scope": "CPU two-cell diagnostic for the benchmark weight policy, not a full-brain run"
+}

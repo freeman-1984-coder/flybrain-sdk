@@ -1,5 +1,7 @@
 # Full FlyWire CUDA validation
 
+**Functional limitation:** the [full-brain odor probe](validation/flywire-odor-a16.md) found that this benchmark’s normalized weights cannot drive an initially resting, externally unstimulated neuron to threshold. Use these results for numerical conformance, not sensory-to-motor behavior.
+
 This opt-in runner loads all **139,255 proofread FlyWire v783 neurons** and every
 row in the official proofread connections table. It uses the SDK's actual
 `Connectome`, `CPUBackend`, and `CUDABackend`, without replacing their execution

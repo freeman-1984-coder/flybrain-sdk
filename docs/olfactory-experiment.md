@@ -1,6 +1,7 @@
 # Full-brain food-odor experiment
 
-**Preparation, not a completed navigation result.** The full FlyWire graph has
+**GPU probe completed; navigation not demonstrated.**
+See the [negative result and parameter diagnosis](validation/flywire-odor-a16.md). The full FlyWire graph has
 passed the [CUDA numerical benchmark](fullbrain-validation.md). This experiment
 adds anatomically identified sensory input. It does not establish that the fly
 recognizes a banana, seeks food, or flies. No CUDA is needed to build the mapping,
