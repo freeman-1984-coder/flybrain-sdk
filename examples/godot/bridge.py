@@ -53,17 +53,21 @@ def make_server(port=8766, *, model="toy", download=False, backend="cpu"):
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 16_000_000:
+                    raise ValueError("request limit: 16 MB")
+                self.connection.settimeout(5)
+                # Consume the bounded body before replying, including rejected
+                # origins. Closing with unread bytes can reset TCP on Windows
+                # and discard the HTTP error response. Never dispatch an origin.
+                body = self.rfile.read(length)
                 # Browsers receive no cross-origin access to this local dev service.
                 if (
                     self.headers.get("Origin")
                     or self.headers.get_content_type() != "application/json"
                 ):
                     raise ValueError("native JSON client required")
-                length = int(self.headers.get("Content-Length", "0"))
-                if not 0 < length <= 16_000_000:
-                    raise ValueError("request limit: 16 MB")
-                self.connection.settimeout(5)
-                data = json.loads(self.rfile.read(length))
+                data = json.loads(body)
                 if not isinstance(data, dict):
                     raise ValueError("JSON object required")
                 result = bridge.dispatch(self.path, data)
