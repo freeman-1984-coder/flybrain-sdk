@@ -44,3 +44,20 @@ def test_world_json_checkpoint_replays_odor_contacts_and_pose():
     with pytest.raises(ValueError):
         arena.apply({"speed": 2, "turn": float("nan")})
     assert arena.snapshot() == before
+
+
+def test_mirrored_world_swaps_antennae_and_preserves_mirrored_motion():
+    # Reflect about z=-2, the initial forward axis. This rules out a built-in
+    # left preference in antenna geometry or the body's turn convention.
+    a = VoxelArena(food=(-1.6, 0.5, -0.6), blocks=())
+    b = VoxelArena(food=(-1.6, 0.5, -3.4), blocks=())
+    assert a.observe()["odor_right"] > a.observe()["odor_left"]
+    assert b.observe()["odor_left"] > b.observe()["odor_right"]
+    for _ in range(100):
+        a.apply({"speed": 1, "turn": 0.8})
+        b.apply({"speed": 1, "turn": -0.8})
+        assert a.x == pytest.approx(b.x, abs=1e-12)
+        assert a.z + b.z == pytest.approx(-4, abs=1e-12)
+        assert a.yaw == pytest.approx(-b.yaw, abs=1e-12)
+        assert a.observe()["odor_left"] == pytest.approx(b.observe()["odor_right"], abs=1e-12)
+        assert a.observe()["odor_right"] == pytest.approx(b.observe()["odor_left"], abs=1e-12)

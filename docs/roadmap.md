@@ -1,5 +1,23 @@
 # Roadmap
 
+## Verified in current source; next release pending
+
+- Optional CUDA backend passed actual NVIDIA A16 conformance checks. CPU remains
+  the default and does not require CuPy. See [CUDA evidence](cuda.md).
+- Full FlyWire v783 numerical benchmark: all 139,255 neurons and source edges,
+  CPU/GPU comparison, checkpoint replay and stability measurement. Not real time.
+- Separate synaptic mV engine matches an independent Brian2 oracle and actual
+  GPU tests. Sensory-only input reaches downstream groups; biological behavior
+  is not established. See [synaptic dynamics](synaptic-dynamics.md).
+- Full-brain GPU voxel recording with an input-silenced control and paired
+  brain/world/input-RNG replay. The untrained readout moves but does not reach food.
+- [Odor gain pilot protocol](odor-calibration-pilot.md) separates transient side
+  responses from persistent activity before further behavioral calibration.
+
+The released v0.4.0a4 remains CPU-only. An integrated CUDA release still requires
+packaging and clean-install verification at its final release commit. Raw full-brain
+loading remains a research-script workflow, not a `FlyBrain.load()` catalog entry.
+
 ## Available in 0.4.0a4
 
 - Actual Godot 4 CPU scene, offline toy and optional real MaleCNS model.
@@ -29,7 +47,7 @@
 - [Integration guide](demo-kits.md) and a gallery with a silenced-output comparison.
 
 Still open: additional engine adapters, streaming audio and learned readouts.
-CUDA implementation is in a separate draft PR pending actual-device validation.
+CUDA subsequently passed actual-device validation; see the current-source section above.
 
 ## Available in 0.3.0a1
 
@@ -38,8 +56,8 @@ CUDA implementation is in a separate draft PR pending actual-device validation.
 - Standalone editable HTML export and browser command recordings replayed in Python.
 - [Browser guide](browser-lab.md) with exact semantics and current limitations.
 
-Next: optional CUDA tested on hardware, additional game adapters, then audio and
-rhythm demo kits sharing the open core. Browser WASM remains a separate backend.
+Later versions added Godot and audio demo kits; current source includes hardware-tested
+CUDA. Browser WASM remains a separate, unimplemented backend.
 
 ## Available in 0.2.0a1
 
@@ -49,7 +67,8 @@ rhythm demo kits sharing the open core. Browser WASM remains a separate backend.
 - The previous alpha API and schema-1 checkpoint reader remain supported.
 
 The circuit lab shipped in 0.3; basic game/audio sessions, the live game and Godot
-adapter shipped in 0.4. Streaming audio, trained rhythm templates and validated CUDA remain open. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
+adapter shipped in 0.4. Streaming audio and trained rhythm templates remain open.
+CUDA has since passed hardware checks. See [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md) for the
 proposed architecture; proposal-only APIs are not current API documentation.
 
 
@@ -73,7 +92,7 @@ proposed architecture; proposal-only APIs are not current API documentation.
 - Extend Godot, add Unity and richer game examples.
 - Compact sparse-array model/checkpoint format for large graphs.
 - WASM reference implementation and TypeScript package.
-- Optional CUDA backend, only after cross-backend conformance tests.
+- Publish the integrated optional CUDA release after clean-install checks.
 - Explore learning/plasticity separately from the fixed-connectome MVP.
 
 Open issues and propose focused milestones; these are directions, not release-date promises.

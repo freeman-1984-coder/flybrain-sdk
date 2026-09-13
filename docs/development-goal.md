@@ -7,11 +7,13 @@ real optional CUDA support, reusable demo kits and a more open architecture.
 The current design proposal is [RFC 0001](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md).
 RFC signatures remain proposals unless listed in the current API guide.
 Implemented slices now include the open Python API, real model, JS CPU circuit
-lab, standalone HTML templates and verified browser-to-Python replay. CUDA,
-additional engine adapters, streaming audio and learning remain open.
+lab, standalone HTML templates and verified browser-to-Python replay. Current source
+also contains actual-device-tested CUDA and Godot. Additional engine adapters,
+streaming audio and validated biological learning remain future work.
 The live browser game now shares the JS CPU core and is checked against Python feedback.
 Basic composable sessions, recorded dodge/sonification kits and full feedback replay
-are implemented; CUDA remains a separate draft awaiting hardware validation.
+are implemented. CUDA passed actual A16 validation and merged into main, while
+the last tagged release (v0.4.0a4) remains CPU-only.
 
 Acceptance criteria:
 
@@ -46,4 +48,15 @@ checkpoints. Headless conformance covers toy and real models. Native macOS run/p
 save/restore, file-dialog cancellation and disconnect/reset checks passed on
 2026-09-11. See its README for usage and verification.
 
-Current evidence and remaining release gates: [delivery audit](completion-audit-2026-09-10.md).
+User steering also requested the full FlyWire graph on GPU in a voxel food-odor
+environment. [That recorded experiment](validation/flywire-voxel-a16.md) now exists:
+all 139,255 neurons and source rows, sensory input, a fixed motor readout, a silenced
+control and exact joint checkpoint replay. Movement occurs but food contact does
+not. A recorded negative outcome is not evidence of learned or reliable foraging.
+
+The [historical delivery audit](completion-audit-2026-09-10.md) predates CUDA
+validation. Current evidence is in [CUDA](cuda.md), [full-brain validation](fullbrain-validation.md)
+and [synaptic dynamics](synaptic-dynamics.md). The remaining delivery gate is an
+integrated release with final packaging, clean-install and public-site verification.
+The [odor gain pilot](odor-calibration-pilot.md) is a separately documented research
+experiment, not a substitute for that release gate.
