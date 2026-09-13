@@ -96,8 +96,7 @@ def build(annotations, roots):
             "glomerulus": "DM1",
             "evidence": "https://www.nature.com/articles/s41598-017-13015-w",
             "scope": (
-                "One responsive receptor channel; "
-                "not the complete ethyl-acetate or banana response"
+                "One responsive receptor channel; not the complete ethyl-acetate or banana response"
             ),
             "current_units": "dimensionless; not measured current or calibrated odor concentration",
             "hemispheres": "source annotation side; no invented left/right assignments",
