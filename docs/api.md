@@ -139,7 +139,7 @@ accepts an observation with `offer(seq, observation)`, then commits the actual
 engine control with `acknowledge(seq, applied)`. Only one action may be pending.
 Identical pending offers reuse their result without reintegrating the brain.
 `snapshot()` is allowed at acknowledged boundaries; `from_snapshot(data, backend=None)` restores
-the built-in linear encoder and rate readout. In this CUDA development branch,
+the built-in linear encoder and rate readout. In version 0.5 alpha,
 pass `backend="cpu"` or `backend="cuda"` to select the restore device explicitly.
 The engine must checkpoint its own
 world at the matching sequence. See the [Godot example](../examples/godot/README.md)

@@ -10,7 +10,7 @@ from .neurons import Observation, Progress
 from .registry import fetch_model, list_models, model_info
 from .sensory import Stimulus
 
-__version__ = "0.5.0.dev0"
+__version__ = "0.5.0a1"
 __all__ = [
     "FlyBrain",
     "LIFConfig",

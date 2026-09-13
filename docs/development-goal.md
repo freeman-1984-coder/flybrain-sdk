@@ -13,7 +13,7 @@ streaming audio and validated biological learning remain future work.
 The live browser game now shares the JS CPU core and is checked against Python feedback.
 Basic composable sessions, recorded dodge/sonification kits and full feedback replay
 are implemented. CUDA passed actual A16 validation and merged into main, while
-the last tagged release (v0.4.0a4) remains CPU-only.
+the older v0.4.0a4 release is CPU-only; version 0.5 integrates the CUDA engines.
 
 Acceptance criteria:
 
@@ -56,7 +56,8 @@ not. A recorded negative outcome is not evidence of learned or reliable foraging
 
 The [historical delivery audit](completion-audit-2026-09-10.md) predates CUDA
 validation. Current evidence is in [CUDA](cuda.md), [full-brain validation](fullbrain-validation.md)
-and [synaptic dynamics](synaptic-dynamics.md). The remaining delivery gate is an
-integrated release with final packaging, clean-install and public-site verification.
+and [synaptic dynamics](synaptic-dynamics.md). Integrated-release closure requires
+final packaging, clean-install and public-site verification according to the
+[release checklist](releasing.md).
 The [odor gain pilot](odor-calibration-pilot.md) is a separately documented research
 experiment, not a substitute for that release gate.

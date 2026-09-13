@@ -1,6 +1,6 @@
 # Roadmap
 
-## Verified in current source; next release pending
+## Version 0.5.0a1
 
 - Optional CUDA backend passed actual NVIDIA A16 conformance checks. CPU remains
   the default and does not require CuPy. See [CUDA evidence](cuda.md).
@@ -14,8 +14,8 @@
 - [Odor gain pilot protocol](odor-calibration-pilot.md) separates transient side
   responses from persistent activity before further behavioral calibration.
 
-The released v0.4.0a4 remains CPU-only. An integrated CUDA release still requires
-packaging and clean-install verification at its final release commit. Raw full-brain
+The older v0.4.0a4 release is CPU-only. Version 0.5 integrates the verified CUDA
+engines; see the [release checklist](releasing.md) for distribution checks. Raw full-brain
 loading remains a research-script workflow, not a `FlyBrain.load()` catalog entry.
 
 ## Available in 0.4.0a4
@@ -92,7 +92,7 @@ proposed architecture; proposal-only APIs are not current API documentation.
 - Extend Godot, add Unity and richer game examples.
 - Compact sparse-array model/checkpoint format for large graphs.
 - WASM reference implementation and TypeScript package.
-- Publish the integrated optional CUDA release after clean-install checks.
+- Improve the optional CUDA backend with separately benchmarked batching.
 - Explore learning/plasticity separately from the fixed-connectome MVP.
 
 Open issues and propose focused milestones; these are directions, not release-date promises.
