@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flybrain-sdk"
-version = "0.4.0a4"
+version = "0.5.0.dev0"
 description = "CPU-first connectome simulation for games and experiments. No CUDA required."
 readme = "README.md"
 requires-python = ">=3.9"

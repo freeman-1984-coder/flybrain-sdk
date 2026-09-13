@@ -53,3 +53,14 @@ def test_transport_ownership_retries_and_opaque_checkpoint():
         finally:
             server.shutdown()
             thread.join(timeout=5)
+
+
+def test_bridge_pins_selected_backend_when_restoring():
+    service = bridge.Bridge(backend="cpu")
+    saved = dict(service.initial)
+    saved["brain"] = dict(saved["brain"], backend="cuda")
+    # Selection is caller-owned, even when saved metadata names another device.
+    # This checks routing only; it does not pretend this fixture ran on CUDA.
+    service.dispatch("/start", {"checkpoint_json": json.dumps(saved)})
+    assert service.controller.brain.snapshot()["backend"] == "cpu"
+    assert service.controller.offer(0, {"danger_left": 1, "danger_right": 0})["brain_tick"] == 20

@@ -1,0 +1,2414 @@
+{
+  "format": "flybrain-reflex-training-v1",
+  "backend": "cuda",
+  "model": "male-cns-escape-v1",
+  "neurons": 313,
+  "model_fingerprint": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+  "checkpoint": {
+    "format": "flybrain-external-reflex-readout-v1",
+    "neuron_ids": [
+      "10010",
+      "10001"
+    ],
+    "scale_hz": 100,
+    "bias_feature": 1,
+    "weights": [
+      1.519173498105741,
+      -1.5165301881263553,
+      -0.047701659405415736
+    ],
+    "model_fingerprint": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+    "actions": [
+      "left",
+      "right"
+    ]
+  },
+  "source_sha256": "0cc6e083cb747c7edcf70c23af72610d4848116530543ea4c82b57c6efdc487c",
+  "train_seed": 101,
+  "evaluation_seed": 202,
+  "optimizer_seed": 23,
+  "training_trials": 64,
+  "evaluation_trials": 80,
+  "epochs": 24,
+  "curve": [
+    {
+      "epoch": 1,
+      "sampled_reward": 0.484375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 2,
+      "sampled_reward": 0.46875,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 3,
+      "sampled_reward": 0.453125,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 4,
+      "sampled_reward": 0.578125,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 5,
+      "sampled_reward": 0.515625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 6,
+      "sampled_reward": 0.734375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 7,
+      "sampled_reward": 0.609375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 8,
+      "sampled_reward": 0.625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 9,
+      "sampled_reward": 0.65625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 10,
+      "sampled_reward": 0.609375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 11,
+      "sampled_reward": 0.609375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 12,
+      "sampled_reward": 0.609375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 13,
+      "sampled_reward": 0.578125,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 14,
+      "sampled_reward": 0.671875,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 15,
+      "sampled_reward": 0.546875,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 16,
+      "sampled_reward": 0.671875,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 17,
+      "sampled_reward": 0.6875,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 18,
+      "sampled_reward": 0.640625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 19,
+      "sampled_reward": 0.609375,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 20,
+      "sampled_reward": 0.78125,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 21,
+      "sampled_reward": 0.640625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 22,
+      "sampled_reward": 0.640625,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 23,
+      "sampled_reward": 0.75,
+      "train_accuracy": 1.0
+    },
+    {
+      "epoch": 24,
+      "sampled_reward": 0.765625,
+      "train_accuracy": 1.0
+    }
+  ],
+  "before": {
+    "accuracy": 0.5,
+    "trials": [
+      {
+        "trial": 0,
+        "obstacle_side": 1,
+        "strength": 0.7397859906671477,
+        "distractor": 0.14163315584223377,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 1,
+        "obstacle_side": 1,
+        "strength": 0.9435135063439757,
+        "distractor": 0.043319149452617084,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 2,
+        "obstacle_side": 1,
+        "strength": 0.820757412356964,
+        "distractor": 0.055159698017229086,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 3,
+        "obstacle_side": 0,
+        "strength": 0.9229488104032286,
+        "distractor": 0.09883683897542953,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 4,
+        "obstacle_side": 0,
+        "strength": 0.7040576183394975,
+        "distractor": 0.16814597306653845,
+        "rates_hz": [
+          52.64083208902695,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 5,
+        "obstacle_side": 0,
+        "strength": 0.8388921935659843,
+        "distractor": 0.16603696113497948,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 6,
+        "obstacle_side": 0,
+        "strength": 0.7263252312127216,
+        "distractor": 0.06621452550789758,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 7,
+        "obstacle_side": 0,
+        "strength": 0.762572186021538,
+        "distractor": 0.21096987173550769,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 8,
+        "obstacle_side": 0,
+        "strength": 0.7515692801873042,
+        "distractor": 0.17222030718527648,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 9,
+        "obstacle_side": 0,
+        "strength": 0.8700059327168125,
+        "distractor": 0.16774962425358272,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 10,
+        "obstacle_side": 1,
+        "strength": 0.804926415343617,
+        "distractor": 0.18880127827392956,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 11,
+        "obstacle_side": 1,
+        "strength": 0.8185126567793506,
+        "distractor": 0.06481521520122263,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 12,
+        "obstacle_side": 1,
+        "strength": 0.8246612410397558,
+        "distractor": 0.17160712843257783,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 13,
+        "obstacle_side": 1,
+        "strength": 0.691715267088416,
+        "distractor": 0.18255776239775617,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 14,
+        "obstacle_side": 0,
+        "strength": 0.8283244119161425,
+        "distractor": 0.2260212825094213,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 15,
+        "obstacle_side": 1,
+        "strength": 0.8334222853756877,
+        "distractor": 0.2204467315083252,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 16,
+        "obstacle_side": 1,
+        "strength": 0.7123981817386242,
+        "distractor": 0.03351000459602424,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 17,
+        "obstacle_side": 0,
+        "strength": 0.8226502110156705,
+        "distractor": 0.0009046368310332287,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 18,
+        "obstacle_side": 0,
+        "strength": 0.8234953684205355,
+        "distractor": 0.026361400332857998,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 19,
+        "obstacle_side": 0,
+        "strength": 0.9414450716172265,
+        "distractor": 0.19040073779916508,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 20,
+        "obstacle_side": 1,
+        "strength": 0.8083785939247946,
+        "distractor": 0.03210861554230887,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 21,
+        "obstacle_side": 1,
+        "strength": 0.934240094202472,
+        "distractor": 0.2493169074720219,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 22,
+        "obstacle_side": 1,
+        "strength": 0.8298343938541678,
+        "distractor": 0.08402482676881823,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 23,
+        "obstacle_side": 0,
+        "strength": 0.793722680009061,
+        "distractor": 0.19776409613227777,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 24,
+        "obstacle_side": 1,
+        "strength": 0.7199855629760891,
+        "distractor": 0.04273722653318235,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 25,
+        "obstacle_side": 0,
+        "strength": 0.7224938960202433,
+        "distractor": 0.21315914594889285,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 26,
+        "obstacle_side": 0,
+        "strength": 0.9073321428138739,
+        "distractor": 0.23749132965721162,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 27,
+        "obstacle_side": 0,
+        "strength": 0.974087699529034,
+        "distractor": 0.13898929150344563,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 28,
+        "obstacle_side": 1,
+        "strength": 0.7387463848936815,
+        "distractor": 0.15986146546348104,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 29,
+        "obstacle_side": 0,
+        "strength": 0.9489258771402111,
+        "distractor": 0.20906117637367963,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 30,
+        "obstacle_side": 0,
+        "strength": 0.6595229324618019,
+        "distractor": 0.2466642610514185,
+        "rates_hz": [
+          39.37549964978339,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 31,
+        "obstacle_side": 1,
+        "strength": 0.8063722549258865,
+        "distractor": 0.05847329387449826,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 32,
+        "obstacle_side": 1,
+        "strength": 0.7485837159110387,
+        "distractor": 0.2344144935201891,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 33,
+        "obstacle_side": 0,
+        "strength": 0.7560974459801786,
+        "distractor": 0.10160787638705174,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 34,
+        "obstacle_side": 1,
+        "strength": 0.6958243136371075,
+        "distractor": 0.11664464090547685,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 35,
+        "obstacle_side": 1,
+        "strength": 0.8759703208894072,
+        "distractor": 0.11739024820098182,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 36,
+        "obstacle_side": 1,
+        "strength": 0.763070847972412,
+        "distractor": 0.14902054052760166,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 37,
+        "obstacle_side": 1,
+        "strength": 0.7850127828815513,
+        "distractor": 0.08925484502691697,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 38,
+        "obstacle_side": 1,
+        "strength": 0.764129199350349,
+        "distractor": 0.11339333696026982,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 39,
+        "obstacle_side": 1,
+        "strength": 0.8090767649708386,
+        "distractor": 0.2415183382402119,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 40,
+        "obstacle_side": 1,
+        "strength": 0.7168735011993751,
+        "distractor": 0.21219833983624814,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 41,
+        "obstacle_side": 1,
+        "strength": 0.9217169210322551,
+        "distractor": 0.20083598111700876,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 42,
+        "obstacle_side": 0,
+        "strength": 0.9761248359618179,
+        "distractor": 0.051784507912612326,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 43,
+        "obstacle_side": 1,
+        "strength": 0.99388734076273,
+        "distractor": 0.08869993310050842,
+        "rates_hz": [
+          0.0,
+          96.41650145120595
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 44,
+        "obstacle_side": 0,
+        "strength": 0.9998855087065026,
+        "distractor": 0.07245566916732682,
+        "rates_hz": [
+          96.41650145120595,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 45,
+        "obstacle_side": 0,
+        "strength": 0.7455007726036763,
+        "distractor": 0.1194163896331375,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 46,
+        "obstacle_side": 0,
+        "strength": 0.8562634163952592,
+        "distractor": 0.020044635253151977,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 47,
+        "obstacle_side": 1,
+        "strength": 0.7288588777527852,
+        "distractor": 0.16506046059374346,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 48,
+        "obstacle_side": 1,
+        "strength": 0.8789264772838576,
+        "distractor": 0.14324031266821685,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 49,
+        "obstacle_side": 1,
+        "strength": 0.844348581756973,
+        "distractor": 0.1838804332574576,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 50,
+        "obstacle_side": 1,
+        "strength": 0.9663223243973855,
+        "distractor": 0.062191205728159116,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 51,
+        "obstacle_side": 1,
+        "strength": 0.8366509876962254,
+        "distractor": 0.11304377877328955,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 52,
+        "obstacle_side": 0,
+        "strength": 0.9639472794976829,
+        "distractor": 0.09873094588242179,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 53,
+        "obstacle_side": 1,
+        "strength": 0.9386318174250412,
+        "distractor": 0.22680187194572712,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 54,
+        "obstacle_side": 1,
+        "strength": 0.8855856428218142,
+        "distractor": 0.2238546926669456,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 55,
+        "obstacle_side": 0,
+        "strength": 0.9252272279917549,
+        "distractor": 0.19138125848751703,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 56,
+        "obstacle_side": 1,
+        "strength": 0.7056118664499941,
+        "distractor": 0.02617325151393407,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 57,
+        "obstacle_side": 0,
+        "strength": 0.7301313397093564,
+        "distractor": 0.1130005605273254,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 58,
+        "obstacle_side": 0,
+        "strength": 0.7913043431407794,
+        "distractor": 0.03575689407719082,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 59,
+        "obstacle_side": 0,
+        "strength": 0.848042734966939,
+        "distractor": 0.1404784447085321,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 60,
+        "obstacle_side": 0,
+        "strength": 0.6906484959491981,
+        "distractor": 0.04800522844995561,
+        "rates_hz": [
+          52.64083208902695,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 61,
+        "obstacle_side": 0,
+        "strength": 0.9331304762249109,
+        "distractor": 0.05271786558799632,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 62,
+        "obstacle_side": 0,
+        "strength": 0.8826342506507153,
+        "distractor": 0.19781527194371218,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 63,
+        "obstacle_side": 0,
+        "strength": 0.7234093049394643,
+        "distractor": 0.01592719371184026,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 64,
+        "obstacle_side": 0,
+        "strength": 0.9537443542052749,
+        "distractor": 0.21000271034725165,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 65,
+        "obstacle_side": 1,
+        "strength": 0.7053432728913656,
+        "distractor": 0.24365923616780907,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 66,
+        "obstacle_side": 1,
+        "strength": 0.936419963872683,
+        "distractor": 0.1830927075269348,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 67,
+        "obstacle_side": 0,
+        "strength": 0.7570142589322466,
+        "distractor": 0.08370490434085917,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 68,
+        "obstacle_side": 0,
+        "strength": 0.7627905120754372,
+        "distractor": 0.05691097204655074,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 69,
+        "obstacle_side": 0,
+        "strength": 0.847380235974295,
+        "distractor": 0.20068994993457281,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 70,
+        "obstacle_side": 1,
+        "strength": 0.8172624188795217,
+        "distractor": 0.08354070123918705,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 71,
+        "obstacle_side": 0,
+        "strength": 0.916073963139977,
+        "distractor": 0.12196357779098249,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 72,
+        "obstacle_side": 1,
+        "strength": 0.7513235221825648,
+        "distractor": 0.22939869946850422,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 73,
+        "obstacle_side": 0,
+        "strength": 0.9734594103237102,
+        "distractor": 0.12625239911087668,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 74,
+        "obstacle_side": 1,
+        "strength": 0.7965374115639787,
+        "distractor": 0.049842866146548565,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 75,
+        "obstacle_side": 1,
+        "strength": 0.8744378708803674,
+        "distractor": 0.13859972666059892,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      },
+      {
+        "trial": 76,
+        "obstacle_side": 0,
+        "strength": 0.6617602408590504,
+        "distractor": 0.23907143168012684,
+        "rates_hz": [
+          39.37549964978339,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 77,
+        "obstacle_side": 0,
+        "strength": 0.6815479116088572,
+        "distractor": 0.07307305280803422,
+        "rates_hz": [
+          56.56572172023989,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 78,
+        "obstacle_side": 0,
+        "strength": 0.8324430278746309,
+        "distractor": 0.016938365646449433,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 79,
+        "obstacle_side": 1,
+        "strength": 0.9775867972606637,
+        "distractor": 0.18184602789496174,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.5,
+        "action": 1,
+        "success": false
+      }
+    ]
+  },
+  "after": {
+    "accuracy": 1.0,
+    "trials": [
+      {
+        "trial": 0,
+        "obstacle_side": 1,
+        "strength": 0.7397859906671477,
+        "distractor": 0.14163315584223377,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 1,
+        "obstacle_side": 1,
+        "strength": 0.9435135063439757,
+        "distractor": 0.043319149452617084,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 2,
+        "obstacle_side": 1,
+        "strength": 0.820757412356964,
+        "distractor": 0.055159698017229086,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 3,
+        "obstacle_side": 0,
+        "strength": 0.9229488104032286,
+        "distractor": 0.09883683897542953,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 4,
+        "obstacle_side": 0,
+        "strength": 0.7040576183394975,
+        "distractor": 0.16814597306653845,
+        "rates_hz": [
+          52.64083208902695,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6796151844529988,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 5,
+        "obstacle_side": 0,
+        "strength": 0.8388921935659843,
+        "distractor": 0.16603696113497948,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 6,
+        "obstacle_side": 0,
+        "strength": 0.7263252312127216,
+        "distractor": 0.06621452550789758,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6675327067422383,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 7,
+        "obstacle_side": 0,
+        "strength": 0.762572186021538,
+        "distractor": 0.21096987173550769,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7170078263977068,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 8,
+        "obstacle_side": 0,
+        "strength": 0.7515692801873042,
+        "distractor": 0.17222030718527648,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7170078263977068,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 9,
+        "obstacle_side": 0,
+        "strength": 0.8700059327168125,
+        "distractor": 0.16774962425358272,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 10,
+        "obstacle_side": 1,
+        "strength": 0.804926415343617,
+        "distractor": 0.18880127827392956,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 11,
+        "obstacle_side": 1,
+        "strength": 0.8185126567793506,
+        "distractor": 0.06481521520122263,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 12,
+        "obstacle_side": 1,
+        "strength": 0.8246612410397558,
+        "distractor": 0.17160712843257783,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 13,
+        "obstacle_side": 1,
+        "strength": 0.691715267088416,
+        "distractor": 0.18255776239775617,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.30026930814348907,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 14,
+        "obstacle_side": 0,
+        "strength": 0.8283244119161425,
+        "distractor": 0.2260212825094213,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 15,
+        "obstacle_side": 1,
+        "strength": 0.8334222853756877,
+        "distractor": 0.2204467315083252,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 16,
+        "obstacle_side": 1,
+        "strength": 0.7123981817386242,
+        "distractor": 0.03351000459602424,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.30026930814348907,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 17,
+        "obstacle_side": 0,
+        "strength": 0.8226502110156705,
+        "distractor": 0.0009046368310332287,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 18,
+        "obstacle_side": 0,
+        "strength": 0.8234953684205355,
+        "distractor": 0.026361400332857998,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 19,
+        "obstacle_side": 0,
+        "strength": 0.9414450716172265,
+        "distractor": 0.19040073779916508,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 20,
+        "obstacle_side": 1,
+        "strength": 0.8083785939247946,
+        "distractor": 0.03210861554230887,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 21,
+        "obstacle_side": 1,
+        "strength": 0.934240094202472,
+        "distractor": 0.2493169074720219,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 22,
+        "obstacle_side": 1,
+        "strength": 0.8298343938541678,
+        "distractor": 0.08402482676881823,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 23,
+        "obstacle_side": 0,
+        "strength": 0.793722680009061,
+        "distractor": 0.19776409613227777,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 24,
+        "obstacle_side": 1,
+        "strength": 0.7199855629760891,
+        "distractor": 0.04273722653318235,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 25,
+        "obstacle_side": 0,
+        "strength": 0.7224938960202433,
+        "distractor": 0.21315914594889285,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6675327067422383,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 26,
+        "obstacle_side": 0,
+        "strength": 0.9073321428138739,
+        "distractor": 0.23749132965721162,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 27,
+        "obstacle_side": 0,
+        "strength": 0.974087699529034,
+        "distractor": 0.13898929150344563,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 28,
+        "obstacle_side": 1,
+        "strength": 0.7387463848936815,
+        "distractor": 0.15986146546348104,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 29,
+        "obstacle_side": 0,
+        "strength": 0.9489258771402111,
+        "distractor": 0.20906117637367963,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 30,
+        "obstacle_side": 0,
+        "strength": 0.6595229324618019,
+        "distractor": 0.2466642610514185,
+        "rates_hz": [
+          39.37549964978339,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6342470625735007,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 31,
+        "obstacle_side": 1,
+        "strength": 0.8063722549258865,
+        "distractor": 0.05847329387449826,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 32,
+        "obstacle_side": 1,
+        "strength": 0.7485837159110387,
+        "distractor": 0.2344144935201891,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 33,
+        "obstacle_side": 0,
+        "strength": 0.7560974459801786,
+        "distractor": 0.10160787638705174,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7170078263977068,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 34,
+        "obstacle_side": 1,
+        "strength": 0.6958243136371075,
+        "distractor": 0.11664464090547685,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.30026930814348907,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 35,
+        "obstacle_side": 1,
+        "strength": 0.8759703208894072,
+        "distractor": 0.11739024820098182,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.24040154855139034,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 36,
+        "obstacle_side": 1,
+        "strength": 0.763070847972412,
+        "distractor": 0.14902054052760166,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.2643714380006148,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 37,
+        "obstacle_side": 1,
+        "strength": 0.7850127828815513,
+        "distractor": 0.08925484502691697,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.2643714380006148,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 38,
+        "obstacle_side": 1,
+        "strength": 0.764129199350349,
+        "distractor": 0.11339333696026982,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.2643714380006148,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 39,
+        "obstacle_side": 1,
+        "strength": 0.8090767649708386,
+        "distractor": 0.2415183382402119,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 40,
+        "obstacle_side": 1,
+        "strength": 0.7168735011993751,
+        "distractor": 0.21219833983624814,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 41,
+        "obstacle_side": 1,
+        "strength": 0.9217169210322551,
+        "distractor": 0.20083598111700876,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 42,
+        "obstacle_side": 0,
+        "strength": 0.9761248359618179,
+        "distractor": 0.051784507912612326,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 43,
+        "obstacle_side": 1,
+        "strength": 0.99388734076273,
+        "distractor": 0.08869993310050842,
+        "rates_hz": [
+          0.0,
+          96.41650145120595
+        ],
+        "target": 0,
+        "probability_right": 0.18095553883095836,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 44,
+        "obstacle_side": 0,
+        "strength": 0.9998855087065026,
+        "distractor": 0.07245566916732682,
+        "rates_hz": [
+          96.41650145120595,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.8048727496688824,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 45,
+        "obstacle_side": 0,
+        "strength": 0.7455007726036763,
+        "distractor": 0.1194163896331375,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6675327067422383,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 46,
+        "obstacle_side": 0,
+        "strength": 0.8562634163952592,
+        "distractor": 0.020044635253151977,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 47,
+        "obstacle_side": 1,
+        "strength": 0.7288588777527852,
+        "distractor": 0.16506046059374346,
+        "rates_hz": [
+          0.0,
+          49.02327213825455
+        ],
+        "target": 0,
+        "probability_right": 0.31192085528050684,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 48,
+        "obstacle_side": 1,
+        "strength": 0.8789264772838576,
+        "distractor": 0.14324031266821685,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.24040154855139034,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 49,
+        "obstacle_side": 1,
+        "strength": 0.844348581756973,
+        "distractor": 0.1838804332574576,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.24040154855139034,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 50,
+        "obstacle_side": 1,
+        "strength": 0.9663223243973855,
+        "distractor": 0.062191205728159116,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 51,
+        "obstacle_side": 1,
+        "strength": 0.8366509876962254,
+        "distractor": 0.11304377877328955,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 52,
+        "obstacle_side": 0,
+        "strength": 0.9639472794976829,
+        "distractor": 0.09873094588242179,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 53,
+        "obstacle_side": 1,
+        "strength": 0.9386318174250412,
+        "distractor": 0.22680187194572712,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 54,
+        "obstacle_side": 1,
+        "strength": 0.8855856428218142,
+        "distractor": 0.2238546926669456,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.24040154855139034,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 55,
+        "obstacle_side": 0,
+        "strength": 0.9252272279917549,
+        "distractor": 0.19138125848751703,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 56,
+        "obstacle_side": 1,
+        "strength": 0.7056118664499941,
+        "distractor": 0.02617325151393407,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.30026930814348907,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 57,
+        "obstacle_side": 0,
+        "strength": 0.7301313397093564,
+        "distractor": 0.1130005605273254,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6675327067422383,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 58,
+        "obstacle_side": 0,
+        "strength": 0.7913043431407794,
+        "distractor": 0.03575689407719082,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 59,
+        "obstacle_side": 0,
+        "strength": 0.848042734966939,
+        "distractor": 0.1404784447085321,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 60,
+        "obstacle_side": 0,
+        "strength": 0.6906484959491981,
+        "distractor": 0.04800522844995561,
+        "rates_hz": [
+          52.64083208902695,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6796151844529988,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 61,
+        "obstacle_side": 0,
+        "strength": 0.9331304762249109,
+        "distractor": 0.05271786558799632,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 62,
+        "obstacle_side": 0,
+        "strength": 0.8826342506507153,
+        "distractor": 0.19781527194371218,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 63,
+        "obstacle_side": 0,
+        "strength": 0.7234093049394643,
+        "distractor": 0.01592719371184026,
+        "rates_hz": [
+          49.02327213825455,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6675327067422383,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 64,
+        "obstacle_side": 0,
+        "strength": 0.9537443542052749,
+        "distractor": 0.21000271034725165,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 65,
+        "obstacle_side": 1,
+        "strength": 0.7053432728913656,
+        "distractor": 0.24365923616780907,
+        "rates_hz": [
+          0.0,
+          52.64083208902695
+        ],
+        "target": 0,
+        "probability_right": 0.30026930814348907,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 66,
+        "obstacle_side": 1,
+        "strength": 0.936419963872683,
+        "distractor": 0.1830927075269348,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 67,
+        "obstacle_side": 0,
+        "strength": 0.7570142589322466,
+        "distractor": 0.08370490434085917,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7170078263977068,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 68,
+        "obstacle_side": 0,
+        "strength": 0.7627905120754372,
+        "distractor": 0.05691097204655074,
+        "rates_hz": [
+          64.33558606024012,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7170078263977068,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 69,
+        "obstacle_side": 0,
+        "strength": 0.847380235974295,
+        "distractor": 0.20068994993457281,
+        "rates_hz": [
+          72.7171569232447,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7421164637859583,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 70,
+        "obstacle_side": 1,
+        "strength": 0.8172624188795217,
+        "distractor": 0.08354070123918705,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 71,
+        "obstacle_side": 0,
+        "strength": 0.916073963139977,
+        "distractor": 0.12196357779098249,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 72,
+        "obstacle_side": 1,
+        "strength": 0.7513235221825648,
+        "distractor": 0.22939869946850422,
+        "rates_hz": [
+          0.0,
+          64.33558606024012
+        ],
+        "target": 0,
+        "probability_right": 0.2643714380006148,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 73,
+        "obstacle_side": 0,
+        "strength": 0.9734594103237102,
+        "distractor": 0.12625239911087668,
+        "rates_hz": [
+          85.45617982499459,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7773908970294365,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 74,
+        "obstacle_side": 1,
+        "strength": 0.7965374115639787,
+        "distractor": 0.049842866146548565,
+        "rates_hz": [
+          0.0,
+          59.14924789924882
+        ],
+        "target": 0,
+        "probability_right": 0.2799483427095903,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 75,
+        "obstacle_side": 1,
+        "strength": 0.8744378708803674,
+        "distractor": 0.13859972666059892,
+        "rates_hz": [
+          0.0,
+          72.7171569232447
+        ],
+        "target": 0,
+        "probability_right": 0.24040154855139034,
+        "action": 0,
+        "success": true
+      },
+      {
+        "trial": 76,
+        "obstacle_side": 0,
+        "strength": 0.6617602408590504,
+        "distractor": 0.23907143168012684,
+        "rates_hz": [
+          39.37549964978339,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6342470625735007,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 77,
+        "obstacle_side": 0,
+        "strength": 0.6815479116088572,
+        "distractor": 0.07307305280803422,
+        "rates_hz": [
+          56.56572172023989,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.6924566947380485,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 78,
+        "obstacle_side": 0,
+        "strength": 0.8324430278746309,
+        "distractor": 0.016938365646449433,
+        "rates_hz": [
+          59.14924789924882,
+          0.0
+        ],
+        "target": 1,
+        "probability_right": 0.7007512987513059,
+        "action": 1,
+        "success": true
+      },
+      {
+        "trial": 79,
+        "obstacle_side": 1,
+        "strength": 0.9775867972606637,
+        "distractor": 0.18184602789496174,
+        "rates_hz": [
+          0.0,
+          85.45617982499459
+        ],
+        "target": 0,
+        "probability_right": 0.20690710664720985,
+        "action": 0,
+        "success": true
+      }
+    ]
+  },
+  "seconds": 33.872531293000065,
+  "limitations": [
+    "Fixed real anatomical subgraph; LIF parameters and input mapping assumed.",
+    "Only the external three-weight action readout is learned.",
+    "Two-choice 80ms obstacle task; trials reset neural state.",
+    "Held-out trials vary stimulus amplitude, not task or environment.",
+    "Untrained zero weights choose right on ties; chance baseline is 50%.",
+    "No claim of biological learning, whole-fly intelligence or broad generalization."
+  ]
+}

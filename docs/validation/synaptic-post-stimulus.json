@@ -1,0 +1,70 @@
+{
+  "source_sha256": "0072f44c17dbc0eb3854a3d509d037aaa5dc04ec1ed9a46c30c511f808911c6c",
+  "window_ms": [
+    600,
+    800
+  ],
+  "definition": "cumulative spikes at 800ms minus at 600ms; input stimulus ends at 600ms",
+  "conditions": [
+    {
+      "name": "no_odor",
+      "post_stimulus_spikes": {
+        "ORN_DM1_left": 0,
+        "ORN_DM1_right": 0,
+        "DNa02_left": 0,
+        "DNa02_right": 0,
+        "ALPN": 0,
+        "MBON": 0,
+        "descending": 0
+      }
+    },
+    {
+      "name": "left_odor",
+      "post_stimulus_spikes": {
+        "ORN_DM1_left": 1,
+        "ORN_DM1_right": 0,
+        "DNa02_left": 8,
+        "DNa02_right": 3,
+        "ALPN": 6782,
+        "MBON": 934,
+        "descending": 799
+      }
+    },
+    {
+      "name": "right_odor",
+      "post_stimulus_spikes": {
+        "ORN_DM1_left": 0,
+        "ORN_DM1_right": 2,
+        "DNa02_left": 11,
+        "DNa02_right": 2,
+        "ALPN": 6887,
+        "MBON": 924,
+        "descending": 832
+      }
+    },
+    {
+      "name": "bilateral_odor",
+      "post_stimulus_spikes": {
+        "ORN_DM1_left": 1,
+        "ORN_DM1_right": 2,
+        "DNa02_left": 11,
+        "DNa02_right": 1,
+        "ALPN": 6842,
+        "MBON": 924,
+        "descending": 859
+      }
+    },
+    {
+      "name": "bilateral_odor_ORNs_silenced",
+      "post_stimulus_spikes": {
+        "ORN_DM1_left": 0,
+        "ORN_DM1_right": 0,
+        "DNa02_left": 0,
+        "DNa02_right": 0,
+        "ALPN": 0,
+        "MBON": 0,
+        "descending": 0
+      }
+    }
+  ]
+}

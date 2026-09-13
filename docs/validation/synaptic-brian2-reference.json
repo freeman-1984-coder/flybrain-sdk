@@ -1,0 +1,114 @@
+{
+  "status": "passed",
+  "oracle": "Brian2",
+  "version": "2.9.0",
+  "numpy": "1.26.4",
+  "cases": [
+    {
+      "config": {
+        "dt_ms": 0.1,
+        "rest_mv": -52.0,
+        "reset_mv": -52.0,
+        "threshold_mv": -45.0,
+        "membrane_tau_ms": 20.0,
+        "synapse_tau_ms": 5.0,
+        "refractory_ms": 2.2,
+        "delay_ms": 1.8,
+        "rate_tau_ms": 50.0
+      },
+      "ticks": 1000,
+      "voltage_max_error_mv": 4.334310688136611e-13,
+      "synaptic_max_error_mv": 1.4210854715202004e-14,
+      "spikes_per_cell": [
+        7,
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      "spike_times_equal": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "config": {
+        "dt_ms": 0.2,
+        "rest_mv": -52.0,
+        "reset_mv": -52.0,
+        "threshold_mv": -45.0,
+        "membrane_tau_ms": 20.0,
+        "synapse_tau_ms": 5.0,
+        "refractory_ms": 2.2,
+        "delay_ms": 1.8,
+        "rate_tau_ms": 50.0
+      },
+      "ticks": 500,
+      "voltage_max_error_mv": 7.815970093361102e-14,
+      "synaptic_max_error_mv": 1.4210854715202004e-14,
+      "spikes_per_cell": [
+        7,
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      "spike_times_equal": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "config": {
+        "dt_ms": 0.1,
+        "rest_mv": -52.0,
+        "reset_mv": -52.0,
+        "threshold_mv": -45.0,
+        "membrane_tau_ms": 20.0,
+        "synapse_tau_ms": 5.0,
+        "refractory_ms": 2.2,
+        "delay_ms": 0.0,
+        "rate_tau_ms": 50.0
+      },
+      "ticks": 1000,
+      "voltage_max_error_mv": 4.973799150320701e-13,
+      "synaptic_max_error_mv": 2.1316282072803006e-14,
+      "spikes_per_cell": [
+        7,
+        4,
+        3,
+        3,
+        0,
+        0
+      ],
+      "spike_times_equal": true,
+      "checkpoint_replay_exact": true
+    },
+    {
+      "config": {
+        "dt_ms": 0.1,
+        "rest_mv": -52.0,
+        "reset_mv": -52.0,
+        "threshold_mv": -45.0,
+        "membrane_tau_ms": 20.0,
+        "synapse_tau_ms": 20.0,
+        "refractory_ms": 2.2,
+        "delay_ms": 1.8,
+        "rate_tau_ms": 50.0
+      },
+      "ticks": 1000,
+      "voltage_max_error_mv": 4.973799150320701e-13,
+      "synaptic_max_error_mv": 3.552713678800501e-14,
+      "spikes_per_cell": [
+        7,
+        4,
+        4,
+        4,
+        0,
+        0
+      ],
+      "spike_times_equal": true,
+      "checkpoint_replay_exact": true
+    }
+  ],
+  "implementation_sha256": "4c3b7b48e659314a1dd839819ddce4bdd1622d21dd8753400035c1df8deaa726",
+  "validation_script_sha256": "9bafd4835bb0824009dc3e9eca9a32a7110ebe54a767779202301a72eb2f80f1"
+}

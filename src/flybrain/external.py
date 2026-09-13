@@ -116,7 +116,7 @@ class ExternalController:
         )
 
     @classmethod
-    def from_snapshot(cls, data):
+    def from_snapshot(cls, data, *, backend=None):
         if (
             data["format"] != "flybrain-external"
             or type(data["schema_version"]) is not int
@@ -124,7 +124,7 @@ class ExternalController:
         ):
             raise ValueError("unsupported external checkpoint")
         result = cls(
-            FlyBrain.from_snapshot(data["brain"]),
+            FlyBrain.from_snapshot(data["brain"], backend=backend),
             LinearEncoder.from_snapshot(data["encoder"]),
             RateReadout.from_snapshot(data["readout"]),
             period_ms=data["period_ms"],

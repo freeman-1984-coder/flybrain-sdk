@@ -1,9 +1,15 @@
 # flybrain-sdk
 
+> Development branch: [experimental CUDA backend](docs/cuda.md). [Full FlyWire benchmark](docs/validation/flywire-full-a16.md): 139,255 neurons, all 16.85M source rows, CPU/CUDA parity and 10 seconds of continuous simulation on A16-8Q. CUDA median 11.55 seconds per simulated second (not real time). [Train an external reflex readout](examples/REFLEX_TRAINING.md). Released v0.4.0a4 is CPU-only.
+
+
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
-**Full-brain CUDA benchmark (experimental branch):** [139,255 FlyWire neurons on a real NVIDIA GPU](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html). Complete published proofread graph, CPU/CUDA checks, reproducible timing and evidence. Released v0.4.0a4 remains CPU-only.
+**Full-brain sensory result:** [The GPU odor probe activates the input cells but exposes a propagation limit in the benchmark weight preset](docs/validation/flywire-odor-a16.md). Numerical parity does not establish biological behavior. [Published report](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html#olfaction).
 
+**Full-brain voxel recording:** [Watch the complete GPU brain drive a ground body](https://freeman-1984-coder.github.io/flybrain-sdk/foraging.html). The fixed readout curves away from food; the input-silenced control stays still. [Evidence, assumptions and reproduction](docs/validation/flywire-voxel-a16.md).
+
+**Synaptic dynamics verified on GPU:** [The separate mV engine matches Brian2 and passes actual CUDA tests](docs/synaptic-dynamics.md). [A complete FlyWire sensory probe now reaches downstream populations](docs/validation/flywire-synaptic-odor-a16.md); the candidate DNa02 readout does not simply encode stimulus side. Navigation remains unproven.
 
 **Live game:** [Open the browser sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) — add obstacles, tune mappings, inspect neural control, save and verify recordings. [Adapter guide](docs/live-sandbox.md).
 
@@ -23,7 +29,7 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). CUDA and WASM are reserved interfaces, not implemented runtimes. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). This development branch adds an experimental CUDA runtime; WASM remains unimplemented. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
 ## Make your own demo
 
@@ -105,7 +111,7 @@ Game movement and rendering stay in your application; see [game_loop.py](example
 | --- | --- |
 | `cpu` | Working reference implementation, NumPy edge lists, float64 |
 | `wasm` | Reserved name; raises `BackendUnavailableError` |
-| `cuda` | Reserved name; raises `BackendUnavailableError`; no CUDA dependencies |
+| `cuda` | Experimental optional CuPy runtime; 12/12 A16 hardware cases passed; unavailable without NVIDIA/CuPy |
 
 See [dynamics and backend contract](docs/architecture.md) for equations, spike timing and limitations.
 
