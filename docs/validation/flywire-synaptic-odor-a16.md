@@ -42,6 +42,20 @@ populations are not proof of correct body commands, attraction or reliable
 navigation. This protocol has one seed, nominal parameters and an 800 ms horizon;
 it does not establish robust physiology across doses, seeds or behavioral states.
 
+Time matters: at 150 ms (50 ms after stimulus onset), the right-odor DNa02
+rates are left 18.15 Hz / right 34.07 Hz, whereas left odor gives 32.84 / 0 Hz.
+Thus the cumulative left bias does **not** establish absence of all transient
+side information. The current raw rate-difference motor mapping still needs
+closed-loop evaluation rather than an inference from these early samples.
+
+Activity also persists after stimulus offset. In the 600–800 ms window, the
+bilateral condition adds 6,842 ALPN, 924 MBON and 859 descending spikes. These
+are new spike counts, not just the tail of the rate estimator. The finite
+recording does not establish indefinite persistence, biological memory or its
+mechanism. Longer recovery and recurrent-gain/transmitter assumptions need
+checking before calling this a calibrated sensorimotor model. See the
+[derived post-stimulus counts](synaptic-post-stimulus.json), linked by raw-report hash.
+
 The graph uses assumed transmitter signs, 0.275 mV/contact weights and no incoming
 normalization. These fitted research parameters do not measure every synapse.
 The [independent Brian2 validation](synaptic-brian2-reference.json) establishes

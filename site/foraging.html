@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full-brain voxel odor experiment · flybrain-sdk</title>
+<meta name="description" content="Recorded full FlyWire CUDA brain in a voxel odor environment. Compare neural control and silenced sensory inputs, inspect real trajectories and explicit motor mapping assumptions.">
+<link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/foraging.html">
+<meta name="robots" content="index,follow">
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;color:#e3efed;background:#0a1318}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:30px 22px}a{color:#93e8c2}header{display:flex;justify-content:space-between;gap:20px;font-size:13px}h1{font-size:clamp(34px,6vw,58px);letter-spacing:-.04em;margin:36px 0 10px}p{color:#a8bcbd;line-height:1.75}.lead{max-width:830px}.tag{color:#94dfb9}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.metric,.note{background:#111f27;border:1px solid #2a3e43;border-radius:12px;padding:18px}.metric strong{display:block;font-size:30px;margin-top:5px}.metric span{font-size:12px;color:#a8bcbd}.stage{position:relative;border:1px solid #2a3e43;border-radius:16px;overflow:hidden;background:#101d25}canvas{display:block;width:100%;height:auto;touch-action:none;cursor:grab}.stage p{padding:0 20px;font-size:13px}button,select{font:inherit;border:1px solid #3b565c;border-radius:8px;background:#142b32;color:#e3efed;padding:9px 13px}button{cursor:pointer}button:disabled{opacity:.5}input{accent-color:#93e8c2;flex:1;min-width:100px}.controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:18px 0}.panels{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}.note h2{font-size:18px;margin:0 0 8px}.note p{font-size:14px;margin:8px 0}#time{font-variant-numeric:tabular-nums;font-size:13px}#status{color:#f7d183}footer{font-size:12px;color:#9bb1b3;margin:24px 0}.legend{display:flex;gap:20px;font-size:13px;color:#a8bcbd}.error{color:#ffb3a8}@media(max-width:650px){main{padding:22px 12px}.panels{grid-template-columns:1fr}.metrics{gap:7px}.metric{padding:12px}.metric strong{font-size:24px}header{flex-wrap:wrap}}
+</style></head>
+<body><main>
+<header><a href="./">FLYBRAIN / VOXEL EXPERIMENT</a><a href="fullbrain.html#synaptic">神经信号对照实验 ↗</a></header>
+<h1>把完整脑，放进一个小世界。</h1>
+<p class="lead">地上的香蕉代表一个简化食物气味源。两侧触角把浓度变成神经输入；完整 FlyWire 网络在 NVIDIA GPU 上演算，DNa02 神经活动经过明确的动作映射，控制方块世界里的步行身体。</p>
+<p class="tag">GPU 实验录制 · 浏览器回放 · No CUDA required to view</p>
+<div class="metrics"><div class="metric"><span>完整 FlyWire 网络</span><strong id="neurons">—</strong></div><div class="metric"><span>本组是否接触食物</span><strong id="result">—</strong></div><div class="metric"><span>最终距食物 / 游戏单位</span><strong id="distance">—</strong></div></div>
+<div class="controls"><label for="condition">实验组</label><select id="condition" disabled><option>等待实验记录</option></select><label for="speed">回放速度</label><select id="speed"><option value="0.1">0.1× 慢放</option><option value="0.25">0.25×</option><option value="1">1× 模拟时间</option></select></div>
+<div class="stage"><canvas id="world" width="1000" height="520" aria-label="完整果蝇脑控制的方块环境实验轨迹">使用下方实验摘要和 JSON 记录查看结果。</canvas><p id="status" role="status">正在读取实际 GPU 记录……</p></div>
+<div class="controls"><button id="play" disabled>播放</button><button id="restart" disabled>从头回放</button><label for="seek">时间</label><input id="seek" type="range" min="0" max="2000" value="0" step="20" disabled><span id="time">0 / 2000 ms</span></div>
+<div class="legend"><span>绿色：实际轨迹</span><span>黄色：食物气味源</span><span>拖动场景：旋转观察角度</span></div>
+<div class="panels"><section class="note"><h2>这一帧，脑子输出了什么？</h2><p id="neural">等待实际记录。</p><p id="motor"></p><p id="odor"></p></section><section class="note"><h2>如何读这个实验</h2><p>比较正常神经输入和关闭嗅觉入口的同初始状态对照。轨迹来自实际记录；网页不会让角色自动朝向香蕉。</p><p id="summary">结果以记录为准，包括没有接近或接触食物的情况。</p></section></div>
+<section class="note"><h2>哪些是连接组，哪些是我们的假设？</h2><p>全部脑神经元和连接来自 FlyWire v783。输入只覆盖一个 DM1 食物气味通道，不代表完整香蕉气味或视觉识别。脑模型采用简化的突触 LIF 动力学。</p><p>动作层是未经训练的工程映射：DNa02 两侧放电频率之差控制转向、频率之和控制速度。尤其是速度映射没有生物学验证。身体是地面运动模型，没有飞行、肌肉或六足步态仿真。记录中的移动不等于可靠觅食。</p><p><a id="download" href="experiments/fullbrain-voxel.json" download>下载全部帧与参数</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/feat/cuda-reference/docs/voxel-foraging.md">复现方法与限制</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk">开源仓库</a></p></section>
+<footer id="provenance">页面只播放实验数据，不在浏览器里运行全脑 CUDA。</footer>
+</main><script src="js/foraging.js"></script></body></html>

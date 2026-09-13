@@ -1,4 +1,4 @@
-# Full-brain voxel foraging experiment — implementation in progress
+# Full-brain voxel odor experiment
 
 The requested experiment couples the **entire FlyWire graph on an NVIDIA GPU**
 to a small voxel world. A fruit mesh will represent a simplified food-odor
@@ -26,21 +26,26 @@ the trajectory under identical commands. Zero movement commands keep the body
 stationary. Obstacles stop motion, and JSON restore reproduces future pose,
 concentration and collision results.
 
-## Remaining integration and acceptance
+## Implemented closed loop and remaining behavior work
 
-The new synaptic full-graph odor controls must first establish what activity
-actually reaches candidate output populations. DNa02 is a candidate steering
+The [full-graph odor controls](validation/flywire-synaptic-odor-a16.md) establish
+that sensory-only input reaches downstream populations. DNa02 is a candidate steering
 readout based on [descending control experiments](https://www.nature.com/articles/s41586-024-07523-9),
 but this does not establish an appropriate forward-speed mapping, odor response
 or behavior in our graph/dynamics. Any gain, baseline gait, trained readout or
 external reflex must be disclosed in the recording and reproduction recipe.
 
-The final recording must identify graph/configuration/source hashes and actual
-GPU, contain paired controls with matched initial state and sensory RNG, and
-record body pose, input events, neural output and applied commands. Replaying
+The [actual GPU recording](validation/flywire-voxel-a16.md) identifies graph,
+configuration, source hashes and GPU. It contains an active and input-silenced
+control with the same initial state and RNG seed, recording body pose, input
+events, neural output and applied commands. Replaying
 it in a browser is **recorded GPU output**, not live browser GPU inference.
-World, brain, delayed events and sensory RNG must restore together. Report
+World, brain, delayed events and sensory RNG restore together; the next complete
+frame was replayed exactly in each run. Report
 failures to move or reach food; do not choose successful seeds and hide others.
 
-The renderer and full-brain closed loop are not delivered by this environment
-module alone. No successful foraging or training result is claimed yet.
+Run `scripts/run_fullbrain_voxel.py` with the pinned dataset files to produce
+the full-brain recording. `site/foraging.html` renders its saved frames. The active
+run moved, curved left and ended farther from food; the silenced run remained
+stationary. Neither reached food. Calibration and a useful motor readout remain
+unfinished. No successful foraging or training result is claimed.
