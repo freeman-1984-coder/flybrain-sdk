@@ -5,7 +5,7 @@
 
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
 
-**Full-brain sensory result:** [The GPU odor probe activates the input cells but exposes a propagation limit in the benchmark weight preset](docs/validation/flywire-odor-a16.md). Numerical parity does not establish biological behavior.
+**Full-brain sensory result:** [The GPU odor probe activates the input cells but exposes a propagation limit in the benchmark weight preset](docs/validation/flywire-odor-a16.md). Numerical parity does not establish biological behavior. [Published report](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html#olfaction).
 
 **Dynamics repair in progress:** [The separate mV synaptic CPU reference matches Brian2, including delays and in-flight checkpoints](docs/synaptic-dynamics.md). Its CUDA implementation and full-brain behavior remain unverified.
 
