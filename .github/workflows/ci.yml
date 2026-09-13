@@ -52,6 +52,22 @@ jobs:
         working-directory: packages/js
       - run: pytest tests/test_experiment.py
       - run: git diff --exit-code -- site/js/runtime.js site/js/dodge-runtime.js site/toy-bundle.json site/license.txt
+  synaptic-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e . 'Brian2==2.9.0' 'numpy==1.26.4'
+      - name: Independent synaptic dynamics oracle
+        run: python scripts/validate_synaptic_reference.py --output synaptic-reference.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: synaptic-reference
+          path: synaptic-reference.json
   godot:
     runs-on: ubuntu-latest
     timeout-minutes: 10
