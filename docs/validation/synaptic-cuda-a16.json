@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "python": "3.12.3",
+  "source_sha256": {
+    "src/flybrain/experimental/__init__.py": "570d34f551fd63b33bff564c022ad01fc463b0e1649d9f7035e361b421533bd5",
+    "src/flybrain/experimental/synaptic.py": "4c3b7b48e659314a1dd839819ddce4bdd1622d21dd8753400035c1df8deaa726",
+    "src/flybrain/experimental/synaptic_cuda.py": "8b0bc40f8bf0075e6d81caadf3393673110aa48b66415303a08020cb9055dfa8",
+    "tests/test_synaptic_cuda_hardware.py": "70761bdbb7cbd4fdaa82ea85b40494a84fb532d9d6af350449aa33e46219bb1e",
+    "scripts/validate_synaptic_cuda.py": "7f51e7147d8c51d879a663e85841077197196851648e780d05fb86eceaf13c80"
+  },
+  "device": {
+    "name": "NVIDIA A16-8Q",
+    "cupy": "14.2.0",
+    "memory_bytes": 8394047488,
+    "driver": 12040,
+    "runtime": 12090
+  },
+  "cases": {
+    "tests": 5,
+    "skipped": 0,
+    "errors": 0,
+    "failures": 0
+  }
+}

@@ -7,7 +7,7 @@
 
 **Full-brain sensory result:** [The GPU odor probe activates the input cells but exposes a propagation limit in the benchmark weight preset](docs/validation/flywire-odor-a16.md). Numerical parity does not establish biological behavior. [Published report](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html#olfaction).
 
-**Dynamics repair in progress:** [The separate mV synaptic CPU reference matches Brian2, including delays and in-flight checkpoints](docs/synaptic-dynamics.md). Its CUDA implementation and full-brain behavior remain unverified.
+**Synaptic dynamics verified on GPU:** [The separate mV engine matches Brian2 and passes actual CUDA tests](docs/synaptic-dynamics.md). [A complete FlyWire sensory probe now reaches downstream populations](docs/validation/flywire-synaptic-odor-a16.md); the candidate DNa02 readout does not simply encode stimulus side. Navigation remains unproven.
 
 **Live game:** [Open the browser sandbox](https://freeman-1984-coder.github.io/flybrain-sdk/live.html) — add obstacles, tune mappings, inspect neural control, save and verify recordings. [Adapter guide](docs/live-sandbox.md).
 

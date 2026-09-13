@@ -1,7 +1,7 @@
 # Synaptic LIF research engine: independent CPU reference
 
-**CPU reference verified; CUDA implementation and full-brain behavior not yet
-validated for this engine.** This is the next implementation step after the
+**CPU reference and actual CUDA numerics verified; full-graph sensory propagation
+observed. Odor-directed navigation is not established.** This is the next implementation step after the
 [full-brain odor probe](validation/flywire-odor-a16.md) showed that the numerical
 benchmark's incoming normalization cannot support sensory propagation.
 
@@ -110,18 +110,17 @@ derive the degenerate case, rather than evaluating that removable singularity.
 
 ## Required next gates
 
-Port the verified schedule to an optional CUDA engine. Compare all neural state
-fields and delayed checkpoint replay on real NVIDIA hardware. Import the complete
-FlyWire graph with explicit signed contact-scaled weights, then repeat the
-published five-condition odor protocol with reproducible Poisson inputs. Preserve
-negative results and compare response stability before any motor readout or
-three-dimensional foraging claim. The intended game environment consumes neural
-readouts; target coordinates must not reach a hidden seek-food controller.
-# Experimental CUDA implementation and full-graph odor protocol
+The [actual A16 results](validation/flywire-synaptic-odor-a16.md) cover the CUDA
+schedule, full graph, active CPU/GPU comparison and matched sensory controls.
+Signals reach downstream populations, but DNa02 retains a left bias for both
+left and right stimuli. Establishing a useful motor mapping remains a separate
+experiment. Preserve negative results; target coordinates must not reach a
+hidden seek-food controller.
+## Experimental CUDA implementation and full-graph odor protocol
 
 `flybrain.experimental.synaptic_cuda.SynapticCUDA` is an optional port of this
-reference. **Hardware validation is pending for this new engine.** The previous
-dimensionless CUDA benchmark does not validate it. Importing its module is safe
+reference. **All five hardware cases passed on an A16-8Q**, separately from the previous
+dimensionless CUDA benchmark. See the linked report for exact scope and source. Importing its module is safe
 without CuPy; constructing the engine requires a working NVIDIA device.
 
 The actual-hardware gate must execute all five GPU cases without skips:
