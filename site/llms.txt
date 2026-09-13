@@ -5,7 +5,7 @@
 Working: NumPy CPU backend, synthetic 12-neuron toy, sensory/motor APIs,
 schema-2 JSON checkpoints, direct current injection, annotation selection,
 custom output channels, selected observations, reversible silencing, and a
-3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.4.0a4.
+3.8 MB opt-in real MaleCNS subgraph with assumed LIF dynamics. SDK 0.5.0a1.
 Also working: JavaScript CPU runtime, interactive browser circuit lab, standalone
 HTML demo export and Python replay of browser stimulus/intervention recordings.
 Also working: Python Session with replaceable current encoders, rate readouts and
@@ -23,7 +23,7 @@ Raw MaleCNS/FlyWire downloads also remain available.
 Not yet implemented: calibrated biological models, full-brain real-time guarantees,
 WASM, biological learning or plasticity. No PyPI or NPM publication yet.
 
-Experimental development branch (not v0.4.0a4): optional CuPy CUDA backend passed
+Version 0.5 alpha adds optional CuPy CUDA support (older v0.4.0a4 is CPU-only). It passed
 12/12 actual NVIDIA A16-2Q hardware tests. Small circuits are slower on CUDA.
 Full FlyWire v783 test on A16-8Q: all 139,255 proofread neurons and all 16,847,997
 source neuron-pair/neuropil rows (54,492,922 contacts), no extra pruning.

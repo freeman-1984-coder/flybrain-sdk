@@ -3,7 +3,7 @@ recursive-include examples *.py *.gd *.uid *.godot *.tscn *.md
 recursive-include scripts *.py *.mjs
 recursive-include models *.json *.md
 recursive-include tests *.py *.json
-recursive-include docs *.md
+recursive-include docs *.md *.json *.xml *.txt *.csv
 recursive-include site *.json *.html *.css *.txt *.xml *.js *.wav .nojekyll
 recursive-include .github *.yml *.md
 include packages/js/package.json packages/js/package-lock.json packages/js/tsconfig.json

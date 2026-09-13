@@ -1,9 +1,9 @@
 # flybrain-sdk
 
-> Development branch: [experimental CUDA backend](docs/cuda.md). [Full FlyWire benchmark](docs/validation/flywire-full-a16.md): 139,255 neurons, all 16.85M source rows, CPU/CUDA parity and 10 seconds of continuous simulation on A16-8Q. CUDA median 11.55 seconds per simulated second (not real time). [Train an external reflex readout](examples/REFLEX_TRAINING.md). Released v0.4.0a4 is CPU-only.
-
-
 **No CUDA required.** A Python SDK for connecting small connectome simulations to games and experiments, starting with a working NumPy CPU backend.
+
+> **0.5 alpha:** [optional CUDA, tested on NVIDIA hardware](docs/cuda.md), a separately versioned [synaptic mV engine](docs/synaptic-dynamics.md), and reproducible [full-brain GPU experiments](https://freeman-1984-coder.github.io/flybrain-sdk/odor-calibration.html). CPU remains the default. Full-brain navigation and real-time performance are not established.
+
 
 **Full-brain sensory result:** [The GPU odor probe activates the input cells but exposes a propagation limit in the benchmark weight preset](docs/validation/flywire-odor-a16.md). Numerical parity does not establish biological behavior. [Published report](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html#olfaction).
 
@@ -29,7 +29,7 @@ brain.step(100)
 print(brain.action().to_dict())
 ```
 
-**0.4 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). This development branch adds an experimental CUDA runtime; WASM remains unimplemented. No GPU, credentials, or network access are needed to run the toy demo after installation.
+**0.5 alpha:** the bundled offline demo is a hand-authored 12-neuron circuit. A separate 3.8 MB MaleCNS model now runs 313 real source neurons and 20,607 anatomical edges with explicitly assumed LIF parameters. [Model card and reproducible recipe](models/male-cns-escape-v1/README.md). This release includes an experimental CUDA runtime; WASM remains unimplemented. No GPU, credentials, or network access are needed to run the toy demo after installation.
 
 ## Make your own demo
 
@@ -86,7 +86,7 @@ pytest
 The package is **not yet published to PyPI**. Install directly from GitHub without cloning:
 
 ```sh
-python -m pip install "flybrain-sdk @ git+https://github.com/freeman-1984-coder/flybrain-sdk.git"
+python -m pip install "flybrain-sdk @ git+https://github.com/freeman-1984-coder/flybrain-sdk.git@v0.5.0a1"
 ```
 
 Normal installation needs only NumPy at runtime. Offline operation means the demo makes no network requests; initial dependency installation needs an existing wheel cache or internet access.

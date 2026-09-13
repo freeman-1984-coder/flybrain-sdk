@@ -1,6 +1,6 @@
 # Experimental CUDA backend — A16 hardware validation passed
 
-This development branch implements a CuPy/CUDA reference backend. **All 12 required hardware cases passed on a Vultr NVIDIA A16-2Q on 2026-09-12 UTC.** The published v0.4.0a4 remains CPU-only. This is experimental compatibility support, not a speedup claim: the 313-cell model took 2.64 seconds per simulated second on this GPU, versus 0.108 seconds on the same host CPU. See [the measured report](validation/a16-20260912.md).
+Version 0.5 alpha includes a CuPy/CUDA reference backend. **All 12 required hardware cases passed on a Vultr NVIDIA A16-2Q on 2026-09-12 UTC.** The older v0.4.0a4 release is CPU-only. This is experimental compatibility support, not a speedup claim: the 313-cell model took 2.64 seconds per simulated second on this GPU, versus 0.108 seconds on the same host CPU. See [the measured report](validation/a16-20260912.md).
 
 ## Optional installation
 
@@ -70,9 +70,9 @@ This command starts remote compute and can incur charges. As checked on 2026-09-
 
 The runner definition was checked against the local Modal SDK without invoking any remote function. It remains untested remotely. [Modal GPU documentation](https://modal.com/docs/guide/gpu) describes device selection. Recheck container termination and actual billed usage before considering the rental step finished.
 
-## Game integration (development branch only)
+## Game integration (0.5 alpha)
 
-The draft now includes the v0.4.0a4 Godot and project-generation changes.
+CUDA integrates with the Godot and project-generation APIs introduced in v0.4.0a4.
 `make_demo(..., backend="cuda")` selects CUDA for Python sessions.
 `ExternalController.from_snapshot(data, backend="cpu")` explicitly restores a
 GPU checkpoint onto CPU, or vice versa with `backend="cuda"`. The new hardware

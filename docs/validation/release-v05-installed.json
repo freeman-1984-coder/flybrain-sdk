@@ -1,0 +1,27 @@
+{
+  "version": "0.5.0a1",
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "installed_from_wheel": true,
+  "cuda_absent": true,
+  "toy_continuation_ticks": 100,
+  "explicit_download_required": true,
+  "download_and_load_seconds": 1.594029749976471,
+  "bundle_sha256": "sha256:ff38cfff0c76345cc2f250e992f95b0bf19863b434d8f97f926da6975cb93a35",
+  "neurons": 313,
+  "edges": 20607,
+  "model_fingerprint": "47a0c91b3eba9c606c29faef58fe15c8846fc049c4314a5e3b6912ab22c5e68a",
+  "real_continuation_ticks": 100,
+  "paired_continuation_check_seconds": 3.8312330830376595,
+  "real_action": {
+    "walk": 0.0,
+    "turn_left": 0.0,
+    "turn_right": 0.0,
+    "jump": 0.5526662751885896
+  },
+  "corrupt_cache_rejected": true,
+  "cuda_error": "CUDA requires a working NVIDIA driver, visible GPU and compatible CuPy. Install the appropriate cupy-cuda12x or cupy-cuda13x wheel. CPU remains available without them. Cause: No module named 'cupy'",
+  "synaptic_inflight_replay_ticks": 50,
+  "generated_requirement_pins_release": true,
+  "status": "passed"
+}

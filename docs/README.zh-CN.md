@@ -1,5 +1,7 @@
 # flybrain-sdk：无需 CUDA 的果蝇连接组仿真 SDK
 
+**0.5 alpha：** 可选 CUDA 已通过 NVIDIA A16 实机验证；新增完整 FlyWire 脑的 GPU 实验、独立验证的突触 LIF 模型，以及气味输入和恢复期的公开记录。CPU 仍然默认可用，无需 CUDA。[GPU 使用说明](cuda.md) · [全脑气味对比](https://freeman-1984-coder.github.io/flybrain-sdk/odor-calibration.html)。全脑实验尚未证明可靠觅食或实时性能。
+
 0.4 新增：统一 Session 循环、可替换输入/输出/环境、避障和声音模板、完整过程回放，以及可继续生成的 WAV。试用[示例与音频](https://freeman-1984-coder.github.io/flybrain-sdk/demos.html)，查看[接入指南](demo-kits.md)。示例页是明确标注的录制回放；实验室仍是浏览器现场仿真。
 
 
@@ -23,7 +25,7 @@ print(brain.action().to_dict())
 ```
 
 支持按 ID/注释选择细胞、直接注入电流、只观察指定细胞，以及可恢复的静默干预。
-新检查点保存自定义输出和刺激，继续兼容旧检查点。CUDA/WASM 尚未实现。
+新检查点保存自定义输出和刺激，继续兼容旧检查点。0.5 alpha 增加可选 CUDA；WASM 仍未实现。
 详见 [API](api.md)、[模型卡](../models/male-cns-escape-v1/README.md) 和
 [整体设计](rfcs/0001-open-runtime-and-demo-kits.zh-CN.md)。
 
@@ -55,7 +57,7 @@ paths = fetch_model("flywire-v783", assets=["neuron_ids"])
 
 真实连接组是神经连接数据，还需要参数、感觉/动作映射和转换器，才能成为
 可直接加载的仿真模型。目前没有宣称全脑实时运行、学习能力或真实果蝇行为。
-WASM/CUDA 只预留接口。欢迎通过 Issue 和 Pull Request 一起完善；无需 GPU。
+WASM 仍只预留接口，CUDA 为可选实验后端。欢迎通过 Issue 和 Pull Request 一起完善；无需 GPU。
 
 [英文首页](../README.md) · [贡献指南](../CONTRIBUTING.md) · [真实数据接入计划](real-data.md)
 
