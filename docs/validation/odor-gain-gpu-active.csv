@@ -1,0 +1,2 @@
+timestamp, name, utilization.gpu [%], memory.used [MiB], memory.total [MiB]
+2026/09/13 04:03:01.738, NVIDIA A16-8Q, 87 %, 289 MiB, 8192 MiB

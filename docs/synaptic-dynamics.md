@@ -11,9 +11,9 @@ it is not yet exposed by `FlyBrain.load()` or a model catalog entry. It requires
 explicit millivolt weights and rejects dimensionless weight units. The original
 benchmark is retained as a reproducible historical numerical test.
 
-The [prespecified odor gain pilot](odor-calibration-pilot.md) compares four contact
+The [completed odor gain pilot](validation/odor-gain-pilot-a16.md) compares four contact
 strengths and both stimulus orders to separate early side responses from sustained
-bias and recovery spiking. Its protocol is not a completed hardware result.
+bias and recovery spiking. All eight GPU runs completed; no behavioral preset was selected.
 
 ## Model and source
 

@@ -1,5 +1,10 @@
 # Full-brain odor gain pilot: protocol before results
 
+**Executed on A16 on 2026-09-13:** [all eight results and hardware evidence](validation/odor-gain-pilot-a16.md).
+The protocol below was published in commit
+`433c77f6c6da3b25c10996847b788d0bca871b4d` before execution and was not changed
+in response to the results. No gain or behavioral default was selected.
+
 This protocol tests whether changing recurrent contact strength alters transient
 side responses and post-stimulus spiking in the experimental synaptic engine.
 It does **not** test banana identification, flight, learning or food seeking.

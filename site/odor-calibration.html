@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full-brain odor calibration · flybrain-sdk</title>
+<meta name="description" content="Full FlyWire CUDA odor gain pilot: compare all four synaptic strengths, counterbalanced left/right stimuli, transient DNa02 responses and post-stimulus spikes. Raw evidence and explicit assumptions.">
+<link rel="canonical" href="https://freeman-1984-coder.github.io/flybrain-sdk/odor-calibration.html">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Full-brain FlyWire CUDA odor gain and recovery pilot","inLanguage":["zh-CN","en"],"url":"https://freeman-1984-coder.github.io/flybrain-sdk/odor-calibration.html","about":"Counterbalanced sensory stimulation in an experimental whole-brain LIF simulation","citation":"https://zenodo.org/records/10676866","isPartOf":{"@type":"WebSite","name":"flybrain-sdk","url":"https://freeman-1984-coder.github.io/flybrain-sdk/"}}</script>
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;color:#e3efed;background:#0a1318}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:30px 22px}a{color:#93e8c2}header{display:flex;justify-content:space-between;gap:20px;font-size:13px}h1{font-size:clamp(30px,5vw,50px);letter-spacing:-.035em;margin:36px 0 12px}h2{font-size:21px}p,li{color:#aec1c2;line-height:1.75}.lead{max-width:850px}.note{background:#111f27;border:1px solid #2a3e43;border-radius:12px;padding:20px;margin:22px 0}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}select{font:inherit;background:#142b32;color:#e3efed;padding:9px;border:1px solid #3b565c;border-radius:8px}.chart-wrap{overflow:auto}svg{display:block;width:100%;min-width:700px;height:auto}#status{color:#f7d183}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}th,td{padding:12px 10px;text-align:right;border-bottom:1px solid #2a3e43;white-space:nowrap}th:first-child,td:first-child{text-align:left}caption{text-align:left;color:#aec1c2;margin-bottom:14px}small,footer{color:#9bb1b3;line-height:1.7}.legend{display:flex;gap:20px;font-size:14px;flex-wrap:wrap}.left{color:#93e8c2}.right{color:#e8b9ff}.population{color:#ffc778}a:focus-visible,select:focus-visible{outline:2px solid #93e8c2;outline-offset:3px}@media(max-width:600px){main{padding:22px 12px}header{flex-wrap:wrap}.note{padding:14px}}
+</style>
+</head>
+<body><main>
+<header><a href="./">FLYBRAIN / ODOR CALIBRATION</a><a href="foraging.html">返回方块实验 ↗</a></header>
+<h1>气味换了方向，神经活动会跟着变吗？</h1>
+<p class="lead">用同一个完整 FlyWire 脑，比较四档突触强度和两种刺激顺序。重点观察刚闻到气味的响应，以及气味停止后新增的放电。所有条件都公开，避免只选看起来成功的结果。</p>
+<p class="lead" lang="en">Full-brain CUDA pilot: all 139,255 FlyWire neurons, four contact strengths, both stimulus orders, one fixed seed. Descriptive evidence of transient side responses and recovery; not a validation of banana recognition, navigation or biological parameters. No CUDA required to view.</p>
+<p id="status" role="status">正在读取完整实验记录……</p>
+<p class="lead">本次结果：0.05 mV/contact 没有下行输出；其余三档在恢复期仍有新增的下游放电。这组单随机种子实验尚未确立可靠导航参数，现有演示的默认值保持不变。</p>
+<section class="note"><h2>八组实验，全部保留</h2>
+<p>“同侧差值”是受刺激一侧的 DNa02 放电频率减去对侧。正数仅表示同侧更活跃，不等于已经确定正确的转向指令。每侧各有一个注释为 DNa02 的细胞。</p>
+<div class="table-wrap"><table><caption>前 50 ms 同侧差值（Hz）与恢复期最后 100 ms 的新增下行神经元放电数</caption><thead><tr><th scope="col">强度 / 顺序</th><th scope="col">第一次气味</th><th scope="col">第二次气味</th><th scope="col">第一次恢复</th><th scope="col">第二次恢复</th></tr></thead><tbody id="results"></tbody></table></div>
+</section>
+<section class="note"><h2>查看完整时序</h2>
+<div class="controls"><label for="run">条件</label><select id="run" disabled></select><label for="population">下游群体</label><select id="population"><option value="ALPN">ALPN 投射神经元</option><option value="MBON">MBON 蘑菇体输出</option><option value="descending">下行神经元</option></select></div>
+<p class="legend"><span class="left">绿线：左 DNa02</span><span class="right">紫线：右 DNa02</span><span class="population">橙线：所选群体的平均放电频率</span></p>
+<div class="chart-wrap"><svg id="trace" viewBox="0 0 1000 370" role="img" aria-label="等待真实神经活动曲线"><title>等待完整实验记录</title></svg></div>
+<p>着色背景为施加气味的阶段，中间及末尾为无输入恢复期。曲线是平滑后的频率估计；是否还在产生放电，请看实际计数。各条件共享相同纵轴范围。</p>
+<div class="table-wrap"><table><caption>当前条件的 DNa02 时段分析</caption><thead><tr><th scope="col">刺激侧</th><th scope="col">前 50 ms 同侧差值 / Hz</th><th scope="col">后 100 ms 同侧差值 / Hz</th><th scope="col">整段右减左 / 放电数</th></tr></thead><tbody id="timing"></tbody></table></div>
+</section>
+<section class="note"><h2>这个实验能说明什么？</h2><p>每组依次运行：50 ms 静息 → 150 ms 一侧气味 → 200 ms 恢复 → 150 ms 另一侧气味 → 250 ms 恢复。只有组间恢复到初始状态，组内不会清空脑活动。</p><p>强度为每个连接接触点 0.05、0.10、0.175、0.275 mV，兴奋和抑制权重一起缩放。68 个 DM1 嗅觉入口采用固定 150 Hz 随机事件输入；输入幅度不随连接强度改变。所有原始连接行保留，没有额外背景刺激或动作控制器。</p><p>这是使用单个固定随机种子的探索实验。输入只近似一条 Or42b/DM1 通路，未重建完整香蕉混合气味。短暂安静不能证明长期稳定，持续放电也不能直接证明记忆。参数选择还需要独立随机种子、其他刺激和闭环行为验证。</p><p><a href="experiments/odor-gain-pilot.json" download>完整原始记录</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/odor-calibration-pilot.md">预先公开的实验方案</a> · <a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/main/docs/validation/odor-gain-pilot-a16.md">硬件证据与复现</a> · <a href="foraging.html#odor-input">气味如何接入脑子</a></p></section>
+<footer id="provenance">等待真实实验的来源与设备信息。</footer>
+</main><script src="js/odor-calibration.js"></script></body></html>
