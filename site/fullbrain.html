@@ -9,11 +9,21 @@
 <p>这次加载全部已校对的 FlyWire v783 脑神经元，运行 SDK 自己的 CUDA 后端。没有抽取小回路，也没有额外删除弱连接。原始报告、校验值和复现脚本均公开。</p>
 <div class="metrics"><div class="metric"><span>全部已校对神经元</span><strong>139,255</strong><span>包含无连接的神经元</span></div><div class="metric"><span>保留的连接表行</span><strong>16,847,997</strong><span>按神经元对与脑区汇总</span></div><div class="metric"><span>这些行代表的突触接触</span><strong>54,492,922</strong><span>官方表内的接触计数总和</span></div></div>
 <div class="note"><strong>通过了什么：</strong>完整图的 LIF 仿真、全体神经元的 CPU/CUDA 数值对照、状态恢复，以及连续运行检查。<strong>范围：</strong>使用真实解剖连接，动力学、输入和递质作用是简化假设。这不是完整果蝇行为或意识的复现，也不是训练成果。</div>
+<p class="note"><strong>新增功能验证：</strong><a href="#olfaction">气味入口已激活，但基准测试权重阻止了下游放电。</a>当前配置不能用于证明果蝇会追逐食物。</p>
 <h2>模拟 1 秒，需要多久？</h2><p>同一台 NVIDIA A16-8Q 服务器、同一个网络和输入。预热后各测三次，以下取中位数；加载与编译单独计时。</p>
 <div class="table-scroll"><table><thead><tr><th>后端</th><th>模拟 1 秒的实际耗时</th><th>相对实时</th></tr></thead><tbody><tr><td>NumPy CPU</td><td>110.955 秒</td><td>0.01×</td></tr><tr><td>CuPy CUDA</td><td>11.552 秒</td><td>0.09×</td></tr></tbody></table></div>
 <p>本次 CUDA 吞吐为 CPU 的 <strong>9.61 倍</strong>。计时包含逐步输入上传和错误同步，不包括数据下载、模型加载、编译和网页渲染。这个数字仅适用于此配置和测试输入。</p>
 <h2>逐项核对</h2><ul><li>两份原始文件通过官方 MD5 校验；报告另存 SHA-256。</li><li>16,847,997 行原始连接全部保留，额外丢弃 0 行；最低接触数为 1。</li><li>先验证 20 步静息，再比较 200 步有活动输入；每 25 步检查全部神经元。脉冲和不应期计数完全一致，电压最大差异 0。</li><li>完整后端状态通过 JSON 往返，恢复后 30 步结果完全复现。</li><li>另外连续运行 10,000 步，即 10 秒模拟时间；每 100 步检查全部状态，未出现非有限或越界状态。</li><li>连续运行期间记录 93,609,984 次脉冲，139,254 个神经元至少放电一次。输入是人工电流，不是视觉重建。</li></ul>
 <h2>实际资源占用</h2><p>测试卡显存 7.82 GiB；结束时 CuPy 内存池在用约 200.8 MiB。这不包含驱动和全部 CUDA 上下文开销，也不代表显存峰值。进程主机内存峰值约 6.79 GiB；当前导入器使用 Python 对象，因此主机内存开销明显大于纯图数组。</p>
+<section id="olfaction"><h2>气味输入：能激活入口，还不能驱动觅食</h2>
+<p>2026 年 9 月 13 日，在 NVIDIA A16-8Q 上运行相同的完整 139,255 神经元网络，只刺激经标注确认的 68 个 ORN_DM1 感觉神经元。每组从同一静息状态开始，包含 100 毫秒静息、500 毫秒刺激和 200 毫秒恢复。</p>
+<p>输入近似乙酸乙酯响应中的 Or42b 单个通道，不是完整的香蕉气味，也不是视觉识别。</p>
+<div class="table-scroll"><table><thead><tr><th>条件</th><th>感觉入口脉冲</th><th>嗅觉投射神经元脉冲</th><th>下降神经元脉冲</th></tr></thead><tbody><tr><td>无气味</td><td>0</td><td>0</td><td>0</td></tr><tr><td>仅左侧气味</td><td>3,500</td><td>0</td><td>0</td></tr><tr><td>仅右侧气味</td><td>3,300</td><td>0</td><td>0</td></tr><tr><td>双侧气味</td><td>6,800</td><td>0</td><td>0</td></tr><tr><td>双侧气味，关闭输入神经元</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p><strong>结果：入口刺激和关闭操作有效，但这组参数没有产生下游放电。</strong>嗅觉投射神经元在采样时刻观察到的最高电压约 0.252，阈值为 1；有微弱膜电位响应，不等于完全没有信号。</p>
+<p>原因已经定位到基准测试的权重配置：每个神经元的输入连接绝对权重之和被归一化到 2.5。在当前不应期下，即使上游以允许的最高频率同步放电，无外部电流的下游电压上限也只有 <strong>0.918，低于阈值 1</strong>。因此不能靠提高气味强度解决，也不能把之前的数值测试当作已验证的感觉—动作模型。</p>
+<p>这次 GPU 环境中 181 项软件测试通过。数值验证通过与行为验证通过是不同的结论。下一步是引入并验证有依据的突触衰减、传递延迟与感觉刺激，再连接三维环境中的运动输出。</p>
+<p><a class="button" href="experiments/fullbrain-odor.json" download>下载五组完整实验记录</a> <a class="button secondary" href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/feat/cuda-reference/docs/validation/flywire-odor-a16.md">参数诊断与复现说明 ↗</a></p>
+<p class="small">Full-brain olfactory CUDA probe: sensory inputs fire, downstream spiking absent with the benchmark normalization. This is a recorded negative functional result, not live inference, banana recognition, or successful navigation.</p></section>
 <h2>开发者如何复现</h2><p>使用实验分支 <code>feat/cuda-reference</code>，按<a href="https://github.com/freeman-1984-coder/flybrain-sdk/blob/feat/cuda-reference/docs/fullbrain-validation.md">复现指南</a>下载官方数据并安装可选 CUDA 依赖。</p>
 <div class="code"><pre><code>python scripts/validate_fullbrain.py \
   --data-dir data \

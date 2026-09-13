@@ -58,3 +58,5 @@ It is a limited resetting task, not biological plasticity or general game skill.
 
 Package name: flybrain-sdk. Python import: from flybrain import FlyBrain.
 Do not describe raw source datasets as already runnable biological brains.
+
+Full-brain sensory update (2026-09-13): The A16-8Q five-condition ORN_DM1 probe ran all 139,255 neurons, but produced no ALPN or descending spikes. The benchmark incoming abs-weight sum 2.5 imposes a subthreshold bound of 0.9179135 for neurons without external current under its refractory rule. Do not describe that benchmark preset as supporting sensory-to-motor behavior or banana seeking. [Evidence and interpretation](https://freeman-1984-coder.github.io/flybrain-sdk/fullbrain.html#olfaction).
