@@ -16,7 +16,7 @@ import numpy as np
 
 from flybrain.backends.cpu import CPUBackend
 from flybrain.backends.cuda import CUDABackend
-from flybrain.config import LIFConfig
+from flybrain.config import LIFConfig, finite_number
 from flybrain.model import Connectome, Synapse
 
 SOURCES = {
@@ -48,7 +48,16 @@ def map_source_ids(ids, source_ids):
     return indices
 
 
-def load_fullbrain(data_dir):
+def load_fullbrain(data_dir, *, contact_mv=None):
+    """Load every source row; optional mV weights require a synaptic mV engine.
+
+    Default retains the historical numerical benchmark's normalized weights.
+    Neither weighting policy establishes biological validation.
+    """
+    if contact_mv is not None:
+        contact_mv = finite_number(contact_mv, "contact_mv")
+        if contact_mv <= 0:
+            raise ValueError("contact_mv must be positive")
     import pyarrow.feather as feather
 
     sources = {}
@@ -81,7 +90,11 @@ def load_fullbrain(data_dir):
     labels = scores.argmax(axis=1)
     signs = np.where(np.isin(labels, [1, 2]), -1.0, 1.0)
     incoming = np.bincount(post, weights=counts, minlength=len(ids))
-    weights = signs[pre] * 2.5 * counts / incoming[post]
+    weights = (
+        signs[pre] * 2.5 * counts / incoming[post]
+        if contact_mv is None
+        else signs[pre] * contact_mv * counts
+    )
     report = {
         "dataset": "FlyWire v783 / Zenodo 10676866",
         "source_url": "https://zenodo.org/records/10676866",
@@ -103,7 +116,15 @@ def load_fullbrain(data_dir):
             "positive": int((signs > 0).sum()),
             "negative": int((signs < 0).sum()),
         },
-        "weight_policy": "incoming abs-sum 2.5; GABA/GLUT negative, others/unknown positive",
+        "weight_policy": (
+            "incoming abs-sum 2.5; GABA/GLUT negative, others/unknown positive"
+            if contact_mv is None
+            else (
+                f"{contact_mv} mV/contact; GABA/GLUT negative, "
+                "others/unknown positive; no normalization"
+            )
+        ),
+        "weight_units": "normalized" if contact_mv is None else "mV",
         "minimum_contacts": 1,
         "additional_pruning": False,
         "graph_arrays_sha256": hashlib.sha256(
@@ -117,12 +138,18 @@ def load_fullbrain(data_dir):
     gc.collect()
     # A generator avoids holding a second complete tuple during validation.
     model = Connectome(
-        "flywire-full-v783",
+        "flywire-full-v783" if contact_mv is None else "flywire-full-v783-synaptic-mv",
         tuple(str(int(n)) for n in ids),
         (Synapse(int(a), int(b), float(w)) for a, b, w in zip(pre, post, weights)),
         {},
         {},
-        {"dataset": "FlyWire v783", "status": "assumed LIF benchmark"},
+        {
+            "dataset": "FlyWire v783",
+            "status": "assumed LIF benchmark"
+            if contact_mv is None
+            else "experimental synaptic mV model; physiology not validated",
+            "weight_units": report["weight_units"],
+        },
     )
     return model, report
 

@@ -30,3 +30,9 @@ def test_unknown_large_id_is_not_rounded_to_an_existing_id(unknown):
 def test_float_ids_are_rejected():
     with pytest.raises(ValueError, match="integer storage"):
         runner.map_source_ids(np.array([1], dtype=np.uint64), np.array([1.0]))
+
+
+@pytest.mark.parametrize("scale", [0, -1, True, float("inf"), float("nan")])
+def test_invalid_physical_contact_scale_rejected_before_data_io(tmp_path, scale):
+    with pytest.raises(ValueError):
+        runner.load_fullbrain(tmp_path, contact_mv=scale)

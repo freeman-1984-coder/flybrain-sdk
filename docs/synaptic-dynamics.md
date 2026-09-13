@@ -117,3 +117,33 @@ published five-condition odor protocol with reproducible Poisson inputs. Preserv
 negative results and compare response stability before any motor readout or
 three-dimensional foraging claim. The intended game environment consumes neural
 readouts; target coordinates must not reach a hidden seek-food controller.
+# Experimental CUDA implementation and full-graph odor protocol
+
+`flybrain.experimental.synaptic_cuda.SynapticCUDA` is an optional port of this
+reference. **Hardware validation is pending for this new engine.** The previous
+dimensionless CUDA benchmark does not validate it. Importing its module is safe
+without CuPy; constructing the engine requires a working NVIDIA device.
+
+The actual-hardware gate must execute all five GPU cases without skips:
+
+```bash
+python scripts/validate_synaptic_cuda.py --output synaptic-cuda.json
+```
+
+After that gate passes, run the complete FlyWire odor protocol using the same
+verified source files and annotations as [the earlier experiment](olfactory-experiment.md):
+
+```bash
+python scripts/probe_synaptic_odor.py --data-dir data \
+  --annotations data/annotations.tsv --output synaptic-odor.json
+```
+
+It retains every official neuron and aggregate edge, uses explicitly signed
+0.275 mV/contact weights without incoming normalization, and stimulates only
+the 68 annotated DM1 inputs with nominal 150 Hz discrete Poisson events and
+68.75 mV input jumps. These are research assumptions, not a calibrated banana
+dose. It first checks 200 active full-graph CPU/GPU ticks and 20 ticks of JSON
+checkpoint replay, including the input RNG. Then it records all five matched
+800 ms conditions: no odor, left, right, bilateral, bilateral with ORNs silenced.
+Enabled input cells share identical random draws across conditions. Negative
+results are retained; completing the protocol does not establish navigation.
