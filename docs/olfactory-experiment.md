@@ -1,7 +1,12 @@
 # Full-brain food-odor experiment
 
-**GPU probe completed; navigation not demonstrated.**
-See the [negative result and parameter diagnosis](validation/flywire-odor-a16.md). The full FlyWire graph has
+**Two GPU probes completed with different dynamics; navigation not demonstrated.**
+The historical dimensionless benchmark could not propagate sensory-only input;
+see its [negative result and parameter diagnosis](validation/flywire-odor-a16.md).
+The separate [synaptic mV probe](validation/flywire-synaptic-odor-a16.md) did produce
+ALPN, MBON and descending spikes. Its [voxel recording](validation/flywire-voxel-a16.md)
+shows movement but no food contact. Do not transfer a result between these presets.
+The full FlyWire graph has
 passed the [CUDA numerical benchmark](fullbrain-validation.md). This experiment
 adds anatomically identified sensory input. It does not establish that the fly
 recognizes a banana, seeks food, or flies. No CUDA is needed to build the mapping,
@@ -32,7 +37,7 @@ member participates in this particular odor response.
 
 ## Reproduce the mapping and GPU probe
 
-Start with the CUDA development branch and the full-brain data/environment
+Use a pinned repository commit containing the CUDA engines and the full-brain data/environment
 instructions in [fullbrain-validation.md](fullbrain-validation.md). Download the
 annotation file into your experiment folder, outside the repository:
 
@@ -61,6 +66,10 @@ separate source/license metadata in the full-brain data instructions.
 
 ## Sensory and world assumptions
 
+The following `OlfactoryDrive` adapter and `probe_fullbrain_odor.py` command describe
+the **historical dimensionless engine**. They are not the mV input used in the
+newer GPU recording.
+
 `flybrain.olfaction.OlfactoryDrive` takes two local antenna concentration samples.
 It injects only the selected sensory neurons. It receives no banana coordinates,
 target bearing, desired turn or reward. Its stateless response is
@@ -71,15 +80,30 @@ channels can be added explicitly by creating additional adapters and summing
 their vectors. There is intentionally no scientifically unqualified `banana`
 preset.
 
+For the **synaptic mV voxel experiment**, each antenna's dimensionless local sample
+is instead mapped to `rate_hz = 180 * concentration / (0.2 + concentration)`.
+At every 0.1 ms tick, each selected ORN independently receives an input event with
+probability `rate_hz * 0.1 / 1000`. Each event adds 68.75 mV to that input cell's
+membrane voltage under the [engine's documented update order](synaptic-dynamics.md).
+The 150 Hz fixed-input odor probe uses the same event mechanism. These rates and
+voltage jumps approximate receptor transduction; they are not measured banana
+dose-response curves. The generated events enter only the 68 selected ORNs,
+while all 139,255 neurons and source edges participate in the simulation.
+
 `sample_odor(antenna_xyz, source_xyz)` is a game-side isotropic Gaussian field.
 Sample it separately at each antenna. It models neither turbulent plumes nor
 obstacle-induced airflow. The body/world owns spatial coordinates; the neural
-controller receives concentrations only. The initial world will be a kinematic
+controller receives concentrations only. The recorded world uses a kinematic
 body in a voxel scene, not a reconstruction of flight musculature or a full
 ventral nerve cord. FlyWire v783 is a whole-brain dataset, not the whole animal's
 nervous system.
 
-## Falsifiable first gate
+## Falsifiable first gate and next calibration
+
+The five-condition gate below was run for both engines. The
+[prespecified gain pilot](odor-calibration-pilot.md) now asks how recurrent strength
+affects transient side responses, later bias and recovery, before selecting a
+behavioral preset. Its design is separate from the completed five-condition results.
 
 Five conditions reset to the identical resting checkpoint: no odor, left odor,
 right odor, bilateral odor, and bilateral odor with the 68 ORNs silenced. Each
